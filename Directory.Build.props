@@ -1,0 +1,19 @@
+<Project>
+  <!-- Common output directory for all projects -->
+  <PropertyGroup>
+    <OutputPath>$(MSBuildThisFileDirectory)bin\$(Configuration)\</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+  </PropertyGroup>
+
+  <!-- Copy Shaders and icons folders to output directory after build -->
+  <Target Name="CopySharedResources" AfterTargets="Build">
+    <ItemGroup>
+      <ShaderFiles Include="$(MSBuildThisFileDirectory)Shaders\**\*.*" />
+      <IconFiles Include="$(MSBuildThisFileDirectory)icons\**\*.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(ShaderFiles)" DestinationFolder="$(OutputPath)Shaders\%(RecursiveDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(IconFiles)" DestinationFolder="$(OutputPath)icons\%(RecursiveDir)" SkipUnchangedFiles="true" />
+  </Target>
+</Project>
+

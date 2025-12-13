@@ -192,6 +192,8 @@ namespace CodeWalker
 
             Task.Run(() =>
             {
+                if (!formopen) return;
+
                 try
                 {
                     GTA5Keys.LoadFromPath(GTAFolder.CurrentGTAFolder, GTAFolder.IsGen9, Settings.Default.Key);
@@ -202,10 +204,13 @@ namespace CodeWalker
                     return;
                 }
 
+                if (!formopen) return;
                 RefreshMainTreeView();
 
+                if (!formopen) return;
                 UpdateStatus("Scan complete.");
 
+                if (!formopen) return;
                 InitFileCache();
 
                 while (formopen && !IsDisposed) //run the file cache content thread until the form exits.
@@ -233,17 +238,24 @@ namespace CodeWalker
         {
             Task.Run(() =>
             {
+                if (!formopen) return;
+
                 lock (FileCacheSyncRoot)
                 {
+                    if (!formopen) return;
+
                     if (!FileCache.IsInited)
                     {
                         UpdateStatus("Loading file cache...");
                         var allRpfs = AllRpfs;
+                        if (!formopen) return;
                         FileCache.Init(UpdateStatus, UpdateErrorLog, allRpfs); //inits main dicts and archetypes only...
 
+                        if (!formopen) return;
                         UpdateStatus("Loading materials...");
                         BoundsMaterialTypes.Init(FileCache);
 
+                        if (!formopen) return;
                         UpdateStatus("Loading scenario types...");
                         Scenarios.EnsureScenarioTypes(FileCache);
 
@@ -393,11 +405,13 @@ namespace CodeWalker
 
         public void UpdateStatus(string text)
         {
+            if (!formopen) return;
             try
             {
                 if (InvokeRequired)
                 {
-                    BeginInvoke(new Action(() => { UpdateStatus(text); }));
+                    if (!formopen) return;
+                    BeginInvoke(new Action(() => { if (formopen) UpdateStatus(text); }));
                 }
                 else
                 {
@@ -408,11 +422,13 @@ namespace CodeWalker
         }
         public void UpdateErrorLog(string text)
         {
+            if (!formopen) return;
             try
             {
                 if (InvokeRequired)
                 {
-                    BeginInvoke(new Action(() => { UpdateErrorLog(text); }));
+                    if (!formopen) return;
+                    BeginInvoke(new Action(() => { if (formopen) UpdateErrorLog(text); }));
                 }
                 else
                 {
@@ -781,29 +797,45 @@ namespace CodeWalker
             }
 
             // Phase 2: Scan all RPF files in parallel
+            if (!formopen) return;
             UpdateStatus($"Scanning {rpfPaths.Count} RPF files...");
             var scannedRpfs = new System.Collections.Concurrent.ConcurrentDictionary<string, RpfFile>();
             var scanCount = 0;
             var totalCount = rpfPaths.Count;
+            var cts = new System.Threading.CancellationTokenSource();
 
-            Parallel.ForEach(rpfPaths, new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount }, rpfInfo =>
+            try
             {
-                var rpf = new RpfFile(rpfInfo.path, rpfInfo.relpath);
-                rpf.ScanStructure(null, UpdateErrorLog); // Don't update status from parallel threads
-
-                if (rpf.LastException == null)
+                Parallel.ForEach(rpfPaths, new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount, CancellationToken = cts.Token }, rpfInfo =>
                 {
-                    scannedRpfs[rpfInfo.path] = rpf;
-                }
+                    if (!formopen)
+                    {
+                        cts.Cancel();
+                        return;
+                    }
 
-                var count = Interlocked.Increment(ref scanCount);
-                if (count % 10 == 0 || count == totalCount)
-                {
-                    UpdateStatus($"Scanned {count}/{totalCount} RPF files...");
-                }
-            });
+                    var rpf = new RpfFile(rpfInfo.path, rpfInfo.relpath);
+                    rpf.ScanStructure(null, UpdateErrorLog); // Don't update status from parallel threads
+
+                    if (rpf.LastException == null)
+                    {
+                        scannedRpfs[rpfInfo.path] = rpf;
+                    }
+
+                    var count = Interlocked.Increment(ref scanCount);
+                    if (count % 10 == 0 || count == totalCount)
+                    {
+                        UpdateStatus($"Scanned {count}/{totalCount} RPF files...");
+                    }
+                });
+            }
+            catch (OperationCanceledException)
+            {
+                return; // Form is closing, exit early
+            }
 
             // Phase 3: Build tree structure sequentially (UI operations must be sequential)
+            if (!formopen) return;
             foreach (var path in allpaths)
             {
                 var relpath = path.Replace(fullPath, "");
@@ -962,11 +994,13 @@ namespace CodeWalker
         }
         private void ClearMainTreeView()
         {
+            if (!formopen) return;
             try
             {
                 if (InvokeRequired)
                 {
-                    Invoke(new Action(() => { ClearMainTreeView(); }));
+                    if (!formopen) return;
+                    BeginInvoke(new Action(() => { if (formopen) ClearMainTreeView(); }));
                 }
                 else
                 {
@@ -985,11 +1019,13 @@ namespace CodeWalker
         }
         private void AddMainTreeViewRoot(MainTreeFolder f)
         {
+            if (!formopen) return;
             try
             {
                 if (InvokeRequired)
                 {
-                    Invoke(new Action(() => { AddMainTreeViewRoot(f); }));
+                    if (!formopen) return;
+                    BeginInvoke(new Action(() => { if (formopen) AddMainTreeViewRoot(f); }));
                 }
                 else
                 {
@@ -1005,11 +1041,13 @@ namespace CodeWalker
         }
         private void AddMainTreeViewNode(MainTreeFolder f)
         {
+            if (!formopen) return;
             try
             {
                 if (InvokeRequired)
                 {
-                    Invoke(new Action(() => { AddMainTreeViewNode(f); }));
+                    if (!formopen) return;
+                    BeginInvoke(new Action(() => { if (formopen) AddMainTreeViewNode(f); }));
                 }
                 else
                 {
@@ -1049,11 +1087,13 @@ namespace CodeWalker
         }
         private void MainTreeViewRefreshComplete()
         {
+            if (!formopen) return;
             try
             {
                 if (InvokeRequired)
                 {
-                    Invoke(new Action(() => { MainTreeViewRefreshComplete(); }));
+                    if (!formopen) return;
+                    BeginInvoke(new Action(() => { if (formopen) MainTreeViewRefreshComplete(); }));
                 }
                 else
                 {
@@ -3600,12 +3640,20 @@ namespace CodeWalker
 
             Task.Run(() =>
             {
+                if (!formopen) return;
+
                 RefreshMainTreeViewRoot(root);
 
-                Invoke(new Action(() => 
+                if (!formopen) return;
+
+                try
                 {
-                    MainTreeView.SelectedNode = root.TreeNode;
-                }));
+                    Invoke(new Action(() =>
+                    {
+                        MainTreeView.SelectedNode = root.TreeNode;
+                    }));
+                }
+                catch { } // Form may be disposed
             });
         }
         private void CloseFolder(MainTreeFolder folder)
@@ -3751,12 +3799,19 @@ namespace CodeWalker
             Init();
         }
 
+        private void ExploreForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            formopen = false; //signal background threads to exit immediately
+        }
+
         private void ExploreForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            formopen = false; //signal background thread to exit
-
             CleanupDropFolder();
             SaveSettings();
+
+            // Force exit the process to kill any lingering background threads
+            // This prevents the PC freeze caused by background I/O operations continuing after form close
+            Environment.Exit(0);
         }
 
         private void MainTreeView_AfterSelect(object sender, TreeViewEventArgs e)
