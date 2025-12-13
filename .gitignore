@@ -241,3 +241,9 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 /Toolbar/cammodes.psd
+/.idea/.gitignore
+/.idea/AugmentWebviewStateStore.xml
+/.idea/CodeWalker.iml
+/.idea/modules.xml
+/.idea/php.xml
+/.idea/vcs.xml

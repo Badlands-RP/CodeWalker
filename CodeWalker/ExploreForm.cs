@@ -768,14 +768,48 @@ namespace CodeWalker
             var allpaths = Directory.GetFileSystemEntries(fullPath, "*", SearchOption.AllDirectories);
             var nodes = new Dictionary<string, MainTreeFolder>();
 
+            // Phase 1: Collect all RPF file paths for parallel scanning
+            var rpfPaths = new List<(string path, string relpath)>();
+            foreach (var path in allpaths)
+            {
+                var filepathl = path.ToLowerInvariant();
+                if (File.Exists(path) && filepathl.EndsWith(".rpf"))
+                {
+                    var relpath = path.Replace(fullPath, "");
+                    rpfPaths.Add((path, relpath));
+                }
+            }
+
+            // Phase 2: Scan all RPF files in parallel
+            UpdateStatus($"Scanning {rpfPaths.Count} RPF files...");
+            var scannedRpfs = new System.Collections.Concurrent.ConcurrentDictionary<string, RpfFile>();
+            var scanCount = 0;
+            var totalCount = rpfPaths.Count;
+
+            Parallel.ForEach(rpfPaths, new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount }, rpfInfo =>
+            {
+                var rpf = new RpfFile(rpfInfo.path, rpfInfo.relpath);
+                rpf.ScanStructure(null, UpdateErrorLog); // Don't update status from parallel threads
+
+                if (rpf.LastException == null)
+                {
+                    scannedRpfs[rpfInfo.path] = rpf;
+                }
+
+                var count = Interlocked.Increment(ref scanCount);
+                if (count % 10 == 0 || count == totalCount)
+                {
+                    UpdateStatus($"Scanned {count}/{totalCount} RPF files...");
+                }
+            });
+
+            // Phase 3: Build tree structure sequentially (UI operations must be sequential)
             foreach (var path in allpaths)
             {
                 var relpath = path.Replace(fullPath, "");
                 var filepathl = path.ToLowerInvariant();
 
                 var isFile = File.Exists(path); //could be a folder
-
-                UpdateStatus("Scanning " + relpath + "...");
 
                 MainTreeFolder parentnode = null, prevnode = null, node = null;
                 var prevnodepath = "";
@@ -813,21 +847,15 @@ namespace CodeWalker
                 {
                     if (filepathl.EndsWith(".rpf")) //add RPF nodes
                     {
-                        RpfFile rpf = new RpfFile(path, relpath);
-
-                        rpf.ScanStructure(UpdateStatus, UpdateErrorLog);
-
-                        if (rpf.LastException != null) //incase of corrupted rpf (or renamed NG encrypted RPF)
+                        // Use pre-scanned RPF from parallel phase
+                        if (!scannedRpfs.TryGetValue(path, out RpfFile rpf))
                         {
-                            continue;
+                            continue; // RPF had an error during scanning
                         }
 
-                        if (extra)
-                        {
-                            relpath = path;
-                        }
+                        var rpfRelpath = extra ? path : relpath;
 
-                        node = CreateRpfTreeFolder(rpf, relpath, path);
+                        node = CreateRpfTreeFolder(rpf, rpfRelpath, path);
 
                         RecurseMainTreeViewRPF(node, allRpfs, extra ? f.Path : null);
 

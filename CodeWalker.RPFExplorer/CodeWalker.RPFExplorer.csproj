@@ -20,4 +20,12 @@
     <ProjectReference Include="..\CodeWalker\CodeWalker.csproj" />
   </ItemGroup>
 
+  <!-- Copy Shaders folder to output directory -->
+  <Target Name="CopyShaders" AfterTargets="Build">
+    <ItemGroup>
+      <ShaderFiles Include="..\Shaders\**\*.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(ShaderFiles)" DestinationFolder="$(OutputPath)Shaders\%(RecursiveDir)" SkipUnchangedFiles="true" />
+  </Target>
+
 </Project>
