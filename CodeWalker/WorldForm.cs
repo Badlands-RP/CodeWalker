@@ -107,7 +107,7 @@ namespace CodeWalker
 
 
 
-        
+
 
 
 
@@ -155,10 +155,14 @@ namespace CodeWalker
 
         bool MouseSelectEnabled = false;
         bool ShowSelectionBounds = true;
-        bool SelectByGeometry = false; //select by geometry needs more work 
+        bool SelectByGeometry = false; //select by geometry needs more work
         MapSelection CurMouseHit = new MapSelection();
         MapSelection LastMouseHit = new MapSelection();
         MapSelection PrevMouseHit = new MapSelection();
+
+        // Cache for boundary edges to avoid recalculating every frame
+        private Dictionary<DrawableBase, List<Vector3>> boundaryEdgeCache = new Dictionary<DrawableBase, List<Vector3>>();
+        private const int MAX_CACHE_SIZE = 100; // Limit cache size to prevent memory issues
 
         bool MouseRayCollisionEnabled = true;
         bool MouseRayCollisionVisible = false;
@@ -1297,8 +1301,81 @@ namespace CodeWalker
                 ori = ori * CurMouseHit.BBOrientation;
             }
 
+            // Render geometry boundaries if geometry selection is enabled and we have a geometry
+            if (SelectByGeometry && CurMouseHit.Geometry != null && CurMouseHit.Drawable != null)
+            {
+                RenderMousedGeometryBoundaries(CurMouseHit, camrel, ori, scale);
+            }
+            else
+            {
+                Renderer.RenderMouseHit(mode, ref camrel, ref bbmin, ref bbmax, ref scale, ref ori, bsphrad);
+            }
+        }
 
-            Renderer.RenderMouseHit(mode, ref camrel, ref bbmin, ref bbmax, ref scale, ref ori, bsphrad);
+        private void RenderMousedGeometryBoundaries(MapSelection mouseHit, Vector3 camrel, Quaternion ori, Vector3 scale)
+        {
+            const uint cwht = 0xFFFFFFFF;
+
+            // Get all geometries from the drawable's high LOD models
+            var drawable = mouseHit.Drawable;
+            if (drawable == null) return;
+
+            var dmodels = drawable.DrawableModels?.High;
+            if (dmodels == null) return;
+
+            // Get world position (camrel is camera-relative, so add camera position to get world pos)
+            var worldPos = camrel + camera.Position;
+
+            // Try to get cached boundary edges (cached without scale applied)
+            List<Vector3> allEdges;
+            if (!boundaryEdgeCache.TryGetValue(drawable, out allEdges))
+            {
+                // Extract boundary edges from all geometries in the drawable
+                allEdges = new List<Vector3>();
+
+                foreach (var model in dmodels)
+                {
+                    if (model?.Geometries == null) continue;
+
+                    foreach (var geom in model.Geometries)
+                    {
+                        // Extract edges without scale - we'll apply scale during rendering
+                        var edges = MeshBoundaryExtractor.ExtractBoundaryEdges(geom, Vector3.One);
+                        allEdges.AddRange(edges);
+                    }
+                }
+
+                // Cache the result
+                if (boundaryEdgeCache.Count >= MAX_CACHE_SIZE)
+                {
+                    // Clear cache if it gets too large
+                    boundaryEdgeCache.Clear();
+                }
+                boundaryEdgeCache[drawable] = allEdges;
+            }
+
+            // Transform and render the boundary edges (apply scale here)
+            if (allEdges.Count == 0)
+            {
+                // No edges found - fall back to bounding box
+                var aabb = mouseHit.AABB;
+                var bbmin = aabb.Minimum;
+                var bbmax = aabb.Maximum;
+                Renderer.RenderMouseHit(BoundsShaderMode.Box, ref camrel, ref bbmin, ref bbmax, ref scale, ref ori, 0);
+                return;
+            }
+
+            // Transform vertices to world space (shader will convert to camera-relative)
+            for (int i = 0; i < allEdges.Count; i += 2)
+            {
+                if (i + 1 >= allEdges.Count) break;
+
+                var v1 = worldPos + ori.Multiply(allEdges[i] * scale);
+                var v2 = worldPos + ori.Multiply(allEdges[i + 1] * scale);
+
+                Renderer.SelectionLineVerts.Add(new VertexTypePC() { Position = v1, Colour = cwht });
+                Renderer.SelectionLineVerts.Add(new VertexTypePC() { Position = v2, Colour = cwht });
+            }
         }
 
         private void RenderSelection()
@@ -1530,7 +1607,7 @@ namespace CodeWalker
                             }
                             else
                             {
-                                wbox.BBMin = room.BBMin_CW; //hack method to use CW calculated room AABBs, 
+                                wbox.BBMin = room.BBMin_CW; //hack method to use CW calculated room AABBs,
                                 wbox.BBMax = room.BBMax_CW; //R* ones are right size, but wrong position??
                                 Renderer.WhiteBoxes.Add(wbox);
                             }
@@ -1543,7 +1620,7 @@ namespace CodeWalker
                 camrel += ori.Multiply(selectionItem.BBOffset);
                 ori = ori * selectionItem.BBOrientation;
                 bbmin = selectionItem.MloRoomDef._Data.bbMin;
-                bbmax = selectionItem.MloRoomDef._Data.bbMax;   
+                bbmax = selectionItem.MloRoomDef._Data.bbMax;
             }
             if ((selectionItem.ArchetypeExtension != null) || (selectionItem.EntityExtension != null) || (selectionItem.CollisionBounds != null))
             {
@@ -1645,7 +1722,12 @@ namespace CodeWalker
                 ori = ori * selectionItem.BBOrientation;
             }
 
-            if (mode == BoundsShaderMode.Box)
+            // Render geometry boundaries if geometry selection is enabled and we have a geometry
+            if (SelectByGeometry && selectionItem.Geometry != null && selectionItem.Drawable != null)
+            {
+                RenderSelectionGeometryBoundaries(selectionItem, camrel, ori, scale);
+            }
+            else if (mode == BoundsShaderMode.Box)
             {
                 MapBox box = new MapBox();
                 box.CamRelPos = camrel;
@@ -1663,6 +1745,76 @@ namespace CodeWalker
                 Renderer.SelectionSpheres.Add(sph);
             }
 
+        }
+
+        private void RenderSelectionGeometryBoundaries(MapSelection selectionItem, Vector3 camrel, Quaternion ori, Vector3 scale)
+        {
+            const uint cgrn = 0xFF00FF00;
+
+            // Get all geometries from the drawable's high LOD models
+            var drawable = selectionItem.Drawable;
+            if (drawable == null) return;
+
+            var dmodels = drawable.DrawableModels?.High;
+            if (dmodels == null) return;
+
+            // Get world position (camrel is camera-relative, so add camera position to get world pos)
+            var worldPos = camrel + camera.Position;
+
+            // Try to get cached boundary edges (cached without scale applied)
+            List<Vector3> allEdges;
+            if (!boundaryEdgeCache.TryGetValue(drawable, out allEdges))
+            {
+                // Extract boundary edges from all geometries in the drawable
+                allEdges = new List<Vector3>();
+
+                foreach (var model in dmodels)
+                {
+                    if (model?.Geometries == null) continue;
+
+                    foreach (var geom in model.Geometries)
+                    {
+                        // Extract edges without scale - we'll apply scale during rendering
+                        var edges = MeshBoundaryExtractor.ExtractBoundaryEdges(geom, Vector3.One);
+                        allEdges.AddRange(edges);
+                    }
+                }
+
+                // Cache the result
+                if (boundaryEdgeCache.Count >= MAX_CACHE_SIZE)
+                {
+                    // Clear cache if it gets too large
+                    boundaryEdgeCache.Clear();
+                }
+                boundaryEdgeCache[drawable] = allEdges;
+            }
+
+            // Transform and render the boundary edges (apply scale here)
+            if (allEdges.Count == 0)
+            {
+                // No edges found - fall back to bounding box
+                var aabb = selectionItem.AABB;
+                MapBox box = new MapBox();
+                box.CamRelPos = camrel;
+                box.BBMin = aabb.Minimum;
+                box.BBMax = aabb.Maximum;
+                box.Orientation = ori;
+                box.Scale = scale;
+                Renderer.SelectionBoxes.Add(box);
+                return;
+            }
+
+            // Transform vertices to world space (shader will convert to camera-relative)
+            for (int i = 0; i < allEdges.Count; i += 2)
+            {
+                if (i + 1 >= allEdges.Count) break;
+
+                var v1 = worldPos + ori.Multiply(allEdges[i] * scale);
+                var v2 = worldPos + ori.Multiply(allEdges[i + 1] * scale);
+
+                Renderer.SelectionLineVerts.Add(new VertexTypePC() { Position = v1, Colour = cgrn });
+                Renderer.SelectionLineVerts.Add(new VertexTypePC() { Position = v2, Colour = cgrn });
+            }
         }
 
 
@@ -2337,7 +2489,7 @@ namespace CodeWalker
             //reset variables for beginning the mouse hit test
             CurMouseHit.Clear();
 
-         
+
             if (Input.CtrlPressed && ProjectForm != null && ProjectForm.CanPaintInstances())   // Get whether or not we can brush from the project form.
             {
                 ControlBrushEnabled = true;
@@ -2368,7 +2520,7 @@ namespace CodeWalker
 
 
         }
-        
+
         public SpaceRayIntersectResult GetSpaceMouseRay()
         {
             SpaceRayIntersectResult ret = new SpaceRayIntersectResult();
@@ -2428,7 +2580,7 @@ namespace CodeWalker
             //if ((SelectionMode == MapSelectionMode.Entity) && !MouseSelectEnabled) return; //performance improvement when not selecting entities...
 
             //test the selected entity/archetype for mouse hit.
-            
+
             //first test the bounding sphere for mouse hit..
             Quaternion orinv;
             Ray mraytrn;
@@ -2569,8 +2721,10 @@ namespace CodeWalker
 
             if (usegeomboxes)
             {
-                //geometry bounding boxes version
+                //geometry bounding boxes version with optional triangle intersection
                 float ghitdist = float.MaxValue;
+                const float bboxExpansionFactor = 1.2f; // Expand bounding boxes by 20%
+
                 for (int i = 0; i < dmodels.Length; i++)
                 {
                     var m = dmodels[i];
@@ -2580,16 +2734,45 @@ namespace CodeWalker
                         var gbox = m.BoundsData[j];
                         gbbox.Minimum = gbox.Min.XYZ();
                         gbbox.Maximum = gbox.Max.XYZ();
-                        bbox.Minimum = gbbox.Minimum * scale;
-                        bbox.Maximum = gbbox.Maximum * scale;
+
+                        // Expand bounding box for initial test
+                        var center = (gbbox.Minimum + gbbox.Maximum) * 0.5f;
+                        var size = (gbbox.Maximum - gbbox.Minimum) * bboxExpansionFactor;
+                        var expandedMin = center - size * 0.5f;
+                        var expandedMax = center + size * 0.5f;
+
+                        bbox.Minimum = expandedMin * scale;
+                        bbox.Maximum = expandedMax * scale;
                         bool usehit = false;
+                        float triHitDist = float.MaxValue;
+                        bool triangleHit = false;
+
                         if (mraytrn.Intersects(ref bbox, out hitdist))
                         {
                             if ((j == 0) && (gbbcount > 1)) continue;//ignore a model hit
-                            //bool firsthit = (mousehit.EntityDef == null);
-                            if (hitdist > 0.0f) //firsthit || //ignore when inside the box
+
+                            if (hitdist > 0.0f) //ignore when inside the box
                             {
-                                bool nearer = ((hitdist < CurMouseHit.HitDist) && (hitdist < ghitdist));
+                                // Perform triangle intersection test if enabled
+                                // Only do expensive triangle test if bbox hit is reasonably close
+                                if (SelectByGeometry && j > 0 && hitdist < 100.0f) // j > 0 means it's a geometry, not the model box
+                                {
+                                    int gind = j - 1;
+                                    if (gind < m.Geometries.Length)
+                                    {
+                                        var geom = m.Geometries[gind];
+                                        // Only test geometries with reasonable triangle counts
+                                        if (geom.IndexBuffer?.Indices != null && geom.IndexBuffer.Indices.Length < 300000)
+                                        {
+                                            triangleHit = RayIntersectsGeometry(ref mraytrn, geom, scale, out triHitDist);
+                                        }
+                                    }
+                                }
+
+                                // Use triangle hit distance if available, otherwise use bbox hit
+                                float actualHitDist = triangleHit ? triHitDist : hitdist;
+
+                                bool nearer = ((actualHitDist < CurMouseHit.HitDist) && (actualHitDist < ghitdist));
                                 bool radsm = true;
                                 if (CurMouseHit.Geometry != null)
                                 {
@@ -2597,9 +2780,12 @@ namespace CodeWalker
                                     var b2 = (CurMouseHit.AABB.Maximum - CurMouseHit.AABB.Minimum) * scale;
                                     float r1 = b1.Length() * 0.5f;
                                     float r2 = b2.Length() * 0.5f;
-                                    radsm = (r1 < (r2));// * 0.5f));
+                                    radsm = (r1 < (r2));
                                 }
-                                if ((nearer&&radsm) || radsm) usehit = true;
+
+                                // Accept hit based on distance and size comparison
+                                // When geometry selection is enabled, we use triangle hit distance if available
+                                usehit = (nearer && radsm) || radsm;
                             }
                         }
                         else if (j == 0) //no hit on model box
@@ -2609,7 +2795,7 @@ namespace CodeWalker
                         if (usehit)
                         {
                             int gind = (j > 0) ? j - 1 : 0;
-                            ghitdist = hitdist;
+                            ghitdist = SelectByGeometry && triangleHit ? triHitDist : hitdist;
                             geometry = m.Geometries[gind];
                             geometryAABB = gbbox;
                             geometryIndex = gind;
@@ -2662,6 +2848,66 @@ namespace CodeWalker
             CurMouseHit.AABB = geometryAABB;
             CurMouseHit.GeometryIndex = geometryIndex;
             CurMouseHit.CamRel = camrel;
+        }
+
+        private bool RayIntersectsGeometry(ref Ray ray, DrawableGeometry geom, Vector3 scale, out float hitDistance)
+        {
+            hitDistance = float.MaxValue;
+
+            if (geom == null) return false;
+            if (geom.VertexData == null) return false;
+            if (geom.IndexBuffer == null) return false;
+            if (geom.IndexBuffer.Indices == null) return false;
+
+            var vdata = geom.VertexData;
+            var indices = geom.IndexBuffer.Indices;
+
+            if (vdata.VertexBytes == null) return false;
+            if (vdata.Info == null) return false;
+
+            bool hit = false;
+            int triCount = indices.Length / 3;
+
+            // Limit triangle checks for performance - check every Nth triangle for large meshes
+            int step = 1;
+            if (triCount > 10000)
+            {
+                step = 4; // Check every 4th triangle for very large meshes
+            }
+            else if (triCount > 5000)
+            {
+                step = 2; // Check every 2nd triangle for large meshes
+            }
+
+            // Iterate through triangles with step
+            for (int i = 0; i < triCount; i += step)
+            {
+                int i0 = indices[i * 3 + 0];
+                int i1 = indices[i * 3 + 1];
+                int i2 = indices[i * 3 + 2];
+
+                // Get vertex positions (component 0 is typically position)
+                Vector3 v0 = vdata.GetVector3(i0, 0) * scale;
+                Vector3 v1 = vdata.GetVector3(i1, 0) * scale;
+                Vector3 v2 = vdata.GetVector3(i2, 0) * scale;
+
+                // Ray-triangle intersection test
+                if (ray.Intersects(ref v0, ref v1, ref v2, out float dist))
+                {
+                    if (dist > 0 && dist < hitDistance)
+                    {
+                        hitDistance = dist;
+                        hit = true;
+                        // Early exit optimization - if we found a close hit, we can stop
+                        if (hitDistance < 0.1f) // Very close hit, no need to check further
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            return hit;
 
 
 
@@ -3479,7 +3725,7 @@ namespace CodeWalker
             bool change = false;
             if (mhit != null)
             {
-                change = SelectedItem.CheckForChanges(mhitv); 
+                change = SelectedItem.CheckForChanges(mhitv);
             }
             else
             {
@@ -4010,7 +4256,7 @@ namespace CodeWalker
                         }
                         tgnode.Expand();
                     }
-                    
+
                 }
 
                 mnode.Expand();
@@ -4835,10 +5081,12 @@ namespace CodeWalker
             ArtificialAmbientLightCheckBox.Checked = s.ArtificialAmbientLight;
             SavePositionCheckBox.Checked = s.SavePosition;
             SaveTimeOfDayCheckBox.Checked = s.SaveTimeOfDay;
-            
+            SelectByGeometryCheckBox.Checked = s.SelectByGeometry;
+            SelectByGeometry = s.SelectByGeometry;
+
             SetTimeOfDay(s.TimeOfDay);
             Renderer.SetWeatherType(s.Weather);
-            
+
 
             EnableModsCheckBox.Checked = s.EnableMods;
             DlcLevelComboBox.Text = s.DLC;
@@ -4881,6 +5129,7 @@ namespace CodeWalker
             s.ArtificialAmbientLight = ArtificialAmbientLightCheckBox.Checked;
             s.SavePosition = SavePositionCheckBox.Checked;
             s.SaveTimeOfDay = SaveTimeOfDayCheckBox.Checked;
+            s.SelectByGeometry = SelectByGeometryCheckBox.Checked;
             if (s.SavePosition)
             {
                 s.StartPosition = FloatUtil.GetVector3String(camEntity?.Position ?? camera.Position);
@@ -5092,7 +5341,7 @@ namespace CodeWalker
         public void EnableYbnUI(bool enable, string filename)
         {
 
-            if (enable) //only do something if a ybn is selected - EnableYmapUI will handle the no selection case.. 
+            if (enable) //only do something if a ybn is selected - EnableYmapUI will handle the no selection case..
             {
                 //ToolbarAddItemButton.ToolTipText = "Add " + type + (enable ? (" to " + filename) : "");
                 //ToolbarAddItemButton.Enabled = enable;
@@ -5106,7 +5355,7 @@ namespace CodeWalker
                 case MapSelectionMode.Path: type = "node"; break;
             }
 
-            if (enable) //only do something if a ynd is selected - EnableYmapUI will handle the no selection case.. 
+            if (enable) //only do something if a ynd is selected - EnableYmapUI will handle the no selection case..
             {
                 ToolbarAddItemButton.ToolTipText = "Add " + type + (enable ? (" to " + filename) : "");
                 ToolbarAddItemButton.Enabled = enable;
@@ -5120,7 +5369,7 @@ namespace CodeWalker
                 case MapSelectionMode.NavMesh: type = "polygon"; break;
             }
 
-            if (enable) //only do something if a ynv is selected - EnableYmapUI will handle the no selection case.. 
+            if (enable) //only do something if a ynv is selected - EnableYmapUI will handle the no selection case..
             {
                 ToolbarAddItemButton.ToolTipText = "Add " + type + (enable ? (" to " + filename) : "");
                 ToolbarAddItemButton.Enabled = enable;
@@ -5134,7 +5383,7 @@ namespace CodeWalker
                 case MapSelectionMode.TrainTrack: type = "node"; break;
             }
 
-            if (enable) //only do something if a track is selected - EnableYmapUI will handle the no selection case.. 
+            if (enable) //only do something if a track is selected - EnableYmapUI will handle the no selection case..
             {
                 ToolbarAddItemButton.ToolTipText = "Add " + type + (enable ? (" to " + filename) : "");
                 ToolbarAddItemButton.Enabled = enable;
@@ -5148,7 +5397,7 @@ namespace CodeWalker
                 case MapSelectionMode.Scenario: type = "scenario point"; break;
             }
 
-            if (enable) //only do something if a scenario is selected - EnableYmapUI will handle the no selection case.. 
+            if (enable) //only do something if a scenario is selected - EnableYmapUI will handle the no selection case..
             {
                 ToolbarAddItemButton.ToolTipText = "Add " + type + (enable ? (" to " + filename) : "");
                 ToolbarAddItemButton.Enabled = enable;
@@ -6480,7 +6729,7 @@ namespace CodeWalker
             }
 
 
-            if (!Input.kbmoving && !Widget.IsDragging) //don't trigger further actions if camera moving or widget dragging 
+            if (!Input.kbmoving && !Widget.IsDragging) //don't trigger further actions if camera moving or widget dragging
             {
                 if (!ctrl)
                 {
@@ -6928,6 +7177,11 @@ namespace CodeWalker
             ShowSelectionBounds = SelectionBoundsCheckBox.Checked;
         }
 
+        private void SelectByGeometryCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            SelectByGeometry = SelectByGeometryCheckBox.Checked;
+        }
+
         private void PopZonesCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             renderpopzones = PopZonesCheckBox.Checked;
@@ -7338,7 +7592,7 @@ namespace CodeWalker
                 MessageBox.Show("Please close the Project Window before enabling or disabling mods.");
                 return;
             }
-            
+
             SetModsEnabled(EnableModsCheckBox.Checked);
         }
 

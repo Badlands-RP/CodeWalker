@@ -38,38 +38,38 @@
             this.MainSplitContainer.Panel2.SuspendLayout();
             this.MainSplitContainer.SuspendLayout();
             this.SuspendLayout();
-            // 
+            //
             // MainSplitContainer
-            // 
+            //
             this.MainSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainSplitContainer.Location = new System.Drawing.Point(0, 0);
             this.MainSplitContainer.Name = "MainSplitContainer";
-            // 
+            //
             // MainSplitContainer.Panel1
-            // 
+            //
             this.MainSplitContainer.Panel1.Controls.Add(this.label1);
             this.MainSplitContainer.Panel1.Controls.Add(this.ModelsTreeView);
-            // 
+            //
             // MainSplitContainer.Panel2
-            // 
+            //
             this.MainSplitContainer.Panel2.Controls.Add(this.MaterialPropertiesPanel);
             this.MainSplitContainer.Size = new System.Drawing.Size(593, 404);
             this.MainSplitContainer.SplitterDistance = 191;
             this.MainSplitContainer.TabIndex = 0;
-            // 
+            //
             // label1
-            // 
+            //
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(5, 7);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(86, 13);
             this.label1.TabIndex = 3;
             this.label1.Text = "Select geometry:";
-            // 
+            //
             // ModelsTreeView
-            // 
-            this.ModelsTreeView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.ModelsTreeView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ModelsTreeView.FullRowSelect = true;
             this.ModelsTreeView.HideSelection = false;
@@ -79,27 +79,27 @@
             this.ModelsTreeView.Size = new System.Drawing.Size(185, 377);
             this.ModelsTreeView.TabIndex = 2;
             this.ModelsTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.ModelsTreeView_AfterSelect);
-            // 
+            //
             // MaterialPropertiesPanel
-            // 
-            this.MaterialPropertiesPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.MaterialPropertiesPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.MaterialPropertiesPanel.AutoScroll = true;
             this.MaterialPropertiesPanel.Location = new System.Drawing.Point(3, 24);
             this.MaterialPropertiesPanel.Name = "MaterialPropertiesPanel";
             this.MaterialPropertiesPanel.Size = new System.Drawing.Size(392, 377);
             this.MaterialPropertiesPanel.TabIndex = 0;
-            // 
+            //
             // ModelMatForm
-            // 
+            //
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(593, 404);
             this.Controls.Add(this.MainSplitContainer);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ModelMatForm";
-            this.Text = "Model Material Editor - CodeWalker by dexyfex";
+            this.Text = "Model Material Editor - BadWalker by dexyfex";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ModelMatForm_FormClosed);
             this.MainSplitContainer.Panel1.ResumeLayout(false);
             this.MainSplitContainer.Panel1.PerformLayout();

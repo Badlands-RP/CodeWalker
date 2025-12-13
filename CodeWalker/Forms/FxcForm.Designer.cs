@@ -65,11 +65,11 @@
             this.TechniquePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TechniqueTextBox)).BeginInit();
             this.SuspendLayout();
-            // 
+            //
             // MainTabControl
-            // 
-            this.MainTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.MainTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.MainTabControl.Controls.Add(this.ShadersTabPage);
             this.MainTabControl.Controls.Add(this.TechniquesTabPage);
@@ -79,9 +79,9 @@
             this.MainTabControl.SelectedIndex = 0;
             this.MainTabControl.Size = new System.Drawing.Size(784, 480);
             this.MainTabControl.TabIndex = 0;
-            // 
+            //
             // ShadersTabPage
-            // 
+            //
             this.ShadersTabPage.Controls.Add(this.splitContainer1);
             this.ShadersTabPage.Location = new System.Drawing.Point(4, 22);
             this.ShadersTabPage.Name = "ShadersTabPage";
@@ -90,9 +90,9 @@
             this.ShadersTabPage.TabIndex = 0;
             this.ShadersTabPage.Text = "Shaders";
             this.ShadersTabPage.UseVisualStyleBackColor = true;
-            // 
+            //
             // DetailsTabPage
-            // 
+            //
             this.DetailsTabPage.Controls.Add(this.DetailsPropertyGrid);
             this.DetailsTabPage.Location = new System.Drawing.Point(4, 22);
             this.DetailsTabPage.Name = "DetailsTabPage";
@@ -101,36 +101,36 @@
             this.DetailsTabPage.TabIndex = 1;
             this.DetailsTabPage.Text = "Details";
             this.DetailsTabPage.UseVisualStyleBackColor = true;
-            // 
+            //
             // DetailsPropertyGrid
-            // 
+            //
             this.DetailsPropertyGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DetailsPropertyGrid.HelpVisible = false;
             this.DetailsPropertyGrid.Location = new System.Drawing.Point(3, 3);
             this.DetailsPropertyGrid.Name = "DetailsPropertyGrid";
             this.DetailsPropertyGrid.Size = new System.Drawing.Size(770, 448);
             this.DetailsPropertyGrid.TabIndex = 1;
-            // 
+            //
             // splitContainer1
-            // 
+            //
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitContainer1.Location = new System.Drawing.Point(3, 3);
             this.splitContainer1.Name = "splitContainer1";
-            // 
+            //
             // splitContainer1.Panel1
-            // 
+            //
             this.splitContainer1.Panel1.Controls.Add(this.ShadersListView);
-            // 
+            //
             // splitContainer1.Panel2
-            // 
+            //
             this.splitContainer1.Panel2.Controls.Add(this.ShaderPanel);
             this.splitContainer1.Size = new System.Drawing.Size(770, 448);
             this.splitContainer1.SplitterDistance = 235;
             this.splitContainer1.TabIndex = 0;
-            // 
+            //
             // ShaderPanel
-            // 
+            //
             this.ShaderPanel.Controls.Add(this.ShaderTextBox);
             this.ShaderPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ShaderPanel.Enabled = false;
@@ -138,9 +138,9 @@
             this.ShaderPanel.Name = "ShaderPanel";
             this.ShaderPanel.Size = new System.Drawing.Size(531, 448);
             this.ShaderPanel.TabIndex = 0;
-            // 
+            //
             // ShadersListView
-            // 
+            //
             this.ShadersListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.ShadersNameColumn});
             this.ShadersListView.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -154,16 +154,16 @@
             this.ShadersListView.UseCompatibleStateImageBehavior = false;
             this.ShadersListView.View = System.Windows.Forms.View.Details;
             this.ShadersListView.SelectedIndexChanged += new System.EventHandler(this.ShadersListView_SelectedIndexChanged);
-            // 
+            //
             // ShadersNameColumn
-            // 
+            //
             this.ShadersNameColumn.Text = "Name";
             this.ShadersNameColumn.Width = 208;
-            // 
+            //
             // ShaderTextBox
-            // 
-            this.ShaderTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.ShaderTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ShaderTextBox.AutoCompleteBracketsList = new char[] {
         '(',
@@ -201,9 +201,9 @@
             this.ShaderTextBox.Size = new System.Drawing.Size(523, 448);
             this.ShaderTextBox.TabIndex = 1;
             this.ShaderTextBox.Zoom = 100;
-            // 
+            //
             // statusStrip1
-            // 
+            //
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.StatusLabel});
             this.statusStrip1.Location = new System.Drawing.Point(0, 486);
@@ -211,17 +211,17 @@
             this.statusStrip1.Size = new System.Drawing.Size(788, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
-            // 
+            //
             // StatusLabel
-            // 
+            //
             this.StatusLabel.Name = "StatusLabel";
             this.StatusLabel.Size = new System.Drawing.Size(773, 17);
             this.StatusLabel.Spring = true;
             this.StatusLabel.Text = "Ready";
             this.StatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
+            //
             // TechniquesTabPage
-            // 
+            //
             this.TechniquesTabPage.Controls.Add(this.splitContainer2);
             this.TechniquesTabPage.Location = new System.Drawing.Point(4, 22);
             this.TechniquesTabPage.Name = "TechniquesTabPage";
@@ -229,29 +229,29 @@
             this.TechniquesTabPage.TabIndex = 2;
             this.TechniquesTabPage.Text = "Techniques";
             this.TechniquesTabPage.UseVisualStyleBackColor = true;
-            // 
+            //
             // splitContainer2
-            // 
-            this.splitContainer2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.splitContainer2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.splitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitContainer2.Location = new System.Drawing.Point(3, 3);
             this.splitContainer2.Name = "splitContainer2";
-            // 
+            //
             // splitContainer2.Panel1
-            // 
+            //
             this.splitContainer2.Panel1.Controls.Add(this.TechniquesListView);
-            // 
+            //
             // splitContainer2.Panel2
-            // 
+            //
             this.splitContainer2.Panel2.Controls.Add(this.TechniquePanel);
             this.splitContainer2.Size = new System.Drawing.Size(770, 448);
             this.splitContainer2.SplitterDistance = 235;
             this.splitContainer2.TabIndex = 1;
-            // 
+            //
             // TechniquesListView
-            // 
+            //
             this.TechniquesListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.TechniquesNameColumn});
             this.TechniquesListView.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -265,14 +265,14 @@
             this.TechniquesListView.UseCompatibleStateImageBehavior = false;
             this.TechniquesListView.View = System.Windows.Forms.View.Details;
             this.TechniquesListView.SelectedIndexChanged += new System.EventHandler(this.TechniquesListView_SelectedIndexChanged);
-            // 
+            //
             // TechniquesNameColumn
-            // 
+            //
             this.TechniquesNameColumn.Text = "Name";
             this.TechniquesNameColumn.Width = 208;
-            // 
+            //
             // TechniquePanel
-            // 
+            //
             this.TechniquePanel.Controls.Add(this.TechniqueTextBox);
             this.TechniquePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TechniquePanel.Enabled = false;
@@ -280,11 +280,11 @@
             this.TechniquePanel.Name = "TechniquePanel";
             this.TechniquePanel.Size = new System.Drawing.Size(531, 448);
             this.TechniquePanel.TabIndex = 0;
-            // 
+            //
             // TechniqueTextBox
-            // 
-            this.TechniqueTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.TechniqueTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TechniqueTextBox.AutoCompleteBracketsList = new char[] {
         '(',
@@ -322,9 +322,9 @@
             this.TechniqueTextBox.Size = new System.Drawing.Size(523, 448);
             this.TechniqueTextBox.TabIndex = 1;
             this.TechniqueTextBox.Zoom = 100;
-            // 
+            //
             // FxcForm
-            // 
+            //
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(788, 508);
@@ -332,7 +332,7 @@
             this.Controls.Add(this.MainTabControl);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FxcForm";
-            this.Text = "FXC Viewer - CodeWalker by dexyfex";
+            this.Text = "FXC Viewer - BadWalker by dexyfex";
             this.MainTabControl.ResumeLayout(false);
             this.ShadersTabPage.ResumeLayout(false);
             this.DetailsTabPage.ResumeLayout(false);

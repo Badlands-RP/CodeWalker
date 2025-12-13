@@ -71,7 +71,7 @@ namespace CodeWalker.Forms
 
         private void UpdateFormTitle()
         {
-            Text = fileName + " - Audio dat.rel Editor - CodeWalker by dexyfex";
+            Text = fileName + " - Audio dat.rel Editor - BadWalker by dexyfex";
         }
 
         private void UpdateTextBoxFromData()
@@ -92,7 +92,7 @@ namespace CodeWalker.Forms
             //    XmlTextBox.Text = "[XML size > 10MB - Not shown due to performance limitations - Please use an external viewer for this file.]";
             //    return;
             //}
-            //else 
+            //else
             if (xml.Length > (1024 * 512))
             {
                 XmlTextBox.Language = Language.Custom;

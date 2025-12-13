@@ -178,9 +178,9 @@ namespace CodeWalker
 
             InitFileTypes();
 
-            // This is probably not necessary now that the GTA folder is checked 
-            // in the Program.cs when the game is initiated, but we will leave it 
-            // here for now to make sure 
+            // This is probably not necessary now that the GTA folder is checked
+            // in the Program.cs when the game is initiated, but we will leave it
+            // here for now to make sure
             if(!GTAFolder.UpdateGTAFolder(true))
             {
                 Close();
@@ -510,7 +510,7 @@ namespace CodeWalker
                     }
                 }
             }
-            
+
             var hierarchy = relpath.Split(new[] { '\\' }, StringSplitOptions.RemoveEmptyEntries);
             TreeNode n = root.TreeNode;// FindTreeNode("gta v", null);
             if (!string.IsNullOrEmpty(path))
@@ -538,7 +538,7 @@ namespace CodeWalker
         }
         private void NavigateComplete(MainTreeFolder prevFolder)
         {
-            //called after the CurrentFolder and CurrentFiles have changed. 
+            //called after the CurrentFolder and CurrentFiles have changed.
 
             UpdateNavigateUI();
             EnsureEditModeWarning();
@@ -1686,7 +1686,7 @@ namespace CodeWalker
                 var ft = item.FileType;
                 var fe = item.File;
                 if (fe == null)
-                { 
+                {
                     //this should only happen when opening a file from filesystem...
                     fe = CreateFileEntry(name, path, ref data);
                 }
@@ -2339,7 +2339,7 @@ namespace CodeWalker
             var msg1 = $"Are you sure you want to change this archive {msgr}to OPEN encryption?";
             var msg2 = "Loading by the game will require a mod loader such as OpenRPF.asi or OpenIV.asi.";
 
-            var confirm = new Func<RpfFile, bool>((f) => 
+            var confirm = new Func<RpfFile, bool>((f) =>
             {
                 var msg0 = (f != null) ? $"Archive {f.Name} is currently set to {f.Encryption} encryption.\n" : "";
                 var msg = $"{msg0}{msg1}\n{msg2}";
@@ -2446,7 +2446,7 @@ namespace CodeWalker
                 if (file.Folder == null)
                 {
                     var xml = GetFileXml(file, out var newfn, null, errorAction);
-                    
+
                     if (string.IsNullOrEmpty(xml) == false)
                     {
                         SaveFileDialog.FileName = newfn;
@@ -2647,7 +2647,7 @@ namespace CodeWalker
         private void ExtractAll()
         {
             if (CurrentFiles == null) return;
-            
+
             var folderpath = SelectFolder();
             if (string.IsNullOrEmpty(folderpath)) return;
 
@@ -3502,7 +3502,7 @@ namespace CodeWalker
                 Width = 450,
                 Height = 290,
                 FormBorderStyle = FormBorderStyle.FixedDialog,
-                Text = "Defragment RPF Archive - CodeWalker by dexyfex",
+                Text = "Defragment RPF Archive - BadWalker by dexyfex",
                 StartPosition = FormStartPosition.CenterParent,
                 MaximizeBox = false,
                 MinimizeBox = false
@@ -4036,7 +4036,7 @@ namespace CodeWalker
 
             Cursor = Cursors.WaitCursor;
 
-            var writeFile = new Action<MainListItem, string, bool>((file, outdir, addfilename) => 
+            var writeFile = new Action<MainListItem, string, bool>((file, outdir, addfilename) =>
             {
                 if (file.FileSize > 0x6400000) //100MB
                 {

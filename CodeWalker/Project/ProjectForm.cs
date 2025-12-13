@@ -887,7 +887,7 @@ namespace CodeWalker.Project
             if (CurrentAudioAmbientRule?.AmbientRule == null) CurrentAudioAmbientRule = null;
             if (CurrentAudioStaticEmitter?.StaticEmitter == null) CurrentAudioStaticEmitter = null;
 
-            
+
             var daz = item as Dat151AmbientZone;//need to get these from WorldForm, project tree only contains the Dat151Rel items
             var dae = item as Dat151AmbientRule;
             var dse = item as Dat151StaticEmitter;
@@ -1139,7 +1139,7 @@ namespace CodeWalker.Project
             if (mode == DeleteGrassPanel.DeleteGrassMode.None || mode == DeleteGrassPanel.DeleteGrassMode.Batch)
                 return CurrentGrassBatch?.BrushRadius ?? 0f;
             else if (DeleteGrassPanel != null && mode != DeleteGrassPanel.DeleteGrassMode.None)
-                return DeleteGrassPanel.BrushRadius;            
+                return DeleteGrassPanel.BrushRadius;
             return 0f;
         }
 
@@ -1152,14 +1152,14 @@ namespace CodeWalker.Project
             }
 
             CurrentProjectFile = new ProjectFile();
-            CurrentProjectFile.Name = "New CodeWalker Project";
+            CurrentProjectFile.Name = "New BadWalker Project";
             CurrentProjectFile.Version = 1;
             CurrentProjectFile.HasChanged = false;
             LoadProjectUI();
         }
         public void OpenProject()
         {
-            string file = ShowOpenDialog("CodeWalker Projects|*.cwproj", string.Empty);
+            string file = ShowOpenDialog("BadWalker Projects|*.cwproj", string.Empty);
             if (string.IsNullOrEmpty(file))
             {
                 return;
@@ -1537,7 +1537,7 @@ namespace CodeWalker.Project
             if (CurrentProjectFile == null) return;
             if (string.IsNullOrEmpty(CurrentProjectFile.Filepath) || saveas)
             {
-                string fileName = ShowSaveDialog("CodeWalker Projects|*.cwproj", CurrentProjectFile.Filepath);
+                string fileName = ShowSaveDialog("BadWalker Projects|*.cwproj", CurrentProjectFile.Filepath);
                 if (string.IsNullOrEmpty(fileName))
                 { return; } //user cancelled
 
@@ -2226,7 +2226,7 @@ namespace CodeWalker.Project
 
             if (CurrentEntity._CEntityDef.numChildren != 0)
             {
-                MessageBox.Show("This entity's numChildren is not 0 - deleting entities with children is not currently supported by CodeWalker.");
+                MessageBox.Show("This entity's numChildren is not 0 - deleting entities with children is not currently supported by BadWalker.");
                 return true;
             }
 
@@ -2236,7 +2236,7 @@ namespace CodeWalker.Project
                 var ent = CurrentYmapFile.AllEntities[i];
                 if (ent._CEntityDef.numChildren != 0)
                 {
-                    MessageBox.Show("There are other entities present in this .ymap that have children. Deleting this entity is not currently supported by CodeWalker.");
+                    MessageBox.Show("There are other entities present in this .ymap that have children. Deleting this entity is not currently supported by BadWalker.");
                     return true;
                 }
             }
@@ -3799,7 +3799,7 @@ namespace CodeWalker.Project
 
             if (CurrentEntity._CEntityDef.numChildren != 0)
             {
-                MessageBox.Show("This entity's numChildren is not 0 - deleting entities with children is not currently supported by CodeWalker.");
+                MessageBox.Show("This entity's numChildren is not 0 - deleting entities with children is not currently supported by BadWalker.");
                 return true;
             }
 
@@ -8927,11 +8927,11 @@ namespace CodeWalker.Project
         {
             if (CurrentProjectFile == null)
             {
-                Text = "Project - CodeWalker by dexyfex";
+                Text = "Project - BadWalker by dexyfex";
             }
             else
             {
-                Text = CurrentProjectFile.Name + " - CodeWalker by dexyfex";
+                Text = CurrentProjectFile.Name + " - BadWalker by dexyfex";
             }
         }
 
@@ -9411,7 +9411,7 @@ namespace CodeWalker.Project
                 var tit = "Confirm close";
                 if (e.CloseReason == CloseReason.FormOwnerClosing)
                 {
-                    msg = "Are you sure you want to quit CodeWalker?";
+                    msg = "Are you sure you want to quit BadWalker?";
                     tit = "Confirm quit";
                 }
                 if (MessageBox.Show(msg, tit, MessageBoxButtons.YesNo) != DialogResult.Yes)
@@ -9665,7 +9665,7 @@ namespace CodeWalker.Project
         {
             RemoveYbnFromProject();
         }
-        
+
         private void YdrRemoveFromProjectMenu_Click(object sender, EventArgs e)
         {
             RemoveYdrFromProject();
@@ -9838,7 +9838,7 @@ namespace CodeWalker.Project
             OptionsDisplayEntityIndexesMenu.Checked = !OptionsDisplayEntityIndexesMenu.Checked;
             displayentityindexes = OptionsDisplayEntityIndexesMenu.Checked;
             ProjectExplorer?.LoadProjectTree(CurrentProjectFile);
-            
+
             //make sure the current item is selected in the project explorer, let's just assume it's an entity
             //(for things other than entities, they will need to be re-selected manually by the user to sync project explorer again)
             if (CurrentEntity != null)

@@ -137,7 +137,7 @@ namespace CodeWalker.Rendering
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Unable to initialise DirectX11.\n" + ex.Message, "CodeWalker - Error!");
+                MessageBox.Show("Unable to initialise DirectX11.\n" + ex.Message, "BadWalker - Error!");
                 return false;
             }
         }

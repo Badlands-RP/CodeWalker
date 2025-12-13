@@ -178,6 +178,7 @@ namespace CodeWalker
             this.label9 = new System.Windows.Forms.Label();
             this.PathsCheckBox = new System.Windows.Forms.CheckBox();
             this.SelectionBoundsCheckBox = new System.Windows.Forms.CheckBox();
+            this.SelectByGeometryCheckBox = new System.Windows.Forms.CheckBox();
             this.BoundsDepthClipCheckBox = new System.Windows.Forms.CheckBox();
             this.BoundsRangeTrackBar = new System.Windows.Forms.TrackBar();
             this.BoundsStyleComboBox = new System.Windows.Forms.ComboBox();
@@ -357,9 +358,9 @@ namespace CodeWalker
             this.ToolbarPanel.SuspendLayout();
             this.Toolbar.SuspendLayout();
             this.SuspendLayout();
-            // 
+            //
             // StatusStrip
-            // 
+            //
             this.StatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.StatusLabel,
             this.MousedLabel,
@@ -369,9 +370,9 @@ namespace CodeWalker
             this.StatusStrip.Size = new System.Drawing.Size(984, 22);
             this.StatusStrip.TabIndex = 0;
             this.StatusStrip.Text = "statusStrip1";
-            // 
+            //
             // StatusLabel
-            // 
+            //
             this.StatusLabel.BackColor = System.Drawing.SystemColors.Control;
             this.StatusLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.StatusLabel.Name = "StatusLabel";
@@ -379,26 +380,26 @@ namespace CodeWalker
             this.StatusLabel.Spring = true;
             this.StatusLabel.Text = "Initialising";
             this.StatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
+            //
             // MousedLabel
-            // 
+            //
             this.MousedLabel.BackColor = System.Drawing.SystemColors.Control;
             this.MousedLabel.Name = "MousedLabel";
             this.MousedLabel.Size = new System.Drawing.Size(16, 17);
             this.MousedLabel.Text = "   ";
-            // 
+            //
             // StatsLabel
-            // 
+            //
             this.StatsLabel.BackColor = System.Drawing.SystemColors.Control;
             this.StatsLabel.DoubleClickEnabled = true;
             this.StatsLabel.Name = "StatsLabel";
             this.StatsLabel.Size = new System.Drawing.Size(75, 17);
             this.StatsLabel.Text = "0 geometries";
             this.StatsLabel.DoubleClick += new System.EventHandler(this.StatsLabel_DoubleClick);
-            // 
+            //
             // ModelComboBox
-            // 
-            this.ModelComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.ModelComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ModelComboBox.FormattingEnabled = true;
             this.ModelComboBox.Items.AddRange(new object[] {
@@ -442,10 +443,10 @@ namespace CodeWalker
             this.ModelComboBox.TabIndex = 11;
             this.ModelComboBox.SelectedIndexChanged += new System.EventHandler(this.ModelComboBox_SelectedIndexChanged);
             this.ModelComboBox.TextUpdate += new System.EventHandler(this.ModelComboBox_TextUpdate);
-            // 
+            //
             // ToolsPanel
-            // 
-            this.ToolsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            //
+            this.ToolsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ToolsPanel.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ToolsPanel.Controls.Add(this.ToolsDragPanel);
@@ -459,10 +460,10 @@ namespace CodeWalker
             this.ToolsPanel.Size = new System.Drawing.Size(218, 665);
             this.ToolsPanel.TabIndex = 2;
             this.ToolsPanel.Visible = false;
-            // 
+            //
             // ToolsDragPanel
-            // 
-            this.ToolsDragPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            //
+            this.ToolsDragPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Left)));
             this.ToolsDragPanel.Cursor = System.Windows.Forms.Cursors.VSplit;
             this.ToolsDragPanel.Location = new System.Drawing.Point(0, 0);
@@ -472,9 +473,9 @@ namespace CodeWalker
             this.ToolsDragPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ToolsDragPanel_MouseDown);
             this.ToolsDragPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ToolsDragPanel_MouseMove);
             this.ToolsDragPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ToolsDragPanel_MouseUp);
-            // 
+            //
             // AboutButton
-            // 
+            //
             this.AboutButton.Location = new System.Drawing.Point(64, 3);
             this.AboutButton.Name = "AboutButton";
             this.AboutButton.Size = new System.Drawing.Size(55, 23);
@@ -482,9 +483,9 @@ namespace CodeWalker
             this.AboutButton.Text = "About...";
             this.AboutButton.UseVisualStyleBackColor = true;
             this.AboutButton.Click += new System.EventHandler(this.AboutButton_Click);
-            // 
+            //
             // ToolsButton
-            // 
+            //
             this.ToolsButton.Location = new System.Drawing.Point(3, 3);
             this.ToolsButton.Name = "ToolsButton";
             this.ToolsButton.Size = new System.Drawing.Size(55, 23);
@@ -492,9 +493,9 @@ namespace CodeWalker
             this.ToolsButton.Text = "Tools...";
             this.ToolsButton.UseVisualStyleBackColor = true;
             this.ToolsButton.Click += new System.EventHandler(this.ToolsButton_Click);
-            // 
+            //
             // ToolsPanelExpandButton
-            // 
+            //
             this.ToolsPanelExpandButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ToolsPanelExpandButton.Location = new System.Drawing.Point(149, 3);
             this.ToolsPanelExpandButton.Name = "ToolsPanelExpandButton";
@@ -503,11 +504,11 @@ namespace CodeWalker
             this.ToolsPanelExpandButton.Text = "<<";
             this.ToolsPanelExpandButton.UseVisualStyleBackColor = true;
             this.ToolsPanelExpandButton.Click += new System.EventHandler(this.ToolsPanelExpandButton_Click);
-            // 
+            //
             // ToolsTabControl
-            // 
-            this.ToolsTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.ToolsTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ToolsTabControl.Controls.Add(this.ViewTabPage);
             this.ToolsTabControl.Controls.Add(this.MarkersTabPage);
@@ -518,9 +519,9 @@ namespace CodeWalker
             this.ToolsTabControl.SelectedIndex = 0;
             this.ToolsTabControl.Size = new System.Drawing.Size(213, 632);
             this.ToolsTabControl.TabIndex = 12;
-            // 
+            //
             // ViewTabPage
-            // 
+            //
             this.ViewTabPage.Controls.Add(this.StatusBarCheckBox);
             this.ViewTabPage.Controls.Add(this.ViewTabControl);
             this.ViewTabPage.Controls.Add(this.label3);
@@ -534,9 +535,9 @@ namespace CodeWalker
             this.ViewTabPage.TabIndex = 0;
             this.ViewTabPage.Text = "View";
             this.ViewTabPage.UseVisualStyleBackColor = true;
-            // 
+            //
             // StatusBarCheckBox
-            // 
+            //
             this.StatusBarCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.StatusBarCheckBox.AutoSize = true;
             this.StatusBarCheckBox.Checked = true;
@@ -548,11 +549,11 @@ namespace CodeWalker
             this.StatusBarCheckBox.Text = "Status bar";
             this.StatusBarCheckBox.UseVisualStyleBackColor = true;
             this.StatusBarCheckBox.CheckedChanged += new System.EventHandler(this.StatusBarCheckBox_CheckedChanged);
-            // 
+            //
             // ViewTabControl
-            // 
-            this.ViewTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.ViewTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ViewTabControl.Controls.Add(this.ViewWorldTabPage);
             this.ViewTabControl.Controls.Add(this.ViewYmapsTabPage);
@@ -562,9 +563,9 @@ namespace CodeWalker
             this.ViewTabControl.SelectedIndex = 0;
             this.ViewTabControl.Size = new System.Drawing.Size(202, 506);
             this.ViewTabControl.TabIndex = 12;
-            // 
+            //
             // ViewWorldTabPage
-            // 
+            //
             this.ViewWorldTabPage.Controls.Add(this.EnableModsCheckBox);
             this.ViewWorldTabPage.Controls.Add(this.label30);
             this.ViewWorldTabPage.Controls.Add(this.DlcLevelComboBox);
@@ -587,9 +588,9 @@ namespace CodeWalker
             this.ViewWorldTabPage.TabIndex = 0;
             this.ViewWorldTabPage.Text = "World";
             this.ViewWorldTabPage.UseVisualStyleBackColor = true;
-            // 
+            //
             // EnableModsCheckBox
-            // 
+            //
             this.EnableModsCheckBox.AutoSize = true;
             this.EnableModsCheckBox.Enabled = false;
             this.EnableModsCheckBox.Location = new System.Drawing.Point(6, 280);
@@ -599,18 +600,18 @@ namespace CodeWalker
             this.EnableModsCheckBox.Text = "Enable Mods";
             this.EnableModsCheckBox.UseVisualStyleBackColor = true;
             this.EnableModsCheckBox.CheckedChanged += new System.EventHandler(this.EnableModsCheckBox_CheckedChanged);
-            // 
+            //
             // label30
-            // 
+            //
             this.label30.AutoSize = true;
             this.label30.Location = new System.Drawing.Point(1, 337);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(60, 13);
             this.label30.TabIndex = 70;
             this.label30.Text = "DLC Level:";
-            // 
+            //
             // DlcLevelComboBox
-            // 
+            //
             this.DlcLevelComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.DlcLevelComboBox.Enabled = false;
             this.DlcLevelComboBox.FormattingEnabled = true;
@@ -622,9 +623,9 @@ namespace CodeWalker
             this.DlcLevelComboBox.TabIndex = 70;
             this.DlcLevelComboBox.SelectedIndexChanged += new System.EventHandler(this.DlcLevelComboBox_SelectedIndexChanged);
             this.DlcLevelComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DlcLevelComboBox_KeyPress);
-            // 
+            //
             // EnableDlcCheckBox
-            // 
+            //
             this.EnableDlcCheckBox.AutoSize = true;
             this.EnableDlcCheckBox.Enabled = false;
             this.EnableDlcCheckBox.Location = new System.Drawing.Point(6, 311);
@@ -634,9 +635,9 @@ namespace CodeWalker
             this.EnableDlcCheckBox.Text = "Enable DLC";
             this.EnableDlcCheckBox.UseVisualStyleBackColor = true;
             this.EnableDlcCheckBox.CheckedChanged += new System.EventHandler(this.EnableDlcCheckBox_CheckedChanged);
-            // 
+            //
             // WorldYmapWeatherFilterCheckBox
-            // 
+            //
             this.WorldYmapWeatherFilterCheckBox.AutoSize = true;
             this.WorldYmapWeatherFilterCheckBox.Checked = true;
             this.WorldYmapWeatherFilterCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -647,9 +648,9 @@ namespace CodeWalker
             this.WorldYmapWeatherFilterCheckBox.Text = "Filter ymaps by weather";
             this.WorldYmapWeatherFilterCheckBox.UseVisualStyleBackColor = true;
             this.WorldYmapWeatherFilterCheckBox.CheckedChanged += new System.EventHandler(this.WorldYmapWeatherFilterCheckBox_CheckedChanged);
-            // 
+            //
             // WorldYmapTimeFilterCheckBox
-            // 
+            //
             this.WorldYmapTimeFilterCheckBox.AutoSize = true;
             this.WorldYmapTimeFilterCheckBox.Checked = true;
             this.WorldYmapTimeFilterCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -660,9 +661,9 @@ namespace CodeWalker
             this.WorldYmapTimeFilterCheckBox.Text = "Filter ymaps by time of day";
             this.WorldYmapTimeFilterCheckBox.UseVisualStyleBackColor = true;
             this.WorldYmapTimeFilterCheckBox.CheckedChanged += new System.EventHandler(this.WorldYmapTimeFilterCheckBox_CheckedChanged);
-            // 
+            //
             // WorldScriptedYmapsCheckBox
-            // 
+            //
             this.WorldScriptedYmapsCheckBox.AutoSize = true;
             this.WorldScriptedYmapsCheckBox.Checked = true;
             this.WorldScriptedYmapsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -673,28 +674,28 @@ namespace CodeWalker
             this.WorldScriptedYmapsCheckBox.Text = "Show scripted ymaps";
             this.WorldScriptedYmapsCheckBox.UseVisualStyleBackColor = true;
             this.WorldScriptedYmapsCheckBox.CheckedChanged += new System.EventHandler(this.WorldScriptedYmapsCheckBox_CheckedChanged);
-            // 
+            //
             // WorldDetailDistLabel
-            // 
+            //
             this.WorldDetailDistLabel.AutoSize = true;
             this.WorldDetailDistLabel.Location = new System.Drawing.Point(87, 94);
             this.WorldDetailDistLabel.Name = "WorldDetailDistLabel";
             this.WorldDetailDistLabel.Size = new System.Drawing.Size(22, 13);
             this.WorldDetailDistLabel.TabIndex = 64;
             this.WorldDetailDistLabel.Text = "1.0";
-            // 
+            //
             // label18
-            // 
+            //
             this.label18.AutoSize = true;
             this.label18.Location = new System.Drawing.Point(1, 94);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(80, 13);
             this.label18.TabIndex = 63;
             this.label18.Text = "Detail distance:";
-            // 
+            //
             // WorldDetailDistTrackBar
-            // 
-            this.WorldDetailDistTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.WorldDetailDistTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.WorldDetailDistTrackBar.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.WorldDetailDistTrackBar.LargeChange = 10;
@@ -706,9 +707,9 @@ namespace CodeWalker
             this.WorldDetailDistTrackBar.TickFrequency = 2;
             this.WorldDetailDistTrackBar.Value = 10;
             this.WorldDetailDistTrackBar.Scroll += new System.EventHandler(this.WorldDetailDistTrackBar_Scroll);
-            // 
+            //
             // WorldLodDistLabel
-            // 
+            //
             this.WorldLodDistLabel.AutoSize = true;
             this.WorldLodDistLabel.Location = new System.Drawing.Point(82, 39);
             this.WorldLodDistLabel.Name = "WorldLodDistLabel";
@@ -716,9 +717,9 @@ namespace CodeWalker
             this.WorldLodDistLabel.TabIndex = 61;
             this.WorldLodDistLabel.Text = "1.0";
             this.WorldLodDistLabel.Visible = false;
-            // 
+            //
             // label16
-            // 
+            //
             this.label16.AutoSize = true;
             this.label16.Location = new System.Drawing.Point(1, 39);
             this.label16.Name = "label16";
@@ -726,10 +727,10 @@ namespace CodeWalker
             this.label16.TabIndex = 60;
             this.label16.Text = "LOD distance:";
             this.label16.Visible = false;
-            // 
+            //
             // WorldLodDistTrackBar
-            // 
-            this.WorldLodDistTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.WorldLodDistTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.WorldLodDistTrackBar.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.WorldLodDistTrackBar.LargeChange = 10;
@@ -742,18 +743,18 @@ namespace CodeWalker
             this.WorldLodDistTrackBar.Value = 10;
             this.WorldLodDistTrackBar.Visible = false;
             this.WorldLodDistTrackBar.Scroll += new System.EventHandler(this.WorldLodDistTrackBar_Scroll);
-            // 
+            //
             // label15
-            // 
+            //
             this.label15.AutoSize = true;
             this.label15.Location = new System.Drawing.Point(1, 9);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(55, 13);
             this.label15.TabIndex = 58;
             this.label15.Text = "Max LOD:";
-            // 
+            //
             // WorldMaxLodComboBox
-            // 
+            //
             this.WorldMaxLodComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.WorldMaxLodComboBox.FormattingEnabled = true;
             this.WorldMaxLodComboBox.Items.AddRange(new object[] {
@@ -770,9 +771,9 @@ namespace CodeWalker
             this.WorldMaxLodComboBox.TabIndex = 57;
             this.WorldMaxLodComboBox.SelectedIndexChanged += new System.EventHandler(this.WorldMaxLodComboBox_SelectedIndexChanged);
             this.WorldMaxLodComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.WorldMaxLodComboBox_KeyPress);
-            // 
+            //
             // ViewYmapsTabPage
-            // 
+            //
             this.ViewYmapsTabPage.Controls.Add(this.ShowYmapChildrenCheckBox);
             this.ViewYmapsTabPage.Controls.Add(this.label2);
             this.ViewYmapsTabPage.Controls.Add(this.DetailTrackBar);
@@ -785,9 +786,9 @@ namespace CodeWalker
             this.ViewYmapsTabPage.TabIndex = 1;
             this.ViewYmapsTabPage.Text = "Ymaps";
             this.ViewYmapsTabPage.UseVisualStyleBackColor = true;
-            // 
+            //
             // ShowYmapChildrenCheckBox
-            // 
+            //
             this.ShowYmapChildrenCheckBox.AutoSize = true;
             this.ShowYmapChildrenCheckBox.Enabled = false;
             this.ShowYmapChildrenCheckBox.Location = new System.Drawing.Point(101, 6);
@@ -797,19 +798,19 @@ namespace CodeWalker
             this.ShowYmapChildrenCheckBox.Text = "Show children";
             this.ShowYmapChildrenCheckBox.UseVisualStyleBackColor = true;
             this.ShowYmapChildrenCheckBox.CheckedChanged += new System.EventHandler(this.ShowYmapChildrenCheckBox_CheckedChanged);
-            // 
+            //
             // label2
-            // 
+            //
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(3, 56);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(77, 13);
             this.label2.TabIndex = 8;
             this.label2.Text = "Ymaps to load:";
-            // 
+            //
             // DetailTrackBar
-            // 
-            this.DetailTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.DetailTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.DetailTrackBar.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.DetailTrackBar.Location = new System.Drawing.Point(6, 24);
@@ -819,9 +820,9 @@ namespace CodeWalker
             this.DetailTrackBar.TabIndex = 34;
             this.DetailTrackBar.Value = 5;
             this.DetailTrackBar.Scroll += new System.EventHandler(this.DetailTrackBar_Scroll);
-            // 
+            //
             // DynamicLODCheckBox
-            // 
+            //
             this.DynamicLODCheckBox.AutoSize = true;
             this.DynamicLODCheckBox.Checked = true;
             this.DynamicLODCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -832,11 +833,11 @@ namespace CodeWalker
             this.DynamicLODCheckBox.Text = "Dynamic LOD";
             this.DynamicLODCheckBox.UseVisualStyleBackColor = true;
             this.DynamicLODCheckBox.CheckedChanged += new System.EventHandler(this.DynamicLODCheckBox_CheckedChanged);
-            // 
+            //
             // YmapsTextBox
-            // 
-            this.YmapsTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.YmapsTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.YmapsTextBox.Location = new System.Drawing.Point(0, 72);
             this.YmapsTextBox.Multiline = true;
@@ -846,9 +847,9 @@ namespace CodeWalker
             this.YmapsTextBox.TabIndex = 36;
             this.YmapsTextBox.Text = resources.GetString("YmapsTextBox.Text");
             this.YmapsTextBox.TextChanged += new System.EventHandler(this.YmapsTextBox_TextChanged);
-            // 
+            //
             // ViewModelTabPage
-            // 
+            //
             this.ViewModelTabPage.Controls.Add(this.label1);
             this.ViewModelTabPage.Controls.Add(this.ModelComboBox);
             this.ViewModelTabPage.Location = new System.Drawing.Point(4, 22);
@@ -857,27 +858,27 @@ namespace CodeWalker
             this.ViewModelTabPage.TabIndex = 2;
             this.ViewModelTabPage.Text = "Model";
             this.ViewModelTabPage.UseVisualStyleBackColor = true;
-            // 
+            //
             // label1
-            // 
+            //
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(-1, 10);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(39, 13);
             this.label1.TabIndex = 5;
             this.label1.Text = "Model:";
-            // 
+            //
             // label3
-            // 
+            //
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(3, 8);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(37, 13);
             this.label3.TabIndex = 11;
             this.label3.Text = "Mode:";
-            // 
+            //
             // ViewModeComboBox
-            // 
+            //
             this.ViewModeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ViewModeComboBox.FormattingEnabled = true;
             this.ViewModeComboBox.Items.AddRange(new object[] {
@@ -890,9 +891,9 @@ namespace CodeWalker
             this.ViewModeComboBox.TabIndex = 10;
             this.ViewModeComboBox.SelectedIndexChanged += new System.EventHandler(this.ViewModeComboBox_SelectedIndexChanged);
             this.ViewModeComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ViewModeComboBox_KeyPress);
-            // 
+            //
             // ShowToolbarCheckBox
-            // 
+            //
             this.ShowToolbarCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ShowToolbarCheckBox.AutoSize = true;
             this.ShowToolbarCheckBox.Location = new System.Drawing.Point(10, 586);
@@ -902,9 +903,9 @@ namespace CodeWalker
             this.ShowToolbarCheckBox.Text = "Show Toolbar (T)";
             this.ShowToolbarCheckBox.UseVisualStyleBackColor = true;
             this.ShowToolbarCheckBox.CheckedChanged += new System.EventHandler(this.ShowToolbarCheckBox_CheckedChanged);
-            // 
+            //
             // ErrorConsoleCheckBox
-            // 
+            //
             this.ErrorConsoleCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ErrorConsoleCheckBox.AutoSize = true;
             this.ErrorConsoleCheckBox.Location = new System.Drawing.Point(10, 565);
@@ -914,9 +915,9 @@ namespace CodeWalker
             this.ErrorConsoleCheckBox.Text = "Error console";
             this.ErrorConsoleCheckBox.UseVisualStyleBackColor = true;
             this.ErrorConsoleCheckBox.CheckedChanged += new System.EventHandler(this.ErrorConsoleCheckBox_CheckedChanged);
-            // 
+            //
             // MarkersTabPage
-            // 
+            //
             this.MarkersTabPage.Controls.Add(this.label27);
             this.MarkersTabPage.Controls.Add(this.CameraPositionTextBox);
             this.MarkersTabPage.Controls.Add(this.AddSelectionMarkerButton);
@@ -937,28 +938,28 @@ namespace CodeWalker
             this.MarkersTabPage.TabIndex = 1;
             this.MarkersTabPage.Text = "Markers";
             this.MarkersTabPage.UseVisualStyleBackColor = true;
-            // 
+            //
             // label27
-            // 
+            //
             this.label27.AutoSize = true;
             this.label27.Location = new System.Drawing.Point(-2, 50);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(121, 13);
             this.label27.TabIndex = 22;
             this.label27.Text = "Current camera position:";
-            // 
+            //
             // CameraPositionTextBox
-            // 
-            this.CameraPositionTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.CameraPositionTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.CameraPositionTextBox.Location = new System.Drawing.Point(0, 67);
             this.CameraPositionTextBox.Name = "CameraPositionTextBox";
             this.CameraPositionTextBox.Size = new System.Drawing.Size(205, 20);
             this.CameraPositionTextBox.TabIndex = 16;
             this.CameraPositionTextBox.Text = "0, 0, 0";
-            // 
+            //
             // AddSelectionMarkerButton
-            // 
+            //
             this.AddSelectionMarkerButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.AddSelectionMarkerButton.Location = new System.Drawing.Point(0, 577);
             this.AddSelectionMarkerButton.Name = "AddSelectionMarkerButton";
@@ -967,9 +968,9 @@ namespace CodeWalker
             this.AddSelectionMarkerButton.Text = "Add selection";
             this.AddSelectionMarkerButton.UseVisualStyleBackColor = true;
             this.AddSelectionMarkerButton.Click += new System.EventHandler(this.AddSelectionMarkerButton_Click);
-            // 
+            //
             // AddCurrentPositonMarkerButton
-            // 
+            //
             this.AddCurrentPositonMarkerButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.AddCurrentPositonMarkerButton.Location = new System.Drawing.Point(0, 548);
             this.AddCurrentPositonMarkerButton.Name = "AddCurrentPositonMarkerButton";
@@ -978,9 +979,9 @@ namespace CodeWalker
             this.AddCurrentPositonMarkerButton.Text = "Add current pos";
             this.AddCurrentPositonMarkerButton.UseVisualStyleBackColor = true;
             this.AddCurrentPositonMarkerButton.Click += new System.EventHandler(this.AddCurrentPositonMarkerButton_Click);
-            // 
+            //
             // ResetMarkersButton
-            // 
+            //
             this.ResetMarkersButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ResetMarkersButton.Location = new System.Drawing.Point(108, 548);
             this.ResetMarkersButton.Name = "ResetMarkersButton";
@@ -989,9 +990,9 @@ namespace CodeWalker
             this.ResetMarkersButton.Text = "Default markers";
             this.ResetMarkersButton.UseVisualStyleBackColor = true;
             this.ResetMarkersButton.Click += new System.EventHandler(this.ResetMarkersButton_Click);
-            // 
+            //
             // ClearMarkersButton
-            // 
+            //
             this.ClearMarkersButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ClearMarkersButton.Location = new System.Drawing.Point(108, 519);
             this.ClearMarkersButton.Name = "ClearMarkersButton";
@@ -1000,9 +1001,9 @@ namespace CodeWalker
             this.ClearMarkersButton.Text = "Clear markers";
             this.ClearMarkersButton.UseVisualStyleBackColor = true;
             this.ClearMarkersButton.Click += new System.EventHandler(this.ClearMarkersButton_Click);
-            // 
+            //
             // GoToButton
-            // 
+            //
             this.GoToButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.GoToButton.Location = new System.Drawing.Point(162, 24);
             this.GoToButton.Name = "GoToButton";
@@ -1011,9 +1012,9 @@ namespace CodeWalker
             this.GoToButton.Text = "Go to";
             this.GoToButton.UseVisualStyleBackColor = true;
             this.GoToButton.Click += new System.EventHandler(this.GoToButton_Click);
-            // 
+            //
             // ShowLocatorCheckBox
-            // 
+            //
             this.ShowLocatorCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ShowLocatorCheckBox.AutoSize = true;
             this.ShowLocatorCheckBox.Location = new System.Drawing.Point(101, 8);
@@ -1023,19 +1024,19 @@ namespace CodeWalker
             this.ShowLocatorCheckBox.Text = "Show marker";
             this.ShowLocatorCheckBox.UseVisualStyleBackColor = true;
             this.ShowLocatorCheckBox.CheckedChanged += new System.EventHandler(this.ShowLocatorCheckBox_CheckedChanged);
-            // 
+            //
             // label6
-            // 
+            //
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(-2, 8);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(79, 13);
             this.label6.TabIndex = 13;
             this.label6.Text = "Locate: X, Y, Z";
-            // 
+            //
             // LocateTextBox
-            // 
-            this.LocateTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.LocateTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.LocateTextBox.Location = new System.Drawing.Point(0, 25);
             this.LocateTextBox.Name = "LocateTextBox";
@@ -1043,18 +1044,18 @@ namespace CodeWalker
             this.LocateTextBox.TabIndex = 14;
             this.LocateTextBox.Text = "0, 0, 0";
             this.LocateTextBox.TextChanged += new System.EventHandler(this.LocateTextBox_TextChanged);
-            // 
+            //
             // label7
-            // 
+            //
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(-2, 101);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(122, 13);
             this.label7.TabIndex = 11;
             this.label7.Text = "Multi-find: X, Y, Z, Name";
-            // 
+            //
             // AddMarkersButton
-            // 
+            //
             this.AddMarkersButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.AddMarkersButton.Location = new System.Drawing.Point(0, 519);
             this.AddMarkersButton.Name = "AddMarkersButton";
@@ -1063,11 +1064,11 @@ namespace CodeWalker
             this.AddMarkersButton.Text = "Add markers";
             this.AddMarkersButton.UseVisualStyleBackColor = true;
             this.AddMarkersButton.Click += new System.EventHandler(this.AddMarkersButton_Click);
-            // 
+            //
             // MultiFindTextBox
-            // 
-            this.MultiFindTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.MultiFindTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.MultiFindTextBox.Location = new System.Drawing.Point(0, 117);
             this.MultiFindTextBox.MaxLength = 1048576;
@@ -1076,9 +1077,9 @@ namespace CodeWalker
             this.MultiFindTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.MultiFindTextBox.Size = new System.Drawing.Size(205, 392);
             this.MultiFindTextBox.TabIndex = 17;
-            // 
+            //
             // SelectionTabPage
-            // 
+            //
             this.SelectionTabPage.Controls.Add(this.label25);
             this.SelectionTabPage.Controls.Add(this.SelectionModeComboBox);
             this.SelectionTabPage.Controls.Add(this.SelectionNameTextBox);
@@ -1090,18 +1091,18 @@ namespace CodeWalker
             this.SelectionTabPage.TabIndex = 2;
             this.SelectionTabPage.Text = "Selection";
             this.SelectionTabPage.UseVisualStyleBackColor = true;
-            // 
+            //
             // label25
-            // 
+            //
             this.label25.AutoSize = true;
             this.label25.Location = new System.Drawing.Point(6, 33);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(37, 13);
             this.label25.TabIndex = 28;
             this.label25.Text = "Mode:";
-            // 
+            //
             // SelectionModeComboBox
-            // 
+            //
             this.SelectionModeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.SelectionModeComboBox.FormattingEnabled = true;
             this.SelectionModeComboBox.Items.AddRange(new object[] {
@@ -1129,10 +1130,10 @@ namespace CodeWalker
             this.SelectionModeComboBox.TabIndex = 23;
             this.SelectionModeComboBox.SelectedIndexChanged += new System.EventHandler(this.SelectionModeComboBox_SelectedIndexChanged);
             this.SelectionModeComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SelectionModeComboBox_KeyPress);
-            // 
+            //
             // SelectionNameTextBox
-            // 
-            this.SelectionNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.SelectionNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.SelectionNameTextBox.BackColor = System.Drawing.Color.White;
             this.SelectionNameTextBox.Location = new System.Drawing.Point(3, 66);
@@ -1141,11 +1142,11 @@ namespace CodeWalker
             this.SelectionNameTextBox.Size = new System.Drawing.Size(199, 20);
             this.SelectionNameTextBox.TabIndex = 26;
             this.SelectionNameTextBox.Text = "Nothing selected";
-            // 
+            //
             // SelectionTabControl
-            // 
-            this.SelectionTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.SelectionTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.SelectionTabControl.Controls.Add(this.SelectionEntityTabPage);
             this.SelectionTabControl.Controls.Add(this.SelectionArchetypeTabPage);
@@ -1157,9 +1158,9 @@ namespace CodeWalker
             this.SelectionTabControl.SelectedIndex = 0;
             this.SelectionTabControl.Size = new System.Drawing.Size(205, 511);
             this.SelectionTabControl.TabIndex = 28;
-            // 
+            //
             // SelectionEntityTabPage
-            // 
+            //
             this.SelectionEntityTabPage.Controls.Add(this.SelEntityPropertyGrid);
             this.SelectionEntityTabPage.Location = new System.Drawing.Point(4, 22);
             this.SelectionEntityTabPage.Name = "SelectionEntityTabPage";
@@ -1168,11 +1169,11 @@ namespace CodeWalker
             this.SelectionEntityTabPage.TabIndex = 0;
             this.SelectionEntityTabPage.Text = "Entity";
             this.SelectionEntityTabPage.UseVisualStyleBackColor = true;
-            // 
+            //
             // SelEntityPropertyGrid
-            // 
-            this.SelEntityPropertyGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.SelEntityPropertyGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.SelEntityPropertyGrid.HelpVisible = false;
             this.SelEntityPropertyGrid.Location = new System.Drawing.Point(0, 6);
@@ -1182,9 +1183,9 @@ namespace CodeWalker
             this.SelEntityPropertyGrid.Size = new System.Drawing.Size(197, 476);
             this.SelEntityPropertyGrid.TabIndex = 35;
             this.SelEntityPropertyGrid.ToolbarVisible = false;
-            // 
+            //
             // SelectionArchetypeTabPage
-            // 
+            //
             this.SelectionArchetypeTabPage.Controls.Add(this.SelArchetypePropertyGrid);
             this.SelectionArchetypeTabPage.Location = new System.Drawing.Point(4, 22);
             this.SelectionArchetypeTabPage.Name = "SelectionArchetypeTabPage";
@@ -1193,11 +1194,11 @@ namespace CodeWalker
             this.SelectionArchetypeTabPage.TabIndex = 1;
             this.SelectionArchetypeTabPage.Text = "Archetype";
             this.SelectionArchetypeTabPage.UseVisualStyleBackColor = true;
-            // 
+            //
             // SelArchetypePropertyGrid
-            // 
-            this.SelArchetypePropertyGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.SelArchetypePropertyGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.SelArchetypePropertyGrid.HelpVisible = false;
             this.SelArchetypePropertyGrid.Location = new System.Drawing.Point(0, 6);
@@ -1207,9 +1208,9 @@ namespace CodeWalker
             this.SelArchetypePropertyGrid.Size = new System.Drawing.Size(197, 476);
             this.SelArchetypePropertyGrid.TabIndex = 36;
             this.SelArchetypePropertyGrid.ToolbarVisible = false;
-            // 
+            //
             // SelectionDrawableTabPage
-            // 
+            //
             this.SelectionDrawableTabPage.Controls.Add(this.tabControl3);
             this.SelectionDrawableTabPage.Location = new System.Drawing.Point(4, 22);
             this.SelectionDrawableTabPage.Margin = new System.Windows.Forms.Padding(0);
@@ -1218,11 +1219,11 @@ namespace CodeWalker
             this.SelectionDrawableTabPage.TabIndex = 2;
             this.SelectionDrawableTabPage.Text = "Drawable";
             this.SelectionDrawableTabPage.UseVisualStyleBackColor = true;
-            // 
+            //
             // tabControl3
-            // 
-            this.tabControl3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.tabControl3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl3.Controls.Add(this.tabPage11);
             this.tabControl3.Controls.Add(this.tabPage12);
@@ -1232,9 +1233,9 @@ namespace CodeWalker
             this.tabControl3.SelectedIndex = 0;
             this.tabControl3.Size = new System.Drawing.Size(205, 478);
             this.tabControl3.TabIndex = 28;
-            // 
+            //
             // tabPage11
-            // 
+            //
             this.tabPage11.Controls.Add(this.SelDrawablePropertyGrid);
             this.tabPage11.Location = new System.Drawing.Point(4, 22);
             this.tabPage11.Margin = new System.Windows.Forms.Padding(0);
@@ -1243,11 +1244,11 @@ namespace CodeWalker
             this.tabPage11.TabIndex = 0;
             this.tabPage11.Text = "Info";
             this.tabPage11.UseVisualStyleBackColor = true;
-            // 
+            //
             // SelDrawablePropertyGrid
-            // 
-            this.SelDrawablePropertyGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.SelDrawablePropertyGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.SelDrawablePropertyGrid.HelpVisible = false;
             this.SelDrawablePropertyGrid.Location = new System.Drawing.Point(0, 0);
@@ -1257,9 +1258,9 @@ namespace CodeWalker
             this.SelDrawablePropertyGrid.Size = new System.Drawing.Size(197, 452);
             this.SelDrawablePropertyGrid.TabIndex = 37;
             this.SelDrawablePropertyGrid.ToolbarVisible = false;
-            // 
+            //
             // tabPage12
-            // 
+            //
             this.tabPage12.Controls.Add(this.SelDrawableModelsTreeView);
             this.tabPage12.Location = new System.Drawing.Point(4, 22);
             this.tabPage12.Name = "tabPage12";
@@ -1268,11 +1269,11 @@ namespace CodeWalker
             this.tabPage12.TabIndex = 1;
             this.tabPage12.Text = "Models";
             this.tabPage12.UseVisualStyleBackColor = true;
-            // 
+            //
             // SelDrawableModelsTreeView
-            // 
-            this.SelDrawableModelsTreeView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.SelDrawableModelsTreeView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.SelDrawableModelsTreeView.CheckBoxes = true;
             this.SelDrawableModelsTreeView.Location = new System.Drawing.Point(0, 0);
@@ -1283,9 +1284,9 @@ namespace CodeWalker
             this.SelDrawableModelsTreeView.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.SelDrawableModelsTreeView_AfterCheck);
             this.SelDrawableModelsTreeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.SelDrawableModelsTreeView_NodeMouseDoubleClick);
             this.SelDrawableModelsTreeView.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SelDrawableModelsTreeView_KeyPress);
-            // 
+            //
             // tabPage13
-            // 
+            //
             this.tabPage13.Controls.Add(this.SelDrawableTexturesTreeView);
             this.tabPage13.Location = new System.Drawing.Point(4, 22);
             this.tabPage13.Name = "tabPage13";
@@ -1293,20 +1294,20 @@ namespace CodeWalker
             this.tabPage13.TabIndex = 2;
             this.tabPage13.Text = "Textures";
             this.tabPage13.UseVisualStyleBackColor = true;
-            // 
+            //
             // SelDrawableTexturesTreeView
-            // 
-            this.SelDrawableTexturesTreeView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.SelDrawableTexturesTreeView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.SelDrawableTexturesTreeView.Location = new System.Drawing.Point(0, 0);
             this.SelDrawableTexturesTreeView.Name = "SelDrawableTexturesTreeView";
             this.SelDrawableTexturesTreeView.ShowRootLines = false;
             this.SelDrawableTexturesTreeView.Size = new System.Drawing.Size(197, 452);
             this.SelDrawableTexturesTreeView.TabIndex = 40;
-            // 
+            //
             // SelectionExtensionTabPage
-            // 
+            //
             this.SelectionExtensionTabPage.Controls.Add(this.SelExtensionPropertyGrid);
             this.SelectionExtensionTabPage.Location = new System.Drawing.Point(4, 22);
             this.SelectionExtensionTabPage.Name = "SelectionExtensionTabPage";
@@ -1314,11 +1315,11 @@ namespace CodeWalker
             this.SelectionExtensionTabPage.TabIndex = 3;
             this.SelectionExtensionTabPage.Text = "Ext";
             this.SelectionExtensionTabPage.UseVisualStyleBackColor = true;
-            // 
+            //
             // SelExtensionPropertyGrid
-            // 
-            this.SelExtensionPropertyGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.SelExtensionPropertyGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.SelExtensionPropertyGrid.HelpVisible = false;
             this.SelExtensionPropertyGrid.Location = new System.Drawing.Point(0, 6);
@@ -1328,9 +1329,9 @@ namespace CodeWalker
             this.SelExtensionPropertyGrid.Size = new System.Drawing.Size(197, 476);
             this.SelExtensionPropertyGrid.TabIndex = 36;
             this.SelExtensionPropertyGrid.ToolbarVisible = false;
-            // 
+            //
             // MouseSelectCheckBox
-            // 
+            //
             this.MouseSelectCheckBox.AutoSize = true;
             this.MouseSelectCheckBox.Location = new System.Drawing.Point(8, 7);
             this.MouseSelectCheckBox.Name = "MouseSelectCheckBox";
@@ -1339,9 +1340,9 @@ namespace CodeWalker
             this.MouseSelectCheckBox.Text = "Mouse select (right click)";
             this.MouseSelectCheckBox.UseVisualStyleBackColor = true;
             this.MouseSelectCheckBox.CheckedChanged += new System.EventHandler(this.MouseSelectCheckBox_CheckedChanged);
-            // 
+            //
             // OptionsTabPage
-            // 
+            //
             this.OptionsTabPage.Controls.Add(this.OptionsTabControl);
             this.OptionsTabPage.Location = new System.Drawing.Point(4, 22);
             this.OptionsTabPage.Name = "OptionsTabPage";
@@ -1349,10 +1350,10 @@ namespace CodeWalker
             this.OptionsTabPage.TabIndex = 3;
             this.OptionsTabPage.Text = "Options";
             this.OptionsTabPage.UseVisualStyleBackColor = true;
-            // 
+            //
             // OptionsTabControl
-            // 
-            this.OptionsTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.OptionsTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.OptionsTabControl.Controls.Add(this.OptionsGeneralTabPage);
             this.OptionsTabControl.Controls.Add(this.OptionsRenderTabPage);
@@ -1363,9 +1364,9 @@ namespace CodeWalker
             this.OptionsTabControl.SelectedIndex = 0;
             this.OptionsTabControl.Size = new System.Drawing.Size(208, 603);
             this.OptionsTabControl.TabIndex = 50;
-            // 
+            //
             // OptionsGeneralTabPage
-            // 
+            //
             this.OptionsGeneralTabPage.Controls.Add(this.SaveTimeOfDayCheckBox);
             this.OptionsGeneralTabPage.Controls.Add(this.SavePositionCheckBox);
             this.OptionsGeneralTabPage.Controls.Add(this.ResetSettingsButton);
@@ -1403,9 +1404,9 @@ namespace CodeWalker
             this.OptionsGeneralTabPage.TabIndex = 0;
             this.OptionsGeneralTabPage.Text = "General";
             this.OptionsGeneralTabPage.UseVisualStyleBackColor = true;
-            // 
+            //
             // SaveTimeOfDayCheckBox
-            // 
+            //
             this.SaveTimeOfDayCheckBox.AutoSize = true;
             this.SaveTimeOfDayCheckBox.Location = new System.Drawing.Point(10, 485);
             this.SaveTimeOfDayCheckBox.Name = "SaveTimeOfDayCheckBox";
@@ -1413,9 +1414,9 @@ namespace CodeWalker
             this.SaveTimeOfDayCheckBox.TabIndex = 149;
             this.SaveTimeOfDayCheckBox.Text = "Save time of day on exit";
             this.SaveTimeOfDayCheckBox.UseVisualStyleBackColor = true;
-            // 
+            //
             // SavePositionCheckBox
-            // 
+            //
             this.SavePositionCheckBox.AutoSize = true;
             this.SavePositionCheckBox.Location = new System.Drawing.Point(10, 464);
             this.SavePositionCheckBox.Name = "SavePositionCheckBox";
@@ -1423,9 +1424,9 @@ namespace CodeWalker
             this.SavePositionCheckBox.TabIndex = 148;
             this.SavePositionCheckBox.Text = "Save position on exit";
             this.SavePositionCheckBox.UseVisualStyleBackColor = true;
-            // 
+            //
             // ResetSettingsButton
-            // 
+            //
             this.ResetSettingsButton.Location = new System.Drawing.Point(4, 551);
             this.ResetSettingsButton.Name = "ResetSettingsButton";
             this.ResetSettingsButton.Size = new System.Drawing.Size(93, 23);
@@ -1433,9 +1434,9 @@ namespace CodeWalker
             this.ResetSettingsButton.Text = "Reset settings";
             this.ResetSettingsButton.UseVisualStyleBackColor = true;
             this.ResetSettingsButton.Click += new System.EventHandler(this.ResetSettingsButton_Click);
-            // 
+            //
             // CarGeneratorsCheckBox
-            // 
+            //
             this.CarGeneratorsCheckBox.AutoSize = true;
             this.CarGeneratorsCheckBox.Location = new System.Drawing.Point(10, 72);
             this.CarGeneratorsCheckBox.Name = "CarGeneratorsCheckBox";
@@ -1444,9 +1445,9 @@ namespace CodeWalker
             this.CarGeneratorsCheckBox.Text = "Show car generators";
             this.CarGeneratorsCheckBox.UseVisualStyleBackColor = true;
             this.CarGeneratorsCheckBox.CheckedChanged += new System.EventHandler(this.CarGeneratorsCheckBox_CheckedChanged);
-            // 
+            //
             // RenderEntitiesCheckBox
-            // 
+            //
             this.RenderEntitiesCheckBox.AutoSize = true;
             this.RenderEntitiesCheckBox.Checked = true;
             this.RenderEntitiesCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -1457,9 +1458,9 @@ namespace CodeWalker
             this.RenderEntitiesCheckBox.Text = "Show entities";
             this.RenderEntitiesCheckBox.UseVisualStyleBackColor = true;
             this.RenderEntitiesCheckBox.CheckedChanged += new System.EventHandler(this.RenderEntitiesCheckBox_CheckedChanged);
-            // 
+            //
             // AdvancedSettingsButton
-            // 
+            //
             this.AdvancedSettingsButton.Location = new System.Drawing.Point(103, 522);
             this.AdvancedSettingsButton.Name = "AdvancedSettingsButton";
             this.AdvancedSettingsButton.Size = new System.Drawing.Size(93, 23);
@@ -1467,9 +1468,9 @@ namespace CodeWalker
             this.AdvancedSettingsButton.Text = "Advanced...";
             this.AdvancedSettingsButton.UseVisualStyleBackColor = true;
             this.AdvancedSettingsButton.Click += new System.EventHandler(this.AdvancedSettingsButton_Click);
-            // 
+            //
             // SaveSettingsButton
-            // 
+            //
             this.SaveSettingsButton.Location = new System.Drawing.Point(103, 551);
             this.SaveSettingsButton.Name = "SaveSettingsButton";
             this.SaveSettingsButton.Size = new System.Drawing.Size(93, 23);
@@ -1477,9 +1478,9 @@ namespace CodeWalker
             this.SaveSettingsButton.Text = "Save settings";
             this.SaveSettingsButton.UseVisualStyleBackColor = true;
             this.SaveSettingsButton.Click += new System.EventHandler(this.SaveSettingsButton_Click);
-            // 
+            //
             // ControlSettingsButton
-            // 
+            //
             this.ControlSettingsButton.Location = new System.Drawing.Point(4, 522);
             this.ControlSettingsButton.Name = "ControlSettingsButton";
             this.ControlSettingsButton.Size = new System.Drawing.Size(93, 23);
@@ -1487,28 +1488,28 @@ namespace CodeWalker
             this.ControlSettingsButton.Text = "Controls...";
             this.ControlSettingsButton.UseVisualStyleBackColor = true;
             this.ControlSettingsButton.Click += new System.EventHandler(this.ControlSettingsButton_Click);
-            // 
+            //
             // MapViewDetailLabel
-            // 
+            //
             this.MapViewDetailLabel.AutoSize = true;
             this.MapViewDetailLabel.Location = new System.Drawing.Point(94, 391);
             this.MapViewDetailLabel.Name = "MapViewDetailLabel";
             this.MapViewDetailLabel.Size = new System.Drawing.Size(22, 13);
             this.MapViewDetailLabel.TabIndex = 66;
             this.MapViewDetailLabel.Text = "1.0";
-            // 
+            //
             // label28
-            // 
+            //
             this.label28.AutoSize = true;
             this.label28.Location = new System.Drawing.Point(4, 391);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(84, 13);
             this.label28.TabIndex = 65;
             this.label28.Text = "Map view detail:";
-            // 
+            //
             // MapViewDetailTrackBar
-            // 
-            this.MapViewDetailTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.MapViewDetailTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.MapViewDetailTrackBar.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.MapViewDetailTrackBar.Enabled = false;
@@ -1522,9 +1523,9 @@ namespace CodeWalker
             this.MapViewDetailTrackBar.TickFrequency = 2;
             this.MapViewDetailTrackBar.Value = 10;
             this.MapViewDetailTrackBar.Scroll += new System.EventHandler(this.MapViewDetailTrackBar_Scroll);
-            // 
+            //
             // CameraModeComboBox
-            // 
+            //
             this.CameraModeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CameraModeComboBox.FormattingEnabled = true;
             this.CameraModeComboBox.Items.AddRange(new object[] {
@@ -1537,18 +1538,18 @@ namespace CodeWalker
             this.CameraModeComboBox.TabIndex = 42;
             this.CameraModeComboBox.SelectedIndexChanged += new System.EventHandler(this.CameraModeComboBox_SelectedIndexChanged);
             this.CameraModeComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CameraModeComboBox_KeyPress);
-            // 
+            //
             // label24
-            // 
+            //
             this.label24.AutoSize = true;
             this.label24.Location = new System.Drawing.Point(4, 308);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(75, 13);
             this.label24.TabIndex = 63;
             this.label24.Text = "Camera mode:";
-            // 
+            //
             // WaterQuadsCheckBox
-            // 
+            //
             this.WaterQuadsCheckBox.AutoSize = true;
             this.WaterQuadsCheckBox.Checked = true;
             this.WaterQuadsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -1559,27 +1560,27 @@ namespace CodeWalker
             this.WaterQuadsCheckBox.Text = "Show water quads";
             this.WaterQuadsCheckBox.UseVisualStyleBackColor = true;
             this.WaterQuadsCheckBox.CheckedChanged += new System.EventHandler(this.WaterQuadsCheckBox_CheckedChanged);
-            // 
+            //
             // FieldOfViewLabel
-            // 
+            //
             this.FieldOfViewLabel.AutoSize = true;
             this.FieldOfViewLabel.Location = new System.Drawing.Point(79, 335);
             this.FieldOfViewLabel.Name = "FieldOfViewLabel";
             this.FieldOfViewLabel.Size = new System.Drawing.Size(22, 13);
             this.FieldOfViewLabel.TabIndex = 59;
             this.FieldOfViewLabel.Text = "1.0";
-            // 
+            //
             // label22
-            // 
+            //
             this.label22.AutoSize = true;
             this.label22.Location = new System.Drawing.Point(4, 335);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(69, 13);
             this.label22.TabIndex = 58;
             this.label22.Text = "Field of view:";
-            // 
+            //
             // TimedEntitiesAlwaysOnCheckBox
-            // 
+            //
             this.TimedEntitiesAlwaysOnCheckBox.AutoSize = true;
             this.TimedEntitiesAlwaysOnCheckBox.Location = new System.Drawing.Point(131, 93);
             this.TimedEntitiesAlwaysOnCheckBox.Name = "TimedEntitiesAlwaysOnCheckBox";
@@ -1588,9 +1589,9 @@ namespace CodeWalker
             this.TimedEntitiesAlwaysOnCheckBox.Text = "always";
             this.TimedEntitiesAlwaysOnCheckBox.UseVisualStyleBackColor = true;
             this.TimedEntitiesAlwaysOnCheckBox.CheckedChanged += new System.EventHandler(this.TimedEntitiesAlwaysOnCheckBox_CheckedChanged);
-            // 
+            //
             // GrassCheckBox
-            // 
+            //
             this.GrassCheckBox.AutoSize = true;
             this.GrassCheckBox.Checked = true;
             this.GrassCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -1601,9 +1602,9 @@ namespace CodeWalker
             this.GrassCheckBox.Text = "Show grass";
             this.GrassCheckBox.UseVisualStyleBackColor = true;
             this.GrassCheckBox.CheckedChanged += new System.EventHandler(this.GrassCheckBox_CheckedChanged);
-            // 
+            //
             // InteriorsCheckBox
-            // 
+            //
             this.InteriorsCheckBox.AutoSize = true;
             this.InteriorsCheckBox.Checked = true;
             this.InteriorsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -1614,9 +1615,9 @@ namespace CodeWalker
             this.InteriorsCheckBox.Text = "Show interiors";
             this.InteriorsCheckBox.UseVisualStyleBackColor = true;
             this.InteriorsCheckBox.CheckedChanged += new System.EventHandler(this.InteriorsCheckBox_CheckedChanged);
-            // 
+            //
             // CollisionMeshLayerDrawableCheckBox
-            // 
+            //
             this.CollisionMeshLayerDrawableCheckBox.AutoSize = true;
             this.CollisionMeshLayerDrawableCheckBox.Checked = true;
             this.CollisionMeshLayerDrawableCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -1627,9 +1628,9 @@ namespace CodeWalker
             this.CollisionMeshLayerDrawableCheckBox.Text = "Drawable";
             this.CollisionMeshLayerDrawableCheckBox.UseVisualStyleBackColor = true;
             this.CollisionMeshLayerDrawableCheckBox.CheckedChanged += new System.EventHandler(this.CollisionMeshLayerDrawableCheckBox_CheckedChanged);
-            // 
+            //
             // CollisionMeshLayer2CheckBox
-            // 
+            //
             this.CollisionMeshLayer2CheckBox.AutoSize = true;
             this.CollisionMeshLayer2CheckBox.Checked = true;
             this.CollisionMeshLayer2CheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -1640,9 +1641,9 @@ namespace CodeWalker
             this.CollisionMeshLayer2CheckBox.Text = "2";
             this.CollisionMeshLayer2CheckBox.UseVisualStyleBackColor = true;
             this.CollisionMeshLayer2CheckBox.CheckedChanged += new System.EventHandler(this.CollisionMeshLayer2CheckBox_CheckedChanged);
-            // 
+            //
             // CollisionMeshLayer1CheckBox
-            // 
+            //
             this.CollisionMeshLayer1CheckBox.AutoSize = true;
             this.CollisionMeshLayer1CheckBox.Checked = true;
             this.CollisionMeshLayer1CheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -1653,18 +1654,18 @@ namespace CodeWalker
             this.CollisionMeshLayer1CheckBox.Text = "1";
             this.CollisionMeshLayer1CheckBox.UseVisualStyleBackColor = true;
             this.CollisionMeshLayer1CheckBox.CheckedChanged += new System.EventHandler(this.CollisionMeshLayer1CheckBox_CheckedChanged);
-            // 
+            //
             // label13
-            // 
+            //
             this.label13.AutoSize = true;
             this.label13.Location = new System.Drawing.Point(4, 244);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(106, 13);
             this.label13.TabIndex = 54;
             this.label13.Text = "Collision mesh layers:";
-            // 
+            //
             // CollisionMeshLayer0CheckBox
-            // 
+            //
             this.CollisionMeshLayer0CheckBox.AutoSize = true;
             this.CollisionMeshLayer0CheckBox.Checked = true;
             this.CollisionMeshLayer0CheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -1675,19 +1676,19 @@ namespace CodeWalker
             this.CollisionMeshLayer0CheckBox.Text = "0";
             this.CollisionMeshLayer0CheckBox.UseVisualStyleBackColor = true;
             this.CollisionMeshLayer0CheckBox.CheckedChanged += new System.EventHandler(this.CollisionMeshLayer0CheckBox_CheckedChanged);
-            // 
+            //
             // label12
-            // 
+            //
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(4, 193);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(129, 13);
             this.label12.TabIndex = 51;
             this.label12.Text = "Collision/nav mesh range:";
-            // 
+            //
             // CollisionMeshRangeTrackBar
-            // 
-            this.CollisionMeshRangeTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.CollisionMeshRangeTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.CollisionMeshRangeTrackBar.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.CollisionMeshRangeTrackBar.LargeChange = 1;
@@ -1699,9 +1700,9 @@ namespace CodeWalker
             this.CollisionMeshRangeTrackBar.TabIndex = 37;
             this.CollisionMeshRangeTrackBar.Value = 6;
             this.CollisionMeshRangeTrackBar.Scroll += new System.EventHandler(this.CollisionMeshRangeTrackBar_Scroll);
-            // 
+            //
             // CollisionMeshesCheckBox
-            // 
+            //
             this.CollisionMeshesCheckBox.AutoSize = true;
             this.CollisionMeshesCheckBox.Location = new System.Drawing.Point(10, 171);
             this.CollisionMeshesCheckBox.Name = "CollisionMeshesCheckBox";
@@ -1710,9 +1711,9 @@ namespace CodeWalker
             this.CollisionMeshesCheckBox.Text = "Show collision meshes";
             this.CollisionMeshesCheckBox.UseVisualStyleBackColor = true;
             this.CollisionMeshesCheckBox.CheckedChanged += new System.EventHandler(this.CollisionMeshesCheckBox_CheckedChanged);
-            // 
+            //
             // FullScreenCheckBox
-            // 
+            //
             this.FullScreenCheckBox.AutoSize = true;
             this.FullScreenCheckBox.Location = new System.Drawing.Point(10, 9);
             this.FullScreenCheckBox.Name = "FullScreenCheckBox";
@@ -1721,9 +1722,9 @@ namespace CodeWalker
             this.FullScreenCheckBox.Text = "Full screen (borderless window)";
             this.FullScreenCheckBox.UseVisualStyleBackColor = true;
             this.FullScreenCheckBox.CheckedChanged += new System.EventHandler(this.FullScreenCheckBox_CheckedChanged);
-            // 
+            //
             // TimedEntitiesCheckBox
-            // 
+            //
             this.TimedEntitiesCheckBox.AutoSize = true;
             this.TimedEntitiesCheckBox.Checked = true;
             this.TimedEntitiesCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -1734,10 +1735,10 @@ namespace CodeWalker
             this.TimedEntitiesCheckBox.Text = "Show timed entities";
             this.TimedEntitiesCheckBox.UseVisualStyleBackColor = true;
             this.TimedEntitiesCheckBox.CheckedChanged += new System.EventHandler(this.TimedEntitiesCheckBox_CheckedChanged);
-            // 
+            //
             // FieldOfViewTrackBar
-            // 
-            this.FieldOfViewTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.FieldOfViewTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.FieldOfViewTrackBar.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.FieldOfViewTrackBar.LargeChange = 1;
@@ -1750,9 +1751,9 @@ namespace CodeWalker
             this.FieldOfViewTrackBar.TickFrequency = 10;
             this.FieldOfViewTrackBar.Value = 100;
             this.FieldOfViewTrackBar.Scroll += new System.EventHandler(this.FieldOfViewTrackBar_Scroll);
-            // 
+            //
             // OptionsRenderTabPage
-            // 
+            //
             this.OptionsRenderTabPage.Controls.Add(this.FarClipUpDown);
             this.OptionsRenderTabPage.Controls.Add(this.label32);
             this.OptionsRenderTabPage.Controls.Add(this.NearClipUpDown);
@@ -1774,9 +1775,9 @@ namespace CodeWalker
             this.OptionsRenderTabPage.TabIndex = 3;
             this.OptionsRenderTabPage.Text = "Render";
             this.OptionsRenderTabPage.UseVisualStyleBackColor = true;
-            // 
+            //
             // FarClipUpDown
-            // 
+            //
             this.FarClipUpDown.Increment = new decimal(new int[] {
             100,
             0,
@@ -1802,18 +1803,18 @@ namespace CodeWalker
             0,
             0});
             this.FarClipUpDown.ValueChanged += new System.EventHandler(this.FarClipUpDown_ValueChanged);
-            // 
+            //
             // label32
-            // 
+            //
             this.label32.AutoSize = true;
             this.label32.Location = new System.Drawing.Point(4, 348);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(45, 13);
             this.label32.TabIndex = 60;
             this.label32.Text = "Far Clip:";
-            // 
+            //
             // NearClipUpDown
-            // 
+            //
             this.NearClipUpDown.DecimalPlaces = 3;
             this.NearClipUpDown.Increment = new decimal(new int[] {
             1,
@@ -1840,18 +1841,18 @@ namespace CodeWalker
             0,
             131072});
             this.NearClipUpDown.ValueChanged += new System.EventHandler(this.NearClipUpDown_ValueChanged);
-            // 
+            //
             // label31
-            // 
+            //
             this.label31.AutoSize = true;
             this.label31.Location = new System.Drawing.Point(4, 322);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(53, 13);
             this.label31.TabIndex = 58;
             this.label31.Text = "Near Clip:";
-            // 
+            //
             // HDTexturesCheckBox
-            // 
+            //
             this.HDTexturesCheckBox.AutoSize = true;
             this.HDTexturesCheckBox.Checked = true;
             this.HDTexturesCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -1862,9 +1863,9 @@ namespace CodeWalker
             this.HDTexturesCheckBox.Text = "HD textures";
             this.HDTexturesCheckBox.UseVisualStyleBackColor = true;
             this.HDTexturesCheckBox.CheckedChanged += new System.EventHandler(this.HDTexturesCheckBox_CheckedChanged);
-            // 
+            //
             // WireframeCheckBox
-            // 
+            //
             this.WireframeCheckBox.AutoSize = true;
             this.WireframeCheckBox.Location = new System.Drawing.Point(10, 115);
             this.WireframeCheckBox.Name = "WireframeCheckBox";
@@ -1873,9 +1874,9 @@ namespace CodeWalker
             this.WireframeCheckBox.Text = "Wireframe";
             this.WireframeCheckBox.UseVisualStyleBackColor = true;
             this.WireframeCheckBox.CheckedChanged += new System.EventHandler(this.WireframeCheckBox_CheckedChanged);
-            // 
+            //
             // RenderModeComboBox
-            // 
+            //
             this.RenderModeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.RenderModeComboBox.FormattingEnabled = true;
             this.RenderModeComboBox.Items.AddRange(new object[] {
@@ -1894,18 +1895,18 @@ namespace CodeWalker
             this.RenderModeComboBox.TabIndex = 46;
             this.RenderModeComboBox.SelectedIndexChanged += new System.EventHandler(this.RenderModeComboBox_SelectedIndexChanged);
             this.RenderModeComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.RenderModeComboBox_KeyPress);
-            // 
+            //
             // label11
-            // 
+            //
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(4, 46);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(67, 13);
             this.label11.TabIndex = 50;
             this.label11.Text = "Tex sampler:";
-            // 
+            //
             // TextureSamplerComboBox
-            // 
+            //
             this.TextureSamplerComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.TextureSamplerComboBox.Enabled = false;
             this.TextureSamplerComboBox.FormattingEnabled = true;
@@ -1915,9 +1916,9 @@ namespace CodeWalker
             this.TextureSamplerComboBox.TabIndex = 47;
             this.TextureSamplerComboBox.SelectedIndexChanged += new System.EventHandler(this.TextureSamplerComboBox_SelectedIndexChanged);
             this.TextureSamplerComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextureSamplerComboBox_KeyPress);
-            // 
+            //
             // TextureCoordsComboBox
-            // 
+            //
             this.TextureCoordsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.TextureCoordsComboBox.Enabled = false;
             this.TextureCoordsComboBox.FormattingEnabled = true;
@@ -1931,18 +1932,18 @@ namespace CodeWalker
             this.TextureCoordsComboBox.TabIndex = 48;
             this.TextureCoordsComboBox.SelectedIndexChanged += new System.EventHandler(this.TextureCoordsComboBox_SelectedIndexChanged);
             this.TextureCoordsComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextureCoordsComboBox_KeyPress);
-            // 
+            //
             // label10
-            // 
+            //
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(4, 19);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(74, 13);
             this.label10.TabIndex = 48;
             this.label10.Text = "Render mode:";
-            // 
+            //
             // AnisotropicFilteringCheckBox
-            // 
+            //
             this.AnisotropicFilteringCheckBox.AutoSize = true;
             this.AnisotropicFilteringCheckBox.Checked = true;
             this.AnisotropicFilteringCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -1953,9 +1954,9 @@ namespace CodeWalker
             this.AnisotropicFilteringCheckBox.Text = "Anisotropic filtering";
             this.AnisotropicFilteringCheckBox.UseVisualStyleBackColor = true;
             this.AnisotropicFilteringCheckBox.CheckedChanged += new System.EventHandler(this.AnisotropicFilteringCheckBox_CheckedChanged);
-            // 
+            //
             // ProxiesCheckBox
-            // 
+            //
             this.ProxiesCheckBox.AutoSize = true;
             this.ProxiesCheckBox.Location = new System.Drawing.Point(10, 199);
             this.ProxiesCheckBox.Name = "ProxiesCheckBox";
@@ -1964,9 +1965,9 @@ namespace CodeWalker
             this.ProxiesCheckBox.Text = "Show proxies";
             this.ProxiesCheckBox.UseVisualStyleBackColor = true;
             this.ProxiesCheckBox.CheckedChanged += new System.EventHandler(this.ProxiesCheckBox_CheckedChanged);
-            // 
+            //
             // WaitForChildrenCheckBox
-            // 
+            //
             this.WaitForChildrenCheckBox.AutoSize = true;
             this.WaitForChildrenCheckBox.Checked = true;
             this.WaitForChildrenCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -1977,18 +1978,18 @@ namespace CodeWalker
             this.WaitForChildrenCheckBox.Text = "Wait for children to load";
             this.WaitForChildrenCheckBox.UseVisualStyleBackColor = true;
             this.WaitForChildrenCheckBox.CheckedChanged += new System.EventHandler(this.WaitForChildrenCheckBox_CheckedChanged);
-            // 
+            //
             // label14
-            // 
+            //
             this.label14.AutoSize = true;
             this.label14.Location = new System.Drawing.Point(4, 73);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(63, 13);
             this.label14.TabIndex = 56;
             this.label14.Text = "Tex coords:";
-            // 
+            //
             // OptionsHelpersTabPage
-            // 
+            //
             this.OptionsHelpersTabPage.Controls.Add(this.SnapAngleUpDown);
             this.OptionsHelpersTabPage.Controls.Add(this.label33);
             this.OptionsHelpersTabPage.Controls.Add(this.SnapGridSizeUpDown);
@@ -2009,6 +2010,7 @@ namespace CodeWalker
             this.OptionsHelpersTabPage.Controls.Add(this.label9);
             this.OptionsHelpersTabPage.Controls.Add(this.PathsCheckBox);
             this.OptionsHelpersTabPage.Controls.Add(this.SelectionBoundsCheckBox);
+            this.OptionsHelpersTabPage.Controls.Add(this.SelectByGeometryCheckBox);
             this.OptionsHelpersTabPage.Controls.Add(this.BoundsDepthClipCheckBox);
             this.OptionsHelpersTabPage.Controls.Add(this.BoundsRangeTrackBar);
             this.OptionsHelpersTabPage.Controls.Add(this.BoundsStyleComboBox);
@@ -2020,9 +2022,9 @@ namespace CodeWalker
             this.OptionsHelpersTabPage.TabIndex = 1;
             this.OptionsHelpersTabPage.Text = "Helpers";
             this.OptionsHelpersTabPage.UseVisualStyleBackColor = true;
-            // 
+            //
             // SnapAngleUpDown
-            // 
+            //
             this.SnapAngleUpDown.DecimalPlaces = 1;
             this.SnapAngleUpDown.Location = new System.Drawing.Point(98, 279);
             this.SnapAngleUpDown.Maximum = new decimal(new int[] {
@@ -2039,18 +2041,18 @@ namespace CodeWalker
             0,
             65536});
             this.SnapAngleUpDown.ValueChanged += new System.EventHandler(this.SnapAngleUpDown_ValueChanged);
-            // 
+            //
             // label33
-            // 
+            //
             this.label33.AutoSize = true;
             this.label33.Location = new System.Drawing.Point(4, 281);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(91, 13);
             this.label33.TabIndex = 31;
             this.label33.Text = "Snap angle (deg):";
-            // 
+            //
             // SnapGridSizeUpDown
-            // 
+            //
             this.SnapGridSizeUpDown.DecimalPlaces = 2;
             this.SnapGridSizeUpDown.Location = new System.Drawing.Point(98, 253);
             this.SnapGridSizeUpDown.Maximum = new decimal(new int[] {
@@ -2072,18 +2074,18 @@ namespace CodeWalker
             0,
             131072});
             this.SnapGridSizeUpDown.ValueChanged += new System.EventHandler(this.SnapGridSizeUpDown_ValueChanged);
-            // 
+            //
             // label26
-            // 
+            //
             this.label26.AutoSize = true;
             this.label26.Location = new System.Drawing.Point(4, 255);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(76, 13);
             this.label26.TabIndex = 29;
             this.label26.Text = "Snap grid size:";
-            // 
+            //
             // SkeletonsCheckBox
-            // 
+            //
             this.SkeletonsCheckBox.AutoSize = true;
             this.SkeletonsCheckBox.Location = new System.Drawing.Point(10, 411);
             this.SkeletonsCheckBox.Name = "SkeletonsCheckBox";
@@ -2092,9 +2094,9 @@ namespace CodeWalker
             this.SkeletonsCheckBox.Text = "Show skeletons";
             this.SkeletonsCheckBox.UseVisualStyleBackColor = true;
             this.SkeletonsCheckBox.CheckedChanged += new System.EventHandler(this.SkeletonsCheckBox_CheckedChanged);
-            // 
+            //
             // AudioOuterBoundsCheckBox
-            // 
+            //
             this.AudioOuterBoundsCheckBox.AutoSize = true;
             this.AudioOuterBoundsCheckBox.Checked = true;
             this.AudioOuterBoundsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -2105,9 +2107,9 @@ namespace CodeWalker
             this.AudioOuterBoundsCheckBox.Text = "Show audio outer bounds";
             this.AudioOuterBoundsCheckBox.UseVisualStyleBackColor = true;
             this.AudioOuterBoundsCheckBox.CheckedChanged += new System.EventHandler(this.AudioOuterBoundsCheckBox_CheckedChanged);
-            // 
+            //
             // PopZonesCheckBox
-            // 
+            //
             this.PopZonesCheckBox.AutoSize = true;
             this.PopZonesCheckBox.Location = new System.Drawing.Point(10, 388);
             this.PopZonesCheckBox.Name = "PopZonesCheckBox";
@@ -2116,9 +2118,9 @@ namespace CodeWalker
             this.PopZonesCheckBox.Text = "Show population zones";
             this.PopZonesCheckBox.UseVisualStyleBackColor = true;
             this.PopZonesCheckBox.CheckedChanged += new System.EventHandler(this.PopZonesCheckBox_CheckedChanged);
-            // 
+            //
             // NavMeshesCheckBox
-            // 
+            //
             this.NavMeshesCheckBox.AutoSize = true;
             this.NavMeshesCheckBox.Location = new System.Drawing.Point(10, 365);
             this.NavMeshesCheckBox.Name = "NavMeshesCheckBox";
@@ -2127,9 +2129,9 @@ namespace CodeWalker
             this.NavMeshesCheckBox.Text = "Show nav meshes";
             this.NavMeshesCheckBox.UseVisualStyleBackColor = true;
             this.NavMeshesCheckBox.CheckedChanged += new System.EventHandler(this.NavMeshesCheckBox_CheckedChanged);
-            // 
+            //
             // TrainPathsCheckBox
-            // 
+            //
             this.TrainPathsCheckBox.AutoSize = true;
             this.TrainPathsCheckBox.Location = new System.Drawing.Point(10, 342);
             this.TrainPathsCheckBox.Name = "TrainPathsCheckBox";
@@ -2138,9 +2140,9 @@ namespace CodeWalker
             this.TrainPathsCheckBox.Text = "Show train paths";
             this.TrainPathsCheckBox.UseVisualStyleBackColor = true;
             this.TrainPathsCheckBox.CheckedChanged += new System.EventHandler(this.TrainPathsCheckBox_CheckedChanged);
-            // 
+            //
             // PathsDepthClipCheckBox
-            // 
+            //
             this.PathsDepthClipCheckBox.AutoSize = true;
             this.PathsDepthClipCheckBox.Checked = true;
             this.PathsDepthClipCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -2151,9 +2153,9 @@ namespace CodeWalker
             this.PathsDepthClipCheckBox.Text = "Paths depth clip";
             this.PathsDepthClipCheckBox.UseVisualStyleBackColor = true;
             this.PathsDepthClipCheckBox.CheckedChanged += new System.EventHandler(this.PathsDepthClipCheckBox_CheckedChanged);
-            // 
+            //
             // PathBoundsCheckBox
-            // 
+            //
             this.PathBoundsCheckBox.AutoSize = true;
             this.PathBoundsCheckBox.Checked = true;
             this.PathBoundsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -2164,9 +2166,9 @@ namespace CodeWalker
             this.PathBoundsCheckBox.Text = "Path bounds";
             this.PathBoundsCheckBox.UseVisualStyleBackColor = true;
             this.PathBoundsCheckBox.CheckedChanged += new System.EventHandler(this.PathBoundsCheckBox_CheckedChanged);
-            // 
+            //
             // SelectionWidgetCheckBox
-            // 
+            //
             this.SelectionWidgetCheckBox.AutoSize = true;
             this.SelectionWidgetCheckBox.Checked = true;
             this.SelectionWidgetCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -2177,9 +2179,9 @@ namespace CodeWalker
             this.SelectionWidgetCheckBox.Text = "Show widget";
             this.SelectionWidgetCheckBox.UseVisualStyleBackColor = true;
             this.SelectionWidgetCheckBox.CheckedChanged += new System.EventHandler(this.SelectionWidgetCheckBox_CheckedChanged);
-            // 
+            //
             // MarkerStyleComboBox
-            // 
+            //
             this.MarkerStyleComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.MarkerStyleComboBox.FormattingEnabled = true;
             this.MarkerStyleComboBox.Location = new System.Drawing.Point(80, 6);
@@ -2188,18 +2190,18 @@ namespace CodeWalker
             this.MarkerStyleComboBox.TabIndex = 18;
             this.MarkerStyleComboBox.SelectedIndexChanged += new System.EventHandler(this.MarkerStyleComboBox_SelectedIndexChanged);
             this.MarkerStyleComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MarkerStyleComboBox_KeyPress);
-            // 
+            //
             // label4
-            // 
+            //
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(4, 9);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(67, 13);
             this.label4.TabIndex = 17;
             this.label4.Text = "Marker style:";
-            // 
+            //
             // LocatorStyleComboBox
-            // 
+            //
             this.LocatorStyleComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.LocatorStyleComboBox.FormattingEnabled = true;
             this.LocatorStyleComboBox.Location = new System.Drawing.Point(80, 33);
@@ -2208,18 +2210,18 @@ namespace CodeWalker
             this.LocatorStyleComboBox.TabIndex = 20;
             this.LocatorStyleComboBox.SelectedIndexChanged += new System.EventHandler(this.LocatorStyleComboBox_SelectedIndexChanged);
             this.LocatorStyleComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.LocatorStyleComboBox_KeyPress);
-            // 
+            //
             // label5
-            // 
+            //
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(4, 36);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(70, 13);
             this.label5.TabIndex = 19;
             this.label5.Text = "Locator style:";
-            // 
+            //
             // MarkerDepthClipCheckBox
-            // 
+            //
             this.MarkerDepthClipCheckBox.AutoSize = true;
             this.MarkerDepthClipCheckBox.Location = new System.Drawing.Point(10, 60);
             this.MarkerDepthClipCheckBox.Name = "MarkerDepthClipCheckBox";
@@ -2229,18 +2231,18 @@ namespace CodeWalker
             this.MarkerDepthClipCheckBox.UseVisualStyleBackColor = true;
             this.MarkerDepthClipCheckBox.Visible = false;
             this.MarkerDepthClipCheckBox.CheckedChanged += new System.EventHandler(this.MarkerDepthClipCheckBox_CheckedChanged);
-            // 
+            //
             // label9
-            // 
+            //
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(4, 136);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(76, 13);
             this.label9.TabIndex = 25;
             this.label9.Text = "Bounds range:";
-            // 
+            //
             // PathsCheckBox
-            // 
+            //
             this.PathsCheckBox.AutoSize = true;
             this.PathsCheckBox.Location = new System.Drawing.Point(10, 319);
             this.PathsCheckBox.Name = "PathsCheckBox";
@@ -2249,9 +2251,9 @@ namespace CodeWalker
             this.PathsCheckBox.Text = "Show paths";
             this.PathsCheckBox.UseVisualStyleBackColor = true;
             this.PathsCheckBox.CheckedChanged += new System.EventHandler(this.PathsCheckBox_CheckedChanged);
-            // 
+            //
             // SelectionBoundsCheckBox
-            // 
+            //
             this.SelectionBoundsCheckBox.AutoSize = true;
             this.SelectionBoundsCheckBox.Checked = true;
             this.SelectionBoundsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -2262,9 +2264,20 @@ namespace CodeWalker
             this.SelectionBoundsCheckBox.Text = "Show selection bounds";
             this.SelectionBoundsCheckBox.UseVisualStyleBackColor = true;
             this.SelectionBoundsCheckBox.CheckedChanged += new System.EventHandler(this.SelectionBoundsCheckBox_CheckedChanged);
-            // 
+            //
+            // SelectByGeometryCheckBox
+            //
+            this.SelectByGeometryCheckBox.AutoSize = true;
+            this.SelectByGeometryCheckBox.Location = new System.Drawing.Point(10, 217);
+            this.SelectByGeometryCheckBox.Name = "SelectByGeometryCheckBox";
+            this.SelectByGeometryCheckBox.Size = new System.Drawing.Size(120, 17);
+            this.SelectByGeometryCheckBox.TabIndex = 28;
+            this.SelectByGeometryCheckBox.Text = "Select by geometry";
+            this.SelectByGeometryCheckBox.UseVisualStyleBackColor = true;
+            this.SelectByGeometryCheckBox.CheckedChanged += new System.EventHandler(this.SelectByGeometryCheckBox_CheckedChanged);
+            //
             // BoundsDepthClipCheckBox
-            // 
+            //
             this.BoundsDepthClipCheckBox.AutoSize = true;
             this.BoundsDepthClipCheckBox.Checked = true;
             this.BoundsDepthClipCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -2275,9 +2288,9 @@ namespace CodeWalker
             this.BoundsDepthClipCheckBox.Text = "Bounds depth clip";
             this.BoundsDepthClipCheckBox.UseVisualStyleBackColor = true;
             this.BoundsDepthClipCheckBox.CheckedChanged += new System.EventHandler(this.BoundsDepthClipCheckBox_CheckedChanged);
-            // 
+            //
             // BoundsRangeTrackBar
-            // 
+            //
             this.BoundsRangeTrackBar.AutoSize = false;
             this.BoundsRangeTrackBar.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.BoundsRangeTrackBar.LargeChange = 10;
@@ -2290,9 +2303,9 @@ namespace CodeWalker
             this.BoundsRangeTrackBar.TickFrequency = 10;
             this.BoundsRangeTrackBar.Value = 100;
             this.BoundsRangeTrackBar.Scroll += new System.EventHandler(this.BoundsRangeTrackBar_Scroll);
-            // 
+            //
             // BoundsStyleComboBox
-            // 
+            //
             this.BoundsStyleComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.BoundsStyleComboBox.FormattingEnabled = true;
             this.BoundsStyleComboBox.Items.AddRange(new object[] {
@@ -2305,18 +2318,18 @@ namespace CodeWalker
             this.BoundsStyleComboBox.TabIndex = 23;
             this.BoundsStyleComboBox.SelectedIndexChanged += new System.EventHandler(this.BoundsStyleComboBox_SelectedIndexChanged);
             this.BoundsStyleComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BoundsStyleComboBox_KeyPress);
-            // 
+            //
             // label8
-            // 
+            //
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(4, 90);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(70, 13);
             this.label8.TabIndex = 22;
             this.label8.Text = "Bounds style:";
-            // 
+            //
             // OptionsLightingTabPage
-            // 
+            //
             this.OptionsLightingTabPage.Controls.Add(this.HDLightsCheckBox);
             this.OptionsLightingTabPage.Controls.Add(this.DeferredShadingCheckBox);
             this.OptionsLightingTabPage.Controls.Add(this.WeatherRegionComboBox);
@@ -2349,9 +2362,9 @@ namespace CodeWalker
             this.OptionsLightingTabPage.TabIndex = 2;
             this.OptionsLightingTabPage.Text = "Lighting";
             this.OptionsLightingTabPage.UseVisualStyleBackColor = true;
-            // 
+            //
             // HDLightsCheckBox
-            // 
+            //
             this.HDLightsCheckBox.AutoSize = true;
             this.HDLightsCheckBox.Checked = true;
             this.HDLightsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -2362,9 +2375,9 @@ namespace CodeWalker
             this.HDLightsCheckBox.Text = "HD lights";
             this.HDLightsCheckBox.UseVisualStyleBackColor = true;
             this.HDLightsCheckBox.CheckedChanged += new System.EventHandler(this.HDLightsCheckBox_CheckedChanged);
-            // 
+            //
             // DeferredShadingCheckBox
-            // 
+            //
             this.DeferredShadingCheckBox.AutoSize = true;
             this.DeferredShadingCheckBox.Checked = true;
             this.DeferredShadingCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -2375,9 +2388,9 @@ namespace CodeWalker
             this.DeferredShadingCheckBox.Text = "Deferred shading";
             this.DeferredShadingCheckBox.UseVisualStyleBackColor = true;
             this.DeferredShadingCheckBox.CheckedChanged += new System.EventHandler(this.DeferredShadingCheckBox_CheckedChanged);
-            // 
+            //
             // WeatherRegionComboBox
-            // 
+            //
             this.WeatherRegionComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.WeatherRegionComboBox.FormattingEnabled = true;
             this.WeatherRegionComboBox.Items.AddRange(new object[] {
@@ -2389,19 +2402,19 @@ namespace CodeWalker
             this.WeatherRegionComboBox.TabIndex = 50;
             this.WeatherRegionComboBox.SelectedIndexChanged += new System.EventHandler(this.WeatherRegionComboBox_SelectedIndexChanged);
             this.WeatherRegionComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.WeatherRegionComboBox_KeyPress);
-            // 
+            //
             // label29
-            // 
+            //
             this.label29.AutoSize = true;
             this.label29.Location = new System.Drawing.Point(4, 358);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(44, 13);
             this.label29.TabIndex = 49;
             this.label29.Text = "Region:";
-            // 
+            //
             // CloudParamTrackBar
-            // 
-            this.CloudParamTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.CloudParamTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.CloudParamTrackBar.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.CloudParamTrackBar.LargeChange = 10;
@@ -2413,9 +2426,9 @@ namespace CodeWalker
             this.CloudParamTrackBar.TickFrequency = 10;
             this.CloudParamTrackBar.Value = 100;
             this.CloudParamTrackBar.Scroll += new System.EventHandler(this.CloudParamTrackBar_Scroll);
-            // 
+            //
             // CloudParamComboBox
-            // 
+            //
             this.CloudParamComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CloudParamComboBox.FormattingEnabled = true;
             this.CloudParamComboBox.Items.AddRange(new object[] {
@@ -2426,18 +2439,18 @@ namespace CodeWalker
             this.CloudParamComboBox.TabIndex = 54;
             this.CloudParamComboBox.SelectedIndexChanged += new System.EventHandler(this.CloudParamComboBox_SelectedIndexChanged);
             this.CloudParamComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CloudParamComboBox_KeyPress);
-            // 
+            //
             // label23
-            // 
+            //
             this.label23.AutoSize = true;
             this.label23.Location = new System.Drawing.Point(4, 412);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(69, 13);
             this.label23.TabIndex = 53;
             this.label23.Text = "Cloud param:";
-            // 
+            //
             // CloudsComboBox
-            // 
+            //
             this.CloudsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CloudsComboBox.FormattingEnabled = true;
             this.CloudsComboBox.Items.AddRange(new object[] {
@@ -2448,37 +2461,37 @@ namespace CodeWalker
             this.CloudsComboBox.TabIndex = 52;
             this.CloudsComboBox.SelectedIndexChanged += new System.EventHandler(this.CloudsComboBox_SelectedIndexChanged);
             this.CloudsComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CloudsComboBox_KeyPress);
-            // 
+            //
             // label21
-            // 
+            //
             this.label21.AutoSize = true;
             this.label21.Location = new System.Drawing.Point(4, 385);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(42, 13);
             this.label21.TabIndex = 51;
             this.label21.Text = "Clouds:";
-            // 
+            //
             // TimeSpeedLabel
-            // 
+            //
             this.TimeSpeedLabel.AutoSize = true;
             this.TimeSpeedLabel.Location = new System.Drawing.Point(78, 263);
             this.TimeSpeedLabel.Name = "TimeSpeedLabel";
             this.TimeSpeedLabel.Size = new System.Drawing.Size(63, 13);
             this.TimeSpeedLabel.TabIndex = 44;
             this.TimeSpeedLabel.Text = "0.5 min/sec";
-            // 
+            //
             // label20
-            // 
+            //
             this.label20.AutoSize = true;
             this.label20.Location = new System.Drawing.Point(3, 263);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(65, 13);
             this.label20.TabIndex = 43;
             this.label20.Text = "Time speed:";
-            // 
+            //
             // TimeSpeedTrackBar
-            // 
-            this.TimeSpeedTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.TimeSpeedTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TimeSpeedTrackBar.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.TimeSpeedTrackBar.Location = new System.Drawing.Point(61, 279);
@@ -2490,9 +2503,9 @@ namespace CodeWalker
             this.TimeSpeedTrackBar.TickFrequency = 5;
             this.TimeSpeedTrackBar.Value = 50;
             this.TimeSpeedTrackBar.Scroll += new System.EventHandler(this.TimeSpeedTrackBar_Scroll);
-            // 
+            //
             // TimeStartStopButton
-            // 
+            //
             this.TimeStartStopButton.Location = new System.Drawing.Point(10, 279);
             this.TimeStartStopButton.Name = "TimeStartStopButton";
             this.TimeStartStopButton.Size = new System.Drawing.Size(45, 23);
@@ -2500,9 +2513,9 @@ namespace CodeWalker
             this.TimeStartStopButton.Text = "Start";
             this.TimeStartStopButton.UseVisualStyleBackColor = true;
             this.TimeStartStopButton.Click += new System.EventHandler(this.TimeStartStopButton_Click);
-            // 
+            //
             // ArtificialAmbientLightCheckBox
-            // 
+            //
             this.ArtificialAmbientLightCheckBox.AutoSize = true;
             this.ArtificialAmbientLightCheckBox.Checked = true;
             this.ArtificialAmbientLightCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -2513,9 +2526,9 @@ namespace CodeWalker
             this.ArtificialAmbientLightCheckBox.Text = "Artificial ambient light";
             this.ArtificialAmbientLightCheckBox.UseVisualStyleBackColor = true;
             this.ArtificialAmbientLightCheckBox.CheckedChanged += new System.EventHandler(this.ArtificialAmbientLightCheckBox_CheckedChanged);
-            // 
+            //
             // NaturalAmbientLightCheckBox
-            // 
+            //
             this.NaturalAmbientLightCheckBox.AutoSize = true;
             this.NaturalAmbientLightCheckBox.Checked = true;
             this.NaturalAmbientLightCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -2526,9 +2539,9 @@ namespace CodeWalker
             this.NaturalAmbientLightCheckBox.Text = "Natural ambient light";
             this.NaturalAmbientLightCheckBox.UseVisualStyleBackColor = true;
             this.NaturalAmbientLightCheckBox.CheckedChanged += new System.EventHandler(this.NaturalAmbientLightCheckBox_CheckedChanged);
-            // 
+            //
             // LODLightsCheckBox
-            // 
+            //
             this.LODLightsCheckBox.AutoSize = true;
             this.LODLightsCheckBox.Checked = true;
             this.LODLightsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -2539,9 +2552,9 @@ namespace CodeWalker
             this.LODLightsCheckBox.Text = "LOD lights";
             this.LODLightsCheckBox.UseVisualStyleBackColor = true;
             this.LODLightsCheckBox.CheckedChanged += new System.EventHandler(this.LODLightsCheckBox_CheckedChanged);
-            // 
+            //
             // HDRRenderingCheckBox
-            // 
+            //
             this.HDRRenderingCheckBox.AutoSize = true;
             this.HDRRenderingCheckBox.Checked = true;
             this.HDRRenderingCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -2552,9 +2565,9 @@ namespace CodeWalker
             this.HDRRenderingCheckBox.Text = "HDR rendering";
             this.HDRRenderingCheckBox.UseVisualStyleBackColor = true;
             this.HDRRenderingCheckBox.CheckedChanged += new System.EventHandler(this.HDRRenderingCheckBox_CheckedChanged);
-            // 
+            //
             // ControlTimeOfDayCheckBox
-            // 
+            //
             this.ControlTimeOfDayCheckBox.AutoSize = true;
             this.ControlTimeOfDayCheckBox.Checked = true;
             this.ControlTimeOfDayCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -2565,28 +2578,28 @@ namespace CodeWalker
             this.ControlTimeOfDayCheckBox.Text = "Control time of day (right-drag)";
             this.ControlTimeOfDayCheckBox.UseVisualStyleBackColor = true;
             this.ControlTimeOfDayCheckBox.CheckedChanged += new System.EventHandler(this.ControlTimeOfDayCheckBox_CheckedChanged);
-            // 
+            //
             // TimeOfDayLabel
-            // 
+            //
             this.TimeOfDayLabel.AutoSize = true;
             this.TimeOfDayLabel.Location = new System.Drawing.Point(75, 208);
             this.TimeOfDayLabel.Name = "TimeOfDayLabel";
             this.TimeOfDayLabel.Size = new System.Drawing.Size(34, 13);
             this.TimeOfDayLabel.TabIndex = 41;
             this.TimeOfDayLabel.Text = "12:00";
-            // 
+            //
             // label19
-            // 
+            //
             this.label19.AutoSize = true;
             this.label19.Location = new System.Drawing.Point(4, 208);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(65, 13);
             this.label19.TabIndex = 40;
             this.label19.Text = "Time of day:";
-            // 
+            //
             // TimeOfDayTrackBar
-            // 
-            this.TimeOfDayTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.TimeOfDayTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TimeOfDayTrackBar.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.TimeOfDayTrackBar.LargeChange = 60;
@@ -2598,9 +2611,9 @@ namespace CodeWalker
             this.TimeOfDayTrackBar.TickFrequency = 60;
             this.TimeOfDayTrackBar.Value = 720;
             this.TimeOfDayTrackBar.Scroll += new System.EventHandler(this.TimeOfDayTrackBar_Scroll);
-            // 
+            //
             // WeatherComboBox
-            // 
+            //
             this.WeatherComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.WeatherComboBox.FormattingEnabled = true;
             this.WeatherComboBox.Items.AddRange(new object[] {
@@ -2611,18 +2624,18 @@ namespace CodeWalker
             this.WeatherComboBox.TabIndex = 48;
             this.WeatherComboBox.SelectedIndexChanged += new System.EventHandler(this.WeatherComboBox_SelectedIndexChanged);
             this.WeatherComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.WeatherComboBox_KeyPress);
-            // 
+            //
             // label17
-            // 
+            //
             this.label17.AutoSize = true;
             this.label17.Location = new System.Drawing.Point(4, 331);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(51, 13);
             this.label17.TabIndex = 47;
             this.label17.Text = "Weather:";
-            // 
+            //
             // ControlLightDirectionCheckBox
-            // 
+            //
             this.ControlLightDirectionCheckBox.AutoSize = true;
             this.ControlLightDirectionCheckBox.Location = new System.Drawing.Point(10, 159);
             this.ControlLightDirectionCheckBox.Name = "ControlLightDirectionCheckBox";
@@ -2631,9 +2644,9 @@ namespace CodeWalker
             this.ControlLightDirectionCheckBox.Text = "Control light direction (right-drag)";
             this.ControlLightDirectionCheckBox.UseVisualStyleBackColor = true;
             this.ControlLightDirectionCheckBox.CheckedChanged += new System.EventHandler(this.ControlLightDirectionCheckBox_CheckedChanged);
-            // 
+            //
             // SkydomeCheckBox
-            // 
+            //
             this.SkydomeCheckBox.AutoSize = true;
             this.SkydomeCheckBox.Checked = true;
             this.SkydomeCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -2644,9 +2657,9 @@ namespace CodeWalker
             this.SkydomeCheckBox.Text = "Skydome";
             this.SkydomeCheckBox.UseVisualStyleBackColor = true;
             this.SkydomeCheckBox.CheckedChanged += new System.EventHandler(this.SkydomeCheckbox_CheckedChanged);
-            // 
+            //
             // ShadowsCheckBox
-            // 
+            //
             this.ShadowsCheckBox.AutoSize = true;
             this.ShadowsCheckBox.Location = new System.Drawing.Point(10, 49);
             this.ShadowsCheckBox.Name = "ShadowsCheckBox";
@@ -2655,9 +2668,9 @@ namespace CodeWalker
             this.ShadowsCheckBox.Text = "Shadows";
             this.ShadowsCheckBox.UseVisualStyleBackColor = true;
             this.ShadowsCheckBox.CheckedChanged += new System.EventHandler(this.ShadowsCheckBox_CheckedChanged);
-            // 
+            //
             // ToolsPanelHideButton
-            // 
+            //
             this.ToolsPanelHideButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ToolsPanelHideButton.Location = new System.Drawing.Point(185, 3);
             this.ToolsPanelHideButton.Name = "ToolsPanelHideButton";
@@ -2666,9 +2679,9 @@ namespace CodeWalker
             this.ToolsPanelHideButton.Text = ">>";
             this.ToolsPanelHideButton.UseVisualStyleBackColor = true;
             this.ToolsPanelHideButton.Click += new System.EventHandler(this.ToolsPanelHideButton_Click);
-            // 
+            //
             // ToolsPanelShowButton
-            // 
+            //
             this.ToolsPanelShowButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ToolsPanelShowButton.Location = new System.Drawing.Point(939, 15);
             this.ToolsPanelShowButton.Name = "ToolsPanelShowButton";
@@ -2677,10 +2690,10 @@ namespace CodeWalker
             this.ToolsPanelShowButton.Text = "<<";
             this.ToolsPanelShowButton.UseVisualStyleBackColor = true;
             this.ToolsPanelShowButton.Click += new System.EventHandler(this.ToolsPanelShowButton_Click);
-            // 
+            //
             // ConsolePanel
-            // 
-            this.ConsolePanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.ConsolePanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ConsolePanel.BackColor = System.Drawing.SystemColors.Control;
             this.ConsolePanel.Controls.Add(this.ConsoleTextBox);
@@ -2689,11 +2702,11 @@ namespace CodeWalker
             this.ConsolePanel.Size = new System.Drawing.Size(736, 101);
             this.ConsolePanel.TabIndex = 3;
             this.ConsolePanel.Visible = false;
-            // 
+            //
             // ConsoleTextBox
-            // 
-            this.ConsoleTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.ConsoleTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ConsoleTextBox.Location = new System.Drawing.Point(3, 3);
             this.ConsoleTextBox.Multiline = true;
@@ -2701,15 +2714,15 @@ namespace CodeWalker
             this.ConsoleTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.ConsoleTextBox.Size = new System.Drawing.Size(730, 95);
             this.ConsoleTextBox.TabIndex = 0;
-            // 
+            //
             // StatsUpdateTimer
-            // 
+            //
             this.StatsUpdateTimer.Enabled = true;
             this.StatsUpdateTimer.Interval = 500;
             this.StatsUpdateTimer.Tick += new System.EventHandler(this.StatsUpdateTimer_Tick);
-            // 
+            //
             // SelectedMarkerPanel
-            // 
+            //
             this.SelectedMarkerPanel.BackColor = System.Drawing.Color.White;
             this.SelectedMarkerPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.SelectedMarkerPanel.Controls.Add(this.SelectedMarkerPositionTextBox);
@@ -2719,10 +2732,10 @@ namespace CodeWalker
             this.SelectedMarkerPanel.Size = new System.Drawing.Size(180, 42);
             this.SelectedMarkerPanel.TabIndex = 5;
             this.SelectedMarkerPanel.Visible = false;
-            // 
+            //
             // SelectedMarkerPositionTextBox
-            // 
-            this.SelectedMarkerPositionTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.SelectedMarkerPositionTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.SelectedMarkerPositionTextBox.BackColor = System.Drawing.Color.White;
             this.SelectedMarkerPositionTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -2731,10 +2744,10 @@ namespace CodeWalker
             this.SelectedMarkerPositionTextBox.ReadOnly = true;
             this.SelectedMarkerPositionTextBox.Size = new System.Drawing.Size(172, 13);
             this.SelectedMarkerPositionTextBox.TabIndex = 1;
-            // 
+            //
             // SelectedMarkerNameTextBox
-            // 
-            this.SelectedMarkerNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.SelectedMarkerNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.SelectedMarkerNameTextBox.BackColor = System.Drawing.Color.White;
             this.SelectedMarkerNameTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -2743,9 +2756,9 @@ namespace CodeWalker
             this.SelectedMarkerNameTextBox.ReadOnly = true;
             this.SelectedMarkerNameTextBox.Size = new System.Drawing.Size(172, 13);
             this.SelectedMarkerNameTextBox.TabIndex = 0;
-            // 
+            //
             // ToolsMenu
-            // 
+            //
             this.ToolsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolsMenuConfigureGame,
             this.ToolsMenuRPFBrowser,
@@ -2765,127 +2778,127 @@ namespace CodeWalker
             this.ToolsMenuOptions});
             this.ToolsMenu.Name = "ToolsMenu";
             this.ToolsMenu.Size = new System.Drawing.Size(171, 356);
-            // 
+            //
             // ToolsMenuConfigureGame
-            // 
+            //
             this.ToolsMenuConfigureGame.Name = "ToolsMenuConfigureGame";
             this.ToolsMenuConfigureGame.Size = new System.Drawing.Size(170, 22);
             this.ToolsMenuConfigureGame.Text = "Configure Game...";
             this.ToolsMenuConfigureGame.Click += new System.EventHandler(this.ToolsMenuConfigureGame_Click);
-            // 
+            //
             // ToolsMenuRPFBrowser
-            // 
+            //
             this.ToolsMenuRPFBrowser.Name = "ToolsMenuRPFBrowser";
             this.ToolsMenuRPFBrowser.Size = new System.Drawing.Size(170, 22);
             this.ToolsMenuRPFBrowser.Text = "RPF Browser...";
             this.ToolsMenuRPFBrowser.Visible = false;
             this.ToolsMenuRPFBrowser.Click += new System.EventHandler(this.ToolsMenuRPFBrowser_Click);
-            // 
+            //
             // ToolsMenuRPFExplorer
-            // 
+            //
             this.ToolsMenuRPFExplorer.Name = "ToolsMenuRPFExplorer";
             this.ToolsMenuRPFExplorer.Size = new System.Drawing.Size(170, 22);
             this.ToolsMenuRPFExplorer.Text = "RPF Explorer...";
             this.ToolsMenuRPFExplorer.Click += new System.EventHandler(this.ToolsMenuRPFExplorer_Click);
-            // 
+            //
             // ToolsMenuSelectionInfo
-            // 
+            //
             this.ToolsMenuSelectionInfo.Name = "ToolsMenuSelectionInfo";
             this.ToolsMenuSelectionInfo.Size = new System.Drawing.Size(170, 22);
             this.ToolsMenuSelectionInfo.Text = "Selection info...";
             this.ToolsMenuSelectionInfo.Click += new System.EventHandler(this.ToolsMenuSelectionInfo_Click);
-            // 
+            //
             // ToolsMenuProjectWindow
-            // 
+            //
             this.ToolsMenuProjectWindow.Enabled = false;
             this.ToolsMenuProjectWindow.Name = "ToolsMenuProjectWindow";
             this.ToolsMenuProjectWindow.Size = new System.Drawing.Size(170, 22);
             this.ToolsMenuProjectWindow.Text = "Project window...";
             this.ToolsMenuProjectWindow.Click += new System.EventHandler(this.ToolsMenuProjectWindow_Click);
-            // 
+            //
             // ToolsMenuCutsceneViewer
-            // 
+            //
             this.ToolsMenuCutsceneViewer.Enabled = false;
             this.ToolsMenuCutsceneViewer.Name = "ToolsMenuCutsceneViewer";
             this.ToolsMenuCutsceneViewer.Size = new System.Drawing.Size(170, 22);
             this.ToolsMenuCutsceneViewer.Text = "Cutscene viewer...";
             this.ToolsMenuCutsceneViewer.Click += new System.EventHandler(this.ToolsMenuCutsceneViewer_Click);
-            // 
+            //
             // ToolsMenuAudioExplorer
-            // 
+            //
             this.ToolsMenuAudioExplorer.Enabled = false;
             this.ToolsMenuAudioExplorer.Name = "ToolsMenuAudioExplorer";
             this.ToolsMenuAudioExplorer.Size = new System.Drawing.Size(170, 22);
             this.ToolsMenuAudioExplorer.Text = "Audio explorer...";
             this.ToolsMenuAudioExplorer.Click += new System.EventHandler(this.ToolsMenuAudioExplorer_Click);
-            // 
+            //
             // ToolsMenuWorldSearch
-            // 
+            //
             this.ToolsMenuWorldSearch.Name = "ToolsMenuWorldSearch";
             this.ToolsMenuWorldSearch.Size = new System.Drawing.Size(170, 22);
             this.ToolsMenuWorldSearch.Text = "World search...";
             this.ToolsMenuWorldSearch.Click += new System.EventHandler(this.ToolsMenuWorldSearch_Click);
-            // 
+            //
             // ToolsMenuBinarySearch
-            // 
+            //
             this.ToolsMenuBinarySearch.Enabled = false;
             this.ToolsMenuBinarySearch.Name = "ToolsMenuBinarySearch";
             this.ToolsMenuBinarySearch.Size = new System.Drawing.Size(170, 22);
             this.ToolsMenuBinarySearch.Text = "Binary search...";
             this.ToolsMenuBinarySearch.Click += new System.EventHandler(this.ToolsMenuBinarySearch_Click);
-            // 
+            //
             // ToolsMenuJenkGen
-            // 
+            //
             this.ToolsMenuJenkGen.Name = "ToolsMenuJenkGen";
             this.ToolsMenuJenkGen.Size = new System.Drawing.Size(170, 22);
             this.ToolsMenuJenkGen.Text = "JenkGen...";
             this.ToolsMenuJenkGen.Click += new System.EventHandler(this.ToolsMenuJenkGen_Click);
-            // 
+            //
             // ToolsMenuJenkInd
-            // 
+            //
             this.ToolsMenuJenkInd.Enabled = false;
             this.ToolsMenuJenkInd.Name = "ToolsMenuJenkInd";
             this.ToolsMenuJenkInd.Size = new System.Drawing.Size(170, 22);
             this.ToolsMenuJenkInd.Text = "JenkInd...";
             this.ToolsMenuJenkInd.Click += new System.EventHandler(this.ToolsMenuJenkInd_Click);
-            // 
+            //
             // ToolsMenuExtractScripts
-            // 
+            //
             this.ToolsMenuExtractScripts.Name = "ToolsMenuExtractScripts";
             this.ToolsMenuExtractScripts.Size = new System.Drawing.Size(170, 22);
             this.ToolsMenuExtractScripts.Text = "Extract scripts...";
             this.ToolsMenuExtractScripts.Click += new System.EventHandler(this.ToolsMenuExtractScripts_Click);
-            // 
+            //
             // ToolsMenuExtractTextures
-            // 
+            //
             this.ToolsMenuExtractTextures.Name = "ToolsMenuExtractTextures";
             this.ToolsMenuExtractTextures.Size = new System.Drawing.Size(170, 22);
             this.ToolsMenuExtractTextures.Text = "Extract textures...";
             this.ToolsMenuExtractTextures.Click += new System.EventHandler(this.ToolsMenuExtractTextures_Click);
-            // 
+            //
             // ToolsMenuExtractRawFiles
-            // 
+            //
             this.ToolsMenuExtractRawFiles.Name = "ToolsMenuExtractRawFiles";
             this.ToolsMenuExtractRawFiles.Size = new System.Drawing.Size(170, 22);
             this.ToolsMenuExtractRawFiles.Text = "Extract raw files...";
             this.ToolsMenuExtractRawFiles.Click += new System.EventHandler(this.ToolsMenuExtractRawFiles_Click);
-            // 
+            //
             // ToolsMenuExtractShaders
-            // 
+            //
             this.ToolsMenuExtractShaders.Name = "ToolsMenuExtractShaders";
             this.ToolsMenuExtractShaders.Size = new System.Drawing.Size(170, 22);
             this.ToolsMenuExtractShaders.Text = "Extract shaders...";
             this.ToolsMenuExtractShaders.Click += new System.EventHandler(this.ToolsMenuExtractShaders_Click);
-            // 
+            //
             // ToolsMenuOptions
-            // 
+            //
             this.ToolsMenuOptions.Name = "ToolsMenuOptions";
             this.ToolsMenuOptions.Size = new System.Drawing.Size(170, 22);
             this.ToolsMenuOptions.Text = "Options...";
             this.ToolsMenuOptions.Click += new System.EventHandler(this.ToolsMenuOptions_Click);
-            // 
+            //
             // ToolbarPanel
-            // 
+            //
             this.ToolbarPanel.BackColor = System.Drawing.SystemColors.Control;
             this.ToolbarPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ToolbarPanel.Controls.Add(this.Toolbar);
@@ -2894,9 +2907,9 @@ namespace CodeWalker
             this.ToolbarPanel.Size = new System.Drawing.Size(557, 26);
             this.ToolbarPanel.TabIndex = 7;
             this.ToolbarPanel.Visible = false;
-            // 
+            //
             // Toolbar
-            // 
+            //
             this.Toolbar.Dock = System.Windows.Forms.DockStyle.None;
             this.Toolbar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.Toolbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -2931,9 +2944,9 @@ namespace CodeWalker
             this.Toolbar.Size = new System.Drawing.Size(554, 25);
             this.Toolbar.TabIndex = 6;
             this.Toolbar.Text = "toolStrip1";
-            // 
+            //
             // ToolbarNewButton
-            // 
+            //
             this.ToolbarNewButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.ToolbarNewButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolbarNewProjectButton,
@@ -2951,58 +2964,58 @@ namespace CodeWalker
             this.ToolbarNewButton.Text = "New...";
             this.ToolbarNewButton.ToolTipText = "New... (Ctrl+N)";
             this.ToolbarNewButton.ButtonClick += new System.EventHandler(this.ToolbarNewButton_ButtonClick);
-            // 
+            //
             // ToolbarNewProjectButton
-            // 
+            //
             this.ToolbarNewProjectButton.Name = "ToolbarNewProjectButton";
             this.ToolbarNewProjectButton.Size = new System.Drawing.Size(167, 22);
             this.ToolbarNewProjectButton.Text = "New Project";
             this.ToolbarNewProjectButton.Click += new System.EventHandler(this.ToolbarNewProjectButton_Click);
-            // 
+            //
             // ToolbarNewYmapButton
-            // 
+            //
             this.ToolbarNewYmapButton.Name = "ToolbarNewYmapButton";
             this.ToolbarNewYmapButton.Size = new System.Drawing.Size(167, 22);
             this.ToolbarNewYmapButton.Text = "New Ymap File";
             this.ToolbarNewYmapButton.Click += new System.EventHandler(this.ToolbarNewYmapButton_Click);
-            // 
+            //
             // ToolbarNewYtypButton
-            // 
+            //
             this.ToolbarNewYtypButton.Name = "ToolbarNewYtypButton";
             this.ToolbarNewYtypButton.Size = new System.Drawing.Size(167, 22);
             this.ToolbarNewYtypButton.Text = "New Ytyp File";
             this.ToolbarNewYtypButton.Click += new System.EventHandler(this.ToolbarNewYtypButton_Click);
-            // 
+            //
             // ToolbarNewYbnButton
-            // 
+            //
             this.ToolbarNewYbnButton.Name = "ToolbarNewYbnButton";
             this.ToolbarNewYbnButton.Size = new System.Drawing.Size(167, 22);
             this.ToolbarNewYbnButton.Text = "New Ybn File";
             this.ToolbarNewYbnButton.Click += new System.EventHandler(this.ToolbarNewYbnButton_Click);
-            // 
+            //
             // ToolbarNewYndButton
-            // 
+            //
             this.ToolbarNewYndButton.Name = "ToolbarNewYndButton";
             this.ToolbarNewYndButton.Size = new System.Drawing.Size(167, 22);
             this.ToolbarNewYndButton.Text = "New Ynd File";
             this.ToolbarNewYndButton.Click += new System.EventHandler(this.ToolbarNewYndButton_Click);
-            // 
+            //
             // ToolbarNewTrainsButton
-            // 
+            //
             this.ToolbarNewTrainsButton.Name = "ToolbarNewTrainsButton";
             this.ToolbarNewTrainsButton.Size = new System.Drawing.Size(167, 22);
             this.ToolbarNewTrainsButton.Text = "New Trains File";
             this.ToolbarNewTrainsButton.Click += new System.EventHandler(this.ToolbarNewTrainsButton_Click);
-            // 
+            //
             // ToolbarNewScenarioButton
-            // 
+            //
             this.ToolbarNewScenarioButton.Name = "ToolbarNewScenarioButton";
             this.ToolbarNewScenarioButton.Size = new System.Drawing.Size(167, 22);
             this.ToolbarNewScenarioButton.Text = "New Scenario File";
             this.ToolbarNewScenarioButton.Click += new System.EventHandler(this.ToolbarNewScenarioButton_Click);
-            // 
+            //
             // ToolbarOpenButton
-            // 
+            //
             this.ToolbarOpenButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.ToolbarOpenButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolbarOpenProjectButton,
@@ -3016,30 +3029,30 @@ namespace CodeWalker
             this.ToolbarOpenButton.Text = "Open...";
             this.ToolbarOpenButton.ToolTipText = "Open... (Ctrl+O)";
             this.ToolbarOpenButton.ButtonClick += new System.EventHandler(this.ToolbarOpenButton_ButtonClick);
-            // 
+            //
             // ToolbarOpenProjectButton
-            // 
+            //
             this.ToolbarOpenProjectButton.Name = "ToolbarOpenProjectButton";
             this.ToolbarOpenProjectButton.Size = new System.Drawing.Size(152, 22);
             this.ToolbarOpenProjectButton.Text = "Open Project...";
             this.ToolbarOpenProjectButton.Click += new System.EventHandler(this.ToolbarOpenProjectButton_Click);
-            // 
+            //
             // ToolbarOpenFilesButton
-            // 
+            //
             this.ToolbarOpenFilesButton.Name = "ToolbarOpenFilesButton";
             this.ToolbarOpenFilesButton.Size = new System.Drawing.Size(152, 22);
             this.ToolbarOpenFilesButton.Text = "Open Files...";
             this.ToolbarOpenFilesButton.Click += new System.EventHandler(this.ToolbarOpenFilesButton_Click);
-            // 
+            //
             // ToolbarOpenFolderButton
-            // 
+            //
             this.ToolbarOpenFolderButton.Name = "ToolbarOpenFolderButton";
             this.ToolbarOpenFolderButton.Size = new System.Drawing.Size(152, 22);
             this.ToolbarOpenFolderButton.Text = "Open Folder...";
             this.ToolbarOpenFolderButton.Click += new System.EventHandler(this.ToolbarOpenFolderButton_Click);
-            // 
+            //
             // ToolbarSaveButton
-            // 
+            //
             this.ToolbarSaveButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.ToolbarSaveButton.Enabled = false;
             this.ToolbarSaveButton.Image = ((System.Drawing.Image)(resources.GetObject("ToolbarSaveButton.Image")));
@@ -3049,9 +3062,9 @@ namespace CodeWalker
             this.ToolbarSaveButton.Text = "Save";
             this.ToolbarSaveButton.ToolTipText = "Save (Ctrl+S)";
             this.ToolbarSaveButton.Click += new System.EventHandler(this.ToolbarSaveButton_Click);
-            // 
+            //
             // ToolbarSaveAllButton
-            // 
+            //
             this.ToolbarSaveAllButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.ToolbarSaveAllButton.Enabled = false;
             this.ToolbarSaveAllButton.Image = ((System.Drawing.Image)(resources.GetObject("ToolbarSaveAllButton.Image")));
@@ -3061,14 +3074,14 @@ namespace CodeWalker
             this.ToolbarSaveAllButton.Text = "Save All";
             this.ToolbarSaveAllButton.ToolTipText = "Save All (Ctrl+Shift+S)";
             this.ToolbarSaveAllButton.Click += new System.EventHandler(this.ToolbarSaveAllButton_Click);
-            // 
+            //
             // toolStripSeparator5
-            // 
+            //
             this.toolStripSeparator5.Name = "toolStripSeparator5";
             this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
-            // 
+            //
             // ToolbarSelectButton
-            // 
+            //
             this.ToolbarSelectButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.ToolbarSelectButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolbarSelectEntityButton,
@@ -3096,142 +3109,142 @@ namespace CodeWalker
             this.ToolbarSelectButton.Text = "Select objects / Exit edit mode";
             this.ToolbarSelectButton.ToolTipText = "Select objects / Exit edit mode (C, Q)";
             this.ToolbarSelectButton.ButtonClick += new System.EventHandler(this.ToolbarSelectButton_ButtonClick);
-            // 
+            //
             // ToolbarSelectEntityButton
-            // 
+            //
             this.ToolbarSelectEntityButton.Checked = true;
             this.ToolbarSelectEntityButton.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ToolbarSelectEntityButton.Name = "ToolbarSelectEntityButton";
             this.ToolbarSelectEntityButton.Size = new System.Drawing.Size(185, 22);
             this.ToolbarSelectEntityButton.Text = "Entity";
             this.ToolbarSelectEntityButton.Click += new System.EventHandler(this.ToolbarSelectEntityButton_Click);
-            // 
+            //
             // ToolbarSelectEntityExtensionButton
-            // 
+            //
             this.ToolbarSelectEntityExtensionButton.Name = "ToolbarSelectEntityExtensionButton";
             this.ToolbarSelectEntityExtensionButton.Size = new System.Drawing.Size(185, 22);
             this.ToolbarSelectEntityExtensionButton.Text = "Entity Extension";
             this.ToolbarSelectEntityExtensionButton.Click += new System.EventHandler(this.ToolbarSelectEntityExtensionButton_Click);
-            // 
+            //
             // ToolbarSelectArchetypeExtensionButton
-            // 
+            //
             this.ToolbarSelectArchetypeExtensionButton.Name = "ToolbarSelectArchetypeExtensionButton";
             this.ToolbarSelectArchetypeExtensionButton.Size = new System.Drawing.Size(185, 22);
             this.ToolbarSelectArchetypeExtensionButton.Text = "Archetype Extension";
             this.ToolbarSelectArchetypeExtensionButton.Click += new System.EventHandler(this.ToolbarSelectArchetypeExtensionButton_Click);
-            // 
+            //
             // ToolbarSelectTimeCycleModifierButton
-            // 
+            //
             this.ToolbarSelectTimeCycleModifierButton.Name = "ToolbarSelectTimeCycleModifierButton";
             this.ToolbarSelectTimeCycleModifierButton.Size = new System.Drawing.Size(185, 22);
             this.ToolbarSelectTimeCycleModifierButton.Text = "Time Cycle Modifier";
             this.ToolbarSelectTimeCycleModifierButton.Click += new System.EventHandler(this.ToolbarSelectTimeCycleModifierButton_Click);
-            // 
+            //
             // ToolbarSelectCarGeneratorButton
-            // 
+            //
             this.ToolbarSelectCarGeneratorButton.Name = "ToolbarSelectCarGeneratorButton";
             this.ToolbarSelectCarGeneratorButton.Size = new System.Drawing.Size(185, 22);
             this.ToolbarSelectCarGeneratorButton.Text = "Car Generator";
             this.ToolbarSelectCarGeneratorButton.Click += new System.EventHandler(this.ToolbarSelectCarGeneratorButton_Click);
-            // 
+            //
             // ToolbarSelectGrassButton
-            // 
+            //
             this.ToolbarSelectGrassButton.Name = "ToolbarSelectGrassButton";
             this.ToolbarSelectGrassButton.Size = new System.Drawing.Size(185, 22);
             this.ToolbarSelectGrassButton.Text = "Grass";
             this.ToolbarSelectGrassButton.Click += new System.EventHandler(this.ToolbarSelectGrassButton_Click);
-            // 
+            //
             // ToolbarSelectWaterQuadButton
-            // 
+            //
             this.ToolbarSelectWaterQuadButton.Name = "ToolbarSelectWaterQuadButton";
             this.ToolbarSelectWaterQuadButton.Size = new System.Drawing.Size(185, 22);
             this.ToolbarSelectWaterQuadButton.Text = "Water Quad";
             this.ToolbarSelectWaterQuadButton.Click += new System.EventHandler(this.ToolbarSelectWaterQuadButton_Click);
-            // 
+            //
             // ToolbarSelectCalmingQuadButton
-            // 
+            //
             this.ToolbarSelectCalmingQuadButton.Name = "ToolbarSelectCalmingQuadButton";
             this.ToolbarSelectCalmingQuadButton.Size = new System.Drawing.Size(185, 22);
             this.ToolbarSelectCalmingQuadButton.Text = "Water Calming Quad";
             this.ToolbarSelectCalmingQuadButton.Click += new System.EventHandler(this.ToolbarSelectCalmingQuadButton_Click);
-            // 
+            //
             // ToolbarSelectWaveQuadButton
-            // 
+            //
             this.ToolbarSelectWaveQuadButton.Name = "ToolbarSelectWaveQuadButton";
             this.ToolbarSelectWaveQuadButton.Size = new System.Drawing.Size(185, 22);
             this.ToolbarSelectWaveQuadButton.Text = "Water Wave Quad";
             this.ToolbarSelectWaveQuadButton.Click += new System.EventHandler(this.ToolbarSelectWaveQuadButton_Click);
-            // 
+            //
             // ToolbarSelectCollisionButton
-            // 
+            //
             this.ToolbarSelectCollisionButton.Name = "ToolbarSelectCollisionButton";
             this.ToolbarSelectCollisionButton.Size = new System.Drawing.Size(185, 22);
             this.ToolbarSelectCollisionButton.Text = "Collision";
             this.ToolbarSelectCollisionButton.Click += new System.EventHandler(this.ToolbarSelectCollisionButton_Click);
-            // 
+            //
             // ToolbarSelectNavMeshButton
-            // 
+            //
             this.ToolbarSelectNavMeshButton.Name = "ToolbarSelectNavMeshButton";
             this.ToolbarSelectNavMeshButton.Size = new System.Drawing.Size(185, 22);
             this.ToolbarSelectNavMeshButton.Text = "Nav Mesh";
             this.ToolbarSelectNavMeshButton.Click += new System.EventHandler(this.ToolbarSelectNavMeshButton_Click);
-            // 
+            //
             // ToolbarSelectPathButton
-            // 
+            //
             this.ToolbarSelectPathButton.Name = "ToolbarSelectPathButton";
             this.ToolbarSelectPathButton.Size = new System.Drawing.Size(185, 22);
             this.ToolbarSelectPathButton.Text = "Traffic Path";
             this.ToolbarSelectPathButton.Click += new System.EventHandler(this.ToolbarSelectPathButton_Click);
-            // 
+            //
             // ToolbarSelectTrainTrackButton
-            // 
+            //
             this.ToolbarSelectTrainTrackButton.Name = "ToolbarSelectTrainTrackButton";
             this.ToolbarSelectTrainTrackButton.Size = new System.Drawing.Size(185, 22);
             this.ToolbarSelectTrainTrackButton.Text = "Train Track";
             this.ToolbarSelectTrainTrackButton.Click += new System.EventHandler(this.ToolbarSelectTrainTrackButton_Click);
-            // 
+            //
             // ToolbarSelectLodLightsButton
-            // 
+            //
             this.ToolbarSelectLodLightsButton.Name = "ToolbarSelectLodLightsButton";
             this.ToolbarSelectLodLightsButton.Size = new System.Drawing.Size(185, 22);
             this.ToolbarSelectLodLightsButton.Text = "Lod Lights";
             this.ToolbarSelectLodLightsButton.Click += new System.EventHandler(this.ToolbarSelectLodLightsButton_Click);
-            // 
+            //
             // ToolbarSelectMloInstanceButton
-            // 
+            //
             this.ToolbarSelectMloInstanceButton.Name = "ToolbarSelectMloInstanceButton";
             this.ToolbarSelectMloInstanceButton.Size = new System.Drawing.Size(185, 22);
             this.ToolbarSelectMloInstanceButton.Text = "Interior Instance";
             this.ToolbarSelectMloInstanceButton.Click += new System.EventHandler(this.ToolbarSelectMloInstanceButton_Click);
-            // 
+            //
             // ToolbarSelectScenarioButton
-            // 
+            //
             this.ToolbarSelectScenarioButton.Name = "ToolbarSelectScenarioButton";
             this.ToolbarSelectScenarioButton.Size = new System.Drawing.Size(185, 22);
             this.ToolbarSelectScenarioButton.Text = "Scenario";
             this.ToolbarSelectScenarioButton.Click += new System.EventHandler(this.ToolbarSelectScenarioButton_Click);
-            // 
+            //
             // ToolbarSelectAudioButton
-            // 
+            //
             this.ToolbarSelectAudioButton.Name = "ToolbarSelectAudioButton";
             this.ToolbarSelectAudioButton.Size = new System.Drawing.Size(185, 22);
             this.ToolbarSelectAudioButton.Text = "Audio";
             this.ToolbarSelectAudioButton.Click += new System.EventHandler(this.ToolbarSelectAudioButton_Click);
-            // 
+            //
             // ToolbarSelectOcclusionButton
-            // 
+            //
             this.ToolbarSelectOcclusionButton.Name = "ToolbarSelectOcclusionButton";
             this.ToolbarSelectOcclusionButton.Size = new System.Drawing.Size(185, 22);
             this.ToolbarSelectOcclusionButton.Text = "Occlusion";
             this.ToolbarSelectOcclusionButton.Click += new System.EventHandler(this.ToolbarSelectOcclusionButton_Click);
-            // 
+            //
             // toolStripSeparator1
-            // 
+            //
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
+            //
             // ToolbarMoveButton
-            // 
+            //
             this.ToolbarMoveButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.ToolbarMoveButton.Image = ((System.Drawing.Image)(resources.GetObject("ToolbarMoveButton.Image")));
             this.ToolbarMoveButton.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -3240,9 +3253,9 @@ namespace CodeWalker
             this.ToolbarMoveButton.Text = "Move";
             this.ToolbarMoveButton.ToolTipText = "Move (W)";
             this.ToolbarMoveButton.Click += new System.EventHandler(this.ToolbarMoveButton_Click);
-            // 
+            //
             // ToolbarRotateButton
-            // 
+            //
             this.ToolbarRotateButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.ToolbarRotateButton.Image = ((System.Drawing.Image)(resources.GetObject("ToolbarRotateButton.Image")));
             this.ToolbarRotateButton.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -3251,9 +3264,9 @@ namespace CodeWalker
             this.ToolbarRotateButton.Text = "Rotate";
             this.ToolbarRotateButton.ToolTipText = "Rotate (E)";
             this.ToolbarRotateButton.Click += new System.EventHandler(this.ToolbarRotateButton_Click);
-            // 
+            //
             // ToolbarScaleButton
-            // 
+            //
             this.ToolbarScaleButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.ToolbarScaleButton.Image = ((System.Drawing.Image)(resources.GetObject("ToolbarScaleButton.Image")));
             this.ToolbarScaleButton.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -3262,9 +3275,9 @@ namespace CodeWalker
             this.ToolbarScaleButton.Text = "Scale";
             this.ToolbarScaleButton.ToolTipText = "Scale (R)";
             this.ToolbarScaleButton.Click += new System.EventHandler(this.ToolbarScaleButton_Click);
-            // 
+            //
             // ToolbarTransformSpaceButton
-            // 
+            //
             this.ToolbarTransformSpaceButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.ToolbarTransformSpaceButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolbarObjectSpaceButton,
@@ -3275,9 +3288,9 @@ namespace CodeWalker
             this.ToolbarTransformSpaceButton.Size = new System.Drawing.Size(32, 22);
             this.ToolbarTransformSpaceButton.Text = "Toggle transform space";
             this.ToolbarTransformSpaceButton.ButtonClick += new System.EventHandler(this.ToolbarTransformSpaceButton_ButtonClick);
-            // 
+            //
             // ToolbarObjectSpaceButton
-            // 
+            //
             this.ToolbarObjectSpaceButton.Checked = true;
             this.ToolbarObjectSpaceButton.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ToolbarObjectSpaceButton.Image = ((System.Drawing.Image)(resources.GetObject("ToolbarObjectSpaceButton.Image")));
@@ -3285,17 +3298,17 @@ namespace CodeWalker
             this.ToolbarObjectSpaceButton.Size = new System.Drawing.Size(142, 22);
             this.ToolbarObjectSpaceButton.Text = "Object space";
             this.ToolbarObjectSpaceButton.Click += new System.EventHandler(this.ToolbarObjectSpaceButton_Click);
-            // 
+            //
             // ToolbarWorldSpaceButton
-            // 
+            //
             this.ToolbarWorldSpaceButton.Image = ((System.Drawing.Image)(resources.GetObject("ToolbarWorldSpaceButton.Image")));
             this.ToolbarWorldSpaceButton.Name = "ToolbarWorldSpaceButton";
             this.ToolbarWorldSpaceButton.Size = new System.Drawing.Size(142, 22);
             this.ToolbarWorldSpaceButton.Text = "World space";
             this.ToolbarWorldSpaceButton.Click += new System.EventHandler(this.ToolbarWorldSpaceButton_Click);
-            // 
+            //
             // ToolbarSnapButton
-            // 
+            //
             this.ToolbarSnapButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.ToolbarSnapButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolbarSnapToGroundButton,
@@ -3310,40 +3323,40 @@ namespace CodeWalker
             this.ToolbarSnapButton.Text = "Snap to Ground";
             this.ToolbarSnapButton.ToolTipText = "Snap to Ground";
             this.ToolbarSnapButton.ButtonClick += new System.EventHandler(this.ToolbarSnapButton_ButtonClick);
-            // 
+            //
             // ToolbarSnapToGroundButton
-            // 
+            //
             this.ToolbarSnapToGroundButton.Image = ((System.Drawing.Image)(resources.GetObject("ToolbarSnapToGroundButton.Image")));
             this.ToolbarSnapToGroundButton.Name = "ToolbarSnapToGroundButton";
             this.ToolbarSnapToGroundButton.Size = new System.Drawing.Size(205, 22);
             this.ToolbarSnapToGroundButton.Text = "Snap to Ground";
             this.ToolbarSnapToGroundButton.Click += new System.EventHandler(this.ToolbarSnapToGroundButton_Click);
-            // 
+            //
             // ToolbarSnapToGridButton
-            // 
+            //
             this.ToolbarSnapToGridButton.Image = ((System.Drawing.Image)(resources.GetObject("ToolbarSnapToGridButton.Image")));
             this.ToolbarSnapToGridButton.Name = "ToolbarSnapToGridButton";
             this.ToolbarSnapToGridButton.Size = new System.Drawing.Size(205, 22);
             this.ToolbarSnapToGridButton.Text = "Snap to Grid";
             this.ToolbarSnapToGridButton.Click += new System.EventHandler(this.ToolbarSnapToGridButton_Click);
-            // 
+            //
             // ToolbarSnapToGroundGridButton
-            // 
+            //
             this.ToolbarSnapToGroundGridButton.Image = ((System.Drawing.Image)(resources.GetObject("ToolbarSnapToGroundGridButton.Image")));
             this.ToolbarSnapToGroundGridButton.Name = "ToolbarSnapToGroundGridButton";
             this.ToolbarSnapToGroundGridButton.Size = new System.Drawing.Size(205, 22);
             this.ToolbarSnapToGroundGridButton.Text = "Snap to Grid and Ground";
             this.ToolbarSnapToGroundGridButton.Click += new System.EventHandler(this.ToolbarSnapToGroundGridButton_Click);
-            // 
+            //
             // ToolbarSnapGridSizeButton
-            // 
+            //
             this.ToolbarSnapGridSizeButton.Name = "ToolbarSnapGridSizeButton";
             this.ToolbarSnapGridSizeButton.Size = new System.Drawing.Size(205, 22);
             this.ToolbarSnapGridSizeButton.Text = "Grid Size...";
             this.ToolbarSnapGridSizeButton.Click += new System.EventHandler(this.ToolbarSnapGridSizeButton_Click);
-            // 
+            //
             // ToolbarRotationSnappingButton
-            // 
+            //
             this.ToolbarRotationSnappingButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolbarRotationSnappingOffButton,
             this.ToolbarRotationSnapping1Button,
@@ -3356,72 +3369,72 @@ namespace CodeWalker
             this.ToolbarRotationSnappingButton.Name = "ToolbarRotationSnappingButton";
             this.ToolbarRotationSnappingButton.Size = new System.Drawing.Size(205, 22);
             this.ToolbarRotationSnappingButton.Text = "Rotation Snapping";
-            // 
+            //
             // ToolbarRotationSnappingOffButton
-            // 
+            //
             this.ToolbarRotationSnappingOffButton.Name = "ToolbarRotationSnappingOffButton";
             this.ToolbarRotationSnappingOffButton.Size = new System.Drawing.Size(131, 22);
             this.ToolbarRotationSnappingOffButton.Text = "Off";
             this.ToolbarRotationSnappingOffButton.Click += new System.EventHandler(this.ToolbarRotationSnappingOffButton_Click);
-            // 
+            //
             // ToolbarRotationSnapping1Button
-            // 
+            //
             this.ToolbarRotationSnapping1Button.Name = "ToolbarRotationSnapping1Button";
             this.ToolbarRotationSnapping1Button.Size = new System.Drawing.Size(131, 22);
             this.ToolbarRotationSnapping1Button.Text = "1 Degree";
             this.ToolbarRotationSnapping1Button.Click += new System.EventHandler(this.ToolbarRotationSnapping1Button_Click);
-            // 
+            //
             // ToolbarRotationSnapping2Button
-            // 
+            //
             this.ToolbarRotationSnapping2Button.Name = "ToolbarRotationSnapping2Button";
             this.ToolbarRotationSnapping2Button.Size = new System.Drawing.Size(131, 22);
             this.ToolbarRotationSnapping2Button.Text = "2 Degrees";
             this.ToolbarRotationSnapping2Button.Click += new System.EventHandler(this.ToolbarRotationSnapping2Button_Click);
-            // 
+            //
             // ToolbarRotationSnapping5Button
-            // 
+            //
             this.ToolbarRotationSnapping5Button.Checked = true;
             this.ToolbarRotationSnapping5Button.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ToolbarRotationSnapping5Button.Name = "ToolbarRotationSnapping5Button";
             this.ToolbarRotationSnapping5Button.Size = new System.Drawing.Size(131, 22);
             this.ToolbarRotationSnapping5Button.Text = "5 Degrees";
             this.ToolbarRotationSnapping5Button.Click += new System.EventHandler(this.ToolbarRotationSnapping5Button_Click);
-            // 
+            //
             // ToolbarRotationSnapping10Button
-            // 
+            //
             this.ToolbarRotationSnapping10Button.Name = "ToolbarRotationSnapping10Button";
             this.ToolbarRotationSnapping10Button.Size = new System.Drawing.Size(131, 22);
             this.ToolbarRotationSnapping10Button.Text = "10 Degrees";
             this.ToolbarRotationSnapping10Button.Click += new System.EventHandler(this.ToolbarRotationSnapping10Button_Click);
-            // 
+            //
             // ToolbarRotationSnapping45Button
-            // 
+            //
             this.ToolbarRotationSnapping45Button.Name = "ToolbarRotationSnapping45Button";
             this.ToolbarRotationSnapping45Button.Size = new System.Drawing.Size(131, 22);
             this.ToolbarRotationSnapping45Button.Text = "45 Degrees";
             this.ToolbarRotationSnapping45Button.Click += new System.EventHandler(this.ToolbarRotationSnapping45Button_Click);
-            // 
+            //
             // ToolbarRotationSnapping90Button
-            // 
+            //
             this.ToolbarRotationSnapping90Button.Name = "ToolbarRotationSnapping90Button";
             this.ToolbarRotationSnapping90Button.Size = new System.Drawing.Size(131, 22);
             this.ToolbarRotationSnapping90Button.Text = "90 Degrees";
             this.ToolbarRotationSnapping90Button.Click += new System.EventHandler(this.ToolbarRotationSnapping90Button_Click);
-            // 
+            //
             // ToolbarRotationSnappingCustomButton
-            // 
+            //
             this.ToolbarRotationSnappingCustomButton.Name = "ToolbarRotationSnappingCustomButton";
             this.ToolbarRotationSnappingCustomButton.Size = new System.Drawing.Size(131, 22);
             this.ToolbarRotationSnappingCustomButton.Text = "Custom...";
             this.ToolbarRotationSnappingCustomButton.Click += new System.EventHandler(this.ToolbarRotationSnappingCustomButton_Click);
-            // 
+            //
             // toolStripSeparator2
-            // 
+            //
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
+            //
             // ToolbarUndoButton
-            // 
+            //
             this.ToolbarUndoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.ToolbarUndoButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolbarUndoListButton});
@@ -3432,16 +3445,16 @@ namespace CodeWalker
             this.ToolbarUndoButton.Size = new System.Drawing.Size(32, 22);
             this.ToolbarUndoButton.Text = "Undo";
             this.ToolbarUndoButton.ButtonClick += new System.EventHandler(this.ToolbarUndoButton_ButtonClick);
-            // 
+            //
             // ToolbarUndoListButton
-            // 
+            //
             this.ToolbarUndoListButton.Name = "ToolbarUndoListButton";
             this.ToolbarUndoListButton.Size = new System.Drawing.Size(121, 22);
             this.ToolbarUndoListButton.Text = "Undo list";
             this.ToolbarUndoListButton.Click += new System.EventHandler(this.ToolbarUndoListButton_Click);
-            // 
+            //
             // ToolbarRedoButton
-            // 
+            //
             this.ToolbarRedoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.ToolbarRedoButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolbarRedoListButton});
@@ -3452,21 +3465,21 @@ namespace CodeWalker
             this.ToolbarRedoButton.Size = new System.Drawing.Size(32, 22);
             this.ToolbarRedoButton.Text = "Redo";
             this.ToolbarRedoButton.ButtonClick += new System.EventHandler(this.ToolbarRedoButton_ButtonClick);
-            // 
+            //
             // ToolbarRedoListButton
-            // 
+            //
             this.ToolbarRedoListButton.Name = "ToolbarRedoListButton";
             this.ToolbarRedoListButton.Size = new System.Drawing.Size(119, 22);
             this.ToolbarRedoListButton.Text = "Redo list";
             this.ToolbarRedoListButton.Click += new System.EventHandler(this.ToolbarRedoListButton_Click);
-            // 
+            //
             // toolStripSeparator3
-            // 
+            //
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
-            // 
+            //
             // ToolbarInfoWindowButton
-            // 
+            //
             this.ToolbarInfoWindowButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.ToolbarInfoWindowButton.Image = ((System.Drawing.Image)(resources.GetObject("ToolbarInfoWindowButton.Image")));
             this.ToolbarInfoWindowButton.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -3474,9 +3487,9 @@ namespace CodeWalker
             this.ToolbarInfoWindowButton.Size = new System.Drawing.Size(23, 22);
             this.ToolbarInfoWindowButton.Text = "Selection info window";
             this.ToolbarInfoWindowButton.Click += new System.EventHandler(this.ToolbarInfoWindowButton_Click);
-            // 
+            //
             // ToolbarProjectWindowButton
-            // 
+            //
             this.ToolbarProjectWindowButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.ToolbarProjectWindowButton.Enabled = false;
             this.ToolbarProjectWindowButton.Image = ((System.Drawing.Image)(resources.GetObject("ToolbarProjectWindowButton.Image")));
@@ -3485,14 +3498,14 @@ namespace CodeWalker
             this.ToolbarProjectWindowButton.Size = new System.Drawing.Size(23, 22);
             this.ToolbarProjectWindowButton.Text = "Project window";
             this.ToolbarProjectWindowButton.Click += new System.EventHandler(this.ToolbarProjectWindowButton_Click);
-            // 
+            //
             // toolStripSeparator4
-            // 
+            //
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
-            // 
+            //
             // ToolbarAddItemButton
-            // 
+            //
             this.ToolbarAddItemButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.ToolbarAddItemButton.Enabled = false;
             this.ToolbarAddItemButton.Image = ((System.Drawing.Image)(resources.GetObject("ToolbarAddItemButton.Image")));
@@ -3501,9 +3514,9 @@ namespace CodeWalker
             this.ToolbarAddItemButton.Size = new System.Drawing.Size(23, 22);
             this.ToolbarAddItemButton.Text = "Add entity";
             this.ToolbarAddItemButton.Click += new System.EventHandler(this.ToolbarAddItemButton_Click);
-            // 
+            //
             // ToolbarDeleteItemButton
-            // 
+            //
             this.ToolbarDeleteItemButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.ToolbarDeleteItemButton.Enabled = false;
             this.ToolbarDeleteItemButton.Image = ((System.Drawing.Image)(resources.GetObject("ToolbarDeleteItemButton.Image")));
@@ -3512,14 +3525,14 @@ namespace CodeWalker
             this.ToolbarDeleteItemButton.Size = new System.Drawing.Size(23, 22);
             this.ToolbarDeleteItemButton.Text = "Delete entity";
             this.ToolbarDeleteItemButton.Click += new System.EventHandler(this.ToolbarDeleteItemButton_Click);
-            // 
+            //
             // toolStripSeparator6
-            // 
+            //
             this.toolStripSeparator6.Name = "toolStripSeparator6";
             this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
-            // 
+            //
             // ToolbarCopyButton
-            // 
+            //
             this.ToolbarCopyButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.ToolbarCopyButton.Enabled = false;
             this.ToolbarCopyButton.Image = ((System.Drawing.Image)(resources.GetObject("ToolbarCopyButton.Image")));
@@ -3529,9 +3542,9 @@ namespace CodeWalker
             this.ToolbarCopyButton.Text = "Copy";
             this.ToolbarCopyButton.ToolTipText = "Copy (Ctrl+C)";
             this.ToolbarCopyButton.Click += new System.EventHandler(this.ToolbarCopyButton_Click);
-            // 
+            //
             // ToolbarPasteButton
-            // 
+            //
             this.ToolbarPasteButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.ToolbarPasteButton.Enabled = false;
             this.ToolbarPasteButton.Image = ((System.Drawing.Image)(resources.GetObject("ToolbarPasteButton.Image")));
@@ -3541,14 +3554,14 @@ namespace CodeWalker
             this.ToolbarPasteButton.Text = "Paste";
             this.ToolbarPasteButton.ToolTipText = "Paste (Ctrl+V)";
             this.ToolbarPasteButton.Click += new System.EventHandler(this.ToolbarPasteButton_Click);
-            // 
+            //
             // toolStripSeparator7
-            // 
+            //
             this.toolStripSeparator7.Name = "toolStripSeparator7";
             this.toolStripSeparator7.Size = new System.Drawing.Size(6, 25);
-            // 
+            //
             // ToolbarCameraModeButton
-            // 
+            //
             this.ToolbarCameraModeButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.ToolbarCameraModeButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolbarCameraPerspectiveButton,
@@ -3560,9 +3573,9 @@ namespace CodeWalker
             this.ToolbarCameraModeButton.Size = new System.Drawing.Size(32, 22);
             this.ToolbarCameraModeButton.Text = "Camera Mode";
             this.ToolbarCameraModeButton.ButtonClick += new System.EventHandler(this.ToolbarCameraModeButton_ButtonClick);
-            // 
+            //
             // ToolbarCameraPerspectiveButton
-            // 
+            //
             this.ToolbarCameraPerspectiveButton.Checked = true;
             this.ToolbarCameraPerspectiveButton.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ToolbarCameraPerspectiveButton.Image = ((System.Drawing.Image)(resources.GetObject("ToolbarCameraPerspectiveButton.Image")));
@@ -3570,25 +3583,25 @@ namespace CodeWalker
             this.ToolbarCameraPerspectiveButton.Size = new System.Drawing.Size(145, 22);
             this.ToolbarCameraPerspectiveButton.Text = "Perspective";
             this.ToolbarCameraPerspectiveButton.Click += new System.EventHandler(this.ToolbarCameraPerspectiveButton_Click);
-            // 
+            //
             // ToolbarCameraMapViewButton
-            // 
+            //
             this.ToolbarCameraMapViewButton.Image = ((System.Drawing.Image)(resources.GetObject("ToolbarCameraMapViewButton.Image")));
             this.ToolbarCameraMapViewButton.Name = "ToolbarCameraMapViewButton";
             this.ToolbarCameraMapViewButton.Size = new System.Drawing.Size(145, 22);
             this.ToolbarCameraMapViewButton.Text = "Map View";
             this.ToolbarCameraMapViewButton.Click += new System.EventHandler(this.ToolbarCameraMapViewButton_Click);
-            // 
+            //
             // ToolbarCameraOrthographicButton
-            // 
+            //
             this.ToolbarCameraOrthographicButton.Image = ((System.Drawing.Image)(resources.GetObject("ToolbarCameraOrthographicButton.Image")));
             this.ToolbarCameraOrthographicButton.Name = "ToolbarCameraOrthographicButton";
             this.ToolbarCameraOrthographicButton.Size = new System.Drawing.Size(145, 22);
             this.ToolbarCameraOrthographicButton.Text = "Orthographic";
             this.ToolbarCameraOrthographicButton.Click += new System.EventHandler(this.ToolbarCameraOrthographicButton_Click);
-            // 
+            //
             // SubtitleLabel
-            // 
+            //
             this.SubtitleLabel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.SubtitleLabel.AutoSize = true;
             this.SubtitleLabel.BackColor = System.Drawing.SystemColors.ControlLightLight;
@@ -3602,13 +3615,13 @@ namespace CodeWalker
             this.SubtitleLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.SubtitleLabel.Visible = false;
             this.SubtitleLabel.SizeChanged += new System.EventHandler(this.SubtitleLabel_SizeChanged);
-            // 
+            //
             // SubtitleTimer
-            // 
+            //
             this.SubtitleTimer.Tick += new System.EventHandler(this.SubtitleTimer_Tick);
-            // 
+            //
             // WorldForm
-            // 
+            //
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.MidnightBlue;
@@ -3623,7 +3636,7 @@ namespace CodeWalker
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.Name = "WorldForm";
-            this.Text = "CodeWalker";
+            this.Text = "BadWalker";
             this.Deactivate += new System.EventHandler(this.WorldForm_Deactivate);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.WorldForm_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.WorldForm_FormClosed);
@@ -3749,6 +3762,7 @@ namespace CodeWalker
         private System.Windows.Forms.TrackBar BoundsRangeTrackBar;
         private System.Windows.Forms.Button AddCurrentPositonMarkerButton;
         private System.Windows.Forms.CheckBox SelectionBoundsCheckBox;
+        private System.Windows.Forms.CheckBox SelectByGeometryCheckBox;
         private ReadOnlyPropertyGrid SelEntityPropertyGrid;
         private ReadOnlyPropertyGrid SelArchetypePropertyGrid;
         private System.Windows.Forms.TabControl SelectionTabControl;

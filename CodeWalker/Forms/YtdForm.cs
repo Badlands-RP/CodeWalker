@@ -380,7 +380,7 @@ namespace CodeWalker.Forms
 
         private void UpdateFormTitle()
         {
-            Text = FileName + (Modified ? "*" : "") + " - Texture Dictionary - CodeWalker by dexyfex";
+            Text = FileName + (Modified ? "*" : "") + " - Texture Dictionary - BadWalker by dexyfex";
             GTAFolder.UpdateEnhancedFormTitle(this);
         }
 

@@ -92,20 +92,20 @@
             this.MainStatusStrip.SuspendLayout();
             this.MainMenu.SuspendLayout();
             this.SuspendLayout();
-            // 
+            //
             // RelPropertyGrid
-            // 
-            this.RelPropertyGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.RelPropertyGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.RelPropertyGrid.HelpVisible = false;
             this.RelPropertyGrid.Location = new System.Drawing.Point(6, 6);
             this.RelPropertyGrid.Name = "RelPropertyGrid";
             this.RelPropertyGrid.Size = new System.Drawing.Size(819, 448);
             this.RelPropertyGrid.TabIndex = 0;
-            // 
+            //
             // MainTabControl
-            // 
+            //
             this.MainTabControl.Controls.Add(this.XmlTabPage);
             this.MainTabControl.Controls.Add(this.DetailsTabPage);
             this.MainTabControl.Controls.Add(this.NameTableTabPage);
@@ -118,9 +118,9 @@
             this.MainTabControl.SelectedIndex = 0;
             this.MainTabControl.Size = new System.Drawing.Size(839, 486);
             this.MainTabControl.TabIndex = 1;
-            // 
+            //
             // XmlTabPage
-            // 
+            //
             this.XmlTabPage.Controls.Add(this.XmlTextBox);
             this.XmlTabPage.Location = new System.Drawing.Point(4, 22);
             this.XmlTabPage.Name = "XmlTabPage";
@@ -129,9 +129,9 @@
             this.XmlTabPage.TabIndex = 3;
             this.XmlTabPage.Text = "XML";
             this.XmlTabPage.UseVisualStyleBackColor = true;
-            // 
+            //
             // XmlTextBox
-            // 
+            //
             this.XmlTextBox.AutoCompleteBracketsList = new char[] {
         '(',
         ')',
@@ -172,9 +172,9 @@
             this.XmlTextBox.Zoom = 100;
             this.XmlTextBox.TextChanged += new System.EventHandler<FastColoredTextBoxNS.TextChangedEventArgs>(this.XmlTextBox_TextChanged);
             this.XmlTextBox.VisibleRangeChangedDelayed += new System.EventHandler(this.XmlTextBox_VisibleRangeChangedDelayed);
-            // 
+            //
             // DetailsTabPage
-            // 
+            //
             this.DetailsTabPage.Controls.Add(this.RelPropertyGrid);
             this.DetailsTabPage.Location = new System.Drawing.Point(4, 22);
             this.DetailsTabPage.Name = "DetailsTabPage";
@@ -183,9 +183,9 @@
             this.DetailsTabPage.TabIndex = 1;
             this.DetailsTabPage.Text = "Details";
             this.DetailsTabPage.UseVisualStyleBackColor = true;
-            // 
+            //
             // NameTableTabPage
-            // 
+            //
             this.NameTableTabPage.Controls.Add(this.MainTextBox);
             this.NameTableTabPage.Location = new System.Drawing.Point(4, 22);
             this.NameTableTabPage.Name = "NameTableTabPage";
@@ -194,11 +194,11 @@
             this.NameTableTabPage.TabIndex = 0;
             this.NameTableTabPage.Text = "Names";
             this.NameTableTabPage.UseVisualStyleBackColor = true;
-            // 
+            //
             // MainTextBox
-            // 
-            this.MainTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.MainTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.MainTextBox.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MainTextBox.HideSelection = false;
@@ -209,9 +209,9 @@
             this.MainTextBox.Size = new System.Drawing.Size(819, 448);
             this.MainTextBox.TabIndex = 1;
             this.MainTextBox.WordWrap = false;
-            // 
+            //
             // SearchTabPage
-            // 
+            //
             this.SearchTabPage.Controls.Add(this.SearchTextRadio);
             this.SearchTabPage.Controls.Add(this.SearchHashRadio);
             this.SearchTabPage.Controls.Add(this.label12);
@@ -224,9 +224,9 @@
             this.SearchTabPage.TabIndex = 2;
             this.SearchTabPage.Text = "Search";
             this.SearchTabPage.UseVisualStyleBackColor = true;
-            // 
+            //
             // SearchTextRadio
-            // 
+            //
             this.SearchTextRadio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.SearchTextRadio.AutoSize = true;
             this.SearchTextRadio.Location = new System.Drawing.Point(518, 4);
@@ -235,9 +235,9 @@
             this.SearchTextRadio.TabIndex = 36;
             this.SearchTextRadio.Text = "Text";
             this.SearchTextRadio.UseVisualStyleBackColor = true;
-            // 
+            //
             // SearchHashRadio
-            // 
+            //
             this.SearchHashRadio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.SearchHashRadio.AutoSize = true;
             this.SearchHashRadio.Checked = true;
@@ -248,28 +248,28 @@
             this.SearchHashRadio.TabStop = true;
             this.SearchHashRadio.Text = "Hash";
             this.SearchHashRadio.UseVisualStyleBackColor = true;
-            // 
+            //
             // label12
-            // 
+            //
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(8, 6);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(30, 13);
             this.label12.TabIndex = 32;
             this.label12.Text = "Find:";
-            // 
+            //
             // SearchTextBox
-            // 
-            this.SearchTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.SearchTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.SearchTextBox.Location = new System.Drawing.Point(44, 3);
             this.SearchTextBox.Name = "SearchTextBox";
             this.SearchTextBox.Size = new System.Drawing.Size(412, 20);
             this.SearchTextBox.TabIndex = 33;
             this.SearchTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SearchTextBox_KeyDown);
-            // 
+            //
             // SearchButton
-            // 
+            //
             this.SearchButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.SearchButton.Location = new System.Drawing.Point(570, 2);
             this.SearchButton.Name = "SearchButton";
@@ -278,20 +278,20 @@
             this.SearchButton.Text = "Search";
             this.SearchButton.UseVisualStyleBackColor = true;
             this.SearchButton.Click += new System.EventHandler(this.SearchButton_Click);
-            // 
+            //
             // SearchResultsGrid
-            // 
-            this.SearchResultsGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.SearchResultsGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.SearchResultsGrid.HelpVisible = false;
             this.SearchResultsGrid.Location = new System.Drawing.Point(3, 31);
             this.SearchResultsGrid.Name = "SearchResultsGrid";
             this.SearchResultsGrid.Size = new System.Drawing.Size(822, 423);
             this.SearchResultsGrid.TabIndex = 1;
-            // 
+            //
             // SynthsTabPage
-            // 
+            //
             this.SynthsTabPage.Controls.Add(this.SynthStopButton);
             this.SynthsTabPage.Controls.Add(this.label3);
             this.SynthsTabPage.Controls.Add(this.label2);
@@ -310,9 +310,9 @@
             this.SynthsTabPage.TabIndex = 4;
             this.SynthsTabPage.Text = "Synths";
             this.SynthsTabPage.UseVisualStyleBackColor = true;
-            // 
+            //
             // SynthStopButton
-            // 
+            //
             this.SynthStopButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.SynthStopButton.Enabled = false;
             this.SynthStopButton.Location = new System.Drawing.Point(724, 2);
@@ -322,45 +322,45 @@
             this.SynthStopButton.Text = "Stop";
             this.SynthStopButton.UseVisualStyleBackColor = true;
             this.SynthStopButton.Click += new System.EventHandler(this.SynthStopButton_Click);
-            // 
+            //
             // label3
-            // 
+            //
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(8, 59);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 13);
             this.label3.TabIndex = 42;
             this.label3.Text = "Variables:";
-            // 
+            //
             // label2
-            // 
+            //
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(8, 33);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(47, 13);
             this.label2.TabIndex = 41;
             this.label2.Text = "Outputs:";
-            // 
+            //
             // SynthVariablesTextBox
-            // 
+            //
             this.SynthVariablesTextBox.Location = new System.Drawing.Point(64, 56);
             this.SynthVariablesTextBox.Multiline = true;
             this.SynthVariablesTextBox.Name = "SynthVariablesTextBox";
             this.SynthVariablesTextBox.Size = new System.Drawing.Size(293, 87);
             this.SynthVariablesTextBox.TabIndex = 40;
             this.SynthVariablesTextBox.TextChanged += new System.EventHandler(this.SynthVariablesTextBox_TextChanged);
-            // 
+            //
             // SynthOutputsTextBox
-            // 
+            //
             this.SynthOutputsTextBox.Location = new System.Drawing.Point(64, 30);
             this.SynthOutputsTextBox.Name = "SynthOutputsTextBox";
             this.SynthOutputsTextBox.Size = new System.Drawing.Size(293, 20);
             this.SynthOutputsTextBox.TabIndex = 39;
             this.SynthOutputsTextBox.TextChanged += new System.EventHandler(this.SynthOutputsTextBox_TextChanged);
-            // 
+            //
             // SynthBufferChart
-            // 
-            this.SynthBufferChart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.SynthBufferChart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             chartArea1.Name = "ChartArea1";
             this.SynthBufferChart.ChartAreas.Add(chartArea1);
@@ -377,9 +377,9 @@
             this.SynthBufferChart.Size = new System.Drawing.Size(460, 112);
             this.SynthBufferChart.TabIndex = 38;
             this.SynthBufferChart.Text = "chart1";
-            // 
+            //
             // SynthPlayButton
-            // 
+            //
             this.SynthPlayButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.SynthPlayButton.Location = new System.Drawing.Point(615, 2);
             this.SynthPlayButton.Name = "SynthPlayButton";
@@ -388,9 +388,9 @@
             this.SynthPlayButton.Text = "Play";
             this.SynthPlayButton.UseVisualStyleBackColor = true;
             this.SynthPlayButton.Click += new System.EventHandler(this.SynthPlayButton_Click);
-            // 
+            //
             // SynthCopyXMLButton
-            // 
+            //
             this.SynthCopyXMLButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.SynthCopyXMLButton.Location = new System.Drawing.Point(463, 2);
             this.SynthCopyXMLButton.Name = "SynthCopyXMLButton";
@@ -399,19 +399,19 @@
             this.SynthCopyXMLButton.Text = "Copy XML to clipboard";
             this.SynthCopyXMLButton.UseVisualStyleBackColor = true;
             this.SynthCopyXMLButton.Click += new System.EventHandler(this.SynthCopyXMLButton_Click);
-            // 
+            //
             // label1
-            // 
+            //
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(8, 6);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(37, 13);
             this.label1.TabIndex = 33;
             this.label1.Text = "Synth:";
-            // 
+            //
             // SynthsComboBox
-            // 
-            this.SynthsComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.SynthsComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.SynthsComboBox.FormattingEnabled = true;
             this.SynthsComboBox.Location = new System.Drawing.Point(64, 3);
@@ -419,11 +419,11 @@
             this.SynthsComboBox.Size = new System.Drawing.Size(393, 21);
             this.SynthsComboBox.TabIndex = 4;
             this.SynthsComboBox.SelectedIndexChanged += new System.EventHandler(this.SynthsComboBox_SelectedIndexChanged);
-            // 
+            //
             // SynthTextBox
-            // 
-            this.SynthTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.SynthTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.SynthTextBox.AutoCompleteBracketsList = new char[] {
         '(',
@@ -463,9 +463,9 @@
             this.SynthTextBox.TabIndex = 3;
             this.SynthTextBox.Zoom = 100;
             this.SynthTextBox.TextChangedDelayed += new System.EventHandler<FastColoredTextBoxNS.TextChangedEventArgs>(this.SynthTextBox_TextChangedDelayed);
-            // 
+            //
             // MainToolbar
-            // 
+            //
             this.MainToolbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.NewButton,
             this.OpenButton,
@@ -475,9 +475,9 @@
             this.MainToolbar.Size = new System.Drawing.Size(839, 25);
             this.MainToolbar.TabIndex = 9;
             this.MainToolbar.Text = "Main Toolbar";
-            // 
+            //
             // NewButton
-            // 
+            //
             this.NewButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.NewButton.Image = ((System.Drawing.Image)(resources.GetObject("NewButton.Image")));
             this.NewButton.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -485,9 +485,9 @@
             this.NewButton.Size = new System.Drawing.Size(32, 22);
             this.NewButton.Text = "New...";
             this.NewButton.ButtonClick += new System.EventHandler(this.NewButton_ButtonClick);
-            // 
+            //
             // OpenButton
-            // 
+            //
             this.OpenButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.OpenButton.Image = ((System.Drawing.Image)(resources.GetObject("OpenButton.Image")));
             this.OpenButton.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -495,9 +495,9 @@
             this.OpenButton.Size = new System.Drawing.Size(32, 22);
             this.OpenButton.Text = "Open...";
             this.OpenButton.ButtonClick += new System.EventHandler(this.OpenButton_ButtonClick);
-            // 
+            //
             // SaveButton
-            // 
+            //
             this.SaveButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.SaveButton.Image = ((System.Drawing.Image)(resources.GetObject("SaveButton.Image")));
             this.SaveButton.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -505,9 +505,9 @@
             this.SaveButton.Size = new System.Drawing.Size(32, 22);
             this.SaveButton.Text = "Save";
             this.SaveButton.ButtonClick += new System.EventHandler(this.SaveButton_ButtonClick);
-            // 
+            //
             // MainStatusStrip
-            // 
+            //
             this.MainStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.StatusLabel});
             this.MainStatusStrip.Location = new System.Drawing.Point(0, 535);
@@ -515,16 +515,16 @@
             this.MainStatusStrip.Size = new System.Drawing.Size(839, 22);
             this.MainStatusStrip.TabIndex = 7;
             this.MainStatusStrip.Text = "Main Status Strip";
-            // 
+            //
             // StatusLabel
-            // 
+            //
             this.StatusLabel.Name = "StatusLabel";
             this.StatusLabel.Size = new System.Drawing.Size(824, 17);
             this.StatusLabel.Spring = true;
             this.StatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
+            //
             // MainMenu
-            // 
+            //
             this.MainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.FileMenu,
             this.EditMenu,
@@ -534,9 +534,9 @@
             this.MainMenu.Size = new System.Drawing.Size(839, 24);
             this.MainMenu.TabIndex = 8;
             this.MainMenu.Text = "Main Menu";
-            // 
+            //
             // FileMenu
-            // 
+            //
             this.FileMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.FileNewMenu,
             this.FileOpenMenu,
@@ -547,88 +547,88 @@
             this.FileMenu.Name = "FileMenu";
             this.FileMenu.Size = new System.Drawing.Size(37, 20);
             this.FileMenu.Text = "File";
-            // 
+            //
             // FileNewMenu
-            // 
+            //
             this.FileNewMenu.Name = "FileNewMenu";
             this.FileNewMenu.Size = new System.Drawing.Size(145, 22);
             this.FileNewMenu.Text = "New";
             this.FileNewMenu.Click += new System.EventHandler(this.FileNewMenu_Click);
-            // 
+            //
             // FileOpenMenu
-            // 
+            //
             this.FileOpenMenu.Name = "FileOpenMenu";
             this.FileOpenMenu.Size = new System.Drawing.Size(145, 22);
             this.FileOpenMenu.Text = "Open...";
             this.FileOpenMenu.Click += new System.EventHandler(this.FileOpenMenu_Click);
-            // 
+            //
             // FileSaveMenu
-            // 
+            //
             this.FileSaveMenu.Name = "FileSaveMenu";
             this.FileSaveMenu.Size = new System.Drawing.Size(145, 22);
             this.FileSaveMenu.Text = "Save";
             this.FileSaveMenu.Click += new System.EventHandler(this.FileSaveMenu_Click);
-            // 
+            //
             // FileSaveAsMenu
-            // 
+            //
             this.FileSaveAsMenu.Name = "FileSaveAsMenu";
             this.FileSaveAsMenu.Size = new System.Drawing.Size(145, 22);
             this.FileSaveAsMenu.Text = "Save As...";
             this.FileSaveAsMenu.Click += new System.EventHandler(this.FileSaveAsMenu_Click);
-            // 
+            //
             // toolStripSeparator1
-            // 
+            //
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(142, 6);
-            // 
+            //
             // FileCloseMenu
-            // 
+            //
             this.FileCloseMenu.Name = "FileCloseMenu";
             this.FileCloseMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
             this.FileCloseMenu.Size = new System.Drawing.Size(145, 22);
             this.FileCloseMenu.Text = "Close";
             this.FileCloseMenu.Click += new System.EventHandler(this.FileCloseMenu_Click);
-            // 
+            //
             // EditMenu
-            // 
+            //
             this.EditMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.wIPToolStripMenuItem});
             this.EditMenu.Enabled = false;
             this.EditMenu.Name = "EditMenu";
             this.EditMenu.Size = new System.Drawing.Size(39, 20);
             this.EditMenu.Text = "Edit";
-            // 
+            //
             // wIPToolStripMenuItem
-            // 
+            //
             this.wIPToolStripMenuItem.Name = "wIPToolStripMenuItem";
             this.wIPToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
             this.wIPToolStripMenuItem.Text = "[WIP!]";
-            // 
+            //
             // ViewMenu
-            // 
+            //
             this.ViewMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.wIPToolStripMenuItem1});
             this.ViewMenu.Enabled = false;
             this.ViewMenu.Name = "ViewMenu";
             this.ViewMenu.Size = new System.Drawing.Size(44, 20);
             this.ViewMenu.Text = "View";
-            // 
+            //
             // wIPToolStripMenuItem1
-            // 
+            //
             this.wIPToolStripMenuItem1.Name = "wIPToolStripMenuItem1";
             this.wIPToolStripMenuItem1.Size = new System.Drawing.Size(106, 22);
             this.wIPToolStripMenuItem1.Text = "[WIP!]";
-            // 
+            //
             // OpenFileDialog
-            // 
+            //
             this.OpenFileDialog.Filter = "XML files|*.xml|All files|*.*";
-            // 
+            //
             // SaveFileDialog
-            // 
+            //
             this.SaveFileDialog.Filter = "XML files|*.xml|All files|*.*";
-            // 
+            //
             // RelForm
-            // 
+            //
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(839, 557);
@@ -638,7 +638,7 @@
             this.Controls.Add(this.MainMenu);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "RelForm";
-            this.Text = "Audio dat.rel Editor - CodeWalker by dexyfex";
+            this.Text = "Audio dat.rel Editor - BadWalker by dexyfex";
             this.MainTabControl.ResumeLayout(false);
             this.XmlTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.XmlTextBox)).EndInit();

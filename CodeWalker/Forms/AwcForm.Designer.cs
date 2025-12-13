@@ -64,9 +64,9 @@
             this.XmlTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.XmlTextBox)).BeginInit();
             this.SuspendLayout();
-            // 
+            //
             // MainTabControl
-            // 
+            //
             this.MainTabControl.Controls.Add(this.PlayerTabPage);
             this.MainTabControl.Controls.Add(this.DetailsTabPage);
             this.MainTabControl.Controls.Add(this.XmlTabPage);
@@ -77,9 +77,9 @@
             this.MainTabControl.Size = new System.Drawing.Size(709, 448);
             this.MainTabControl.TabIndex = 0;
             this.MainTabControl.SelectedIndexChanged += new System.EventHandler(this.MainTabControl_SelectedIndexChanged);
-            // 
+            //
             // PlayerTabPage
-            // 
+            //
             this.PlayerTabPage.Controls.Add(this.LabelInfo);
             this.PlayerTabPage.Controls.Add(this.LabelTime);
             this.PlayerTabPage.Controls.Add(this.StopButton);
@@ -98,27 +98,27 @@
             this.PlayerTabPage.TabIndex = 0;
             this.PlayerTabPage.Text = "Player";
             this.PlayerTabPage.UseVisualStyleBackColor = true;
-            // 
+            //
             // LabelInfo
-            // 
+            //
             this.LabelInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.LabelInfo.AutoSize = true;
             this.LabelInfo.Location = new System.Drawing.Point(8, 334);
             this.LabelInfo.Name = "LabelInfo";
             this.LabelInfo.Size = new System.Drawing.Size(0, 13);
             this.LabelInfo.TabIndex = 12;
-            // 
+            //
             // LabelTime
-            // 
+            //
             this.LabelTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.LabelTime.Location = new System.Drawing.Point(418, 395);
             this.LabelTime.Name = "LabelTime";
             this.LabelTime.Size = new System.Drawing.Size(114, 17);
             this.LabelTime.TabIndex = 11;
             this.LabelTime.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
+            //
             // StopButton
-            // 
+            //
             this.StopButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.StopButton.Enabled = false;
             this.StopButton.Location = new System.Drawing.Point(211, 391);
@@ -128,9 +128,9 @@
             this.StopButton.Text = "◼";
             this.StopButton.UseVisualStyleBackColor = true;
             this.StopButton.Click += new System.EventHandler(this.StopButton_Click);
-            // 
+            //
             // VolumeLabel
-            // 
+            //
             this.VolumeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.VolumeLabel.AutoSize = true;
             this.VolumeLabel.Location = new System.Drawing.Point(538, 395);
@@ -138,9 +138,9 @@
             this.VolumeLabel.Size = new System.Drawing.Size(56, 13);
             this.VolumeLabel.TabIndex = 9;
             this.VolumeLabel.Text = "🕩 Volume";
-            // 
+            //
             // chbAutoJump
-            // 
+            //
             this.chbAutoJump.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chbAutoJump.AutoSize = true;
             this.chbAutoJump.Location = new System.Drawing.Point(17, 395);
@@ -149,9 +149,9 @@
             this.chbAutoJump.TabIndex = 8;
             this.chbAutoJump.Text = "Auto-jump to next";
             this.chbAutoJump.UseVisualStyleBackColor = true;
-            // 
+            //
             // PrevButton
-            // 
+            //
             this.PrevButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.PrevButton.Location = new System.Drawing.Point(137, 391);
             this.PrevButton.Name = "PrevButton";
@@ -160,9 +160,9 @@
             this.PrevButton.Text = "⏮";
             this.PrevButton.UseVisualStyleBackColor = true;
             this.PrevButton.Click += new System.EventHandler(this.PrevButton_Click);
-            // 
+            //
             // NextButton
-            // 
+            //
             this.NextButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.NextButton.Location = new System.Drawing.Point(248, 391);
             this.NextButton.Name = "NextButton";
@@ -171,9 +171,9 @@
             this.NextButton.Text = "⏭";
             this.NextButton.UseVisualStyleBackColor = true;
             this.NextButton.Click += new System.EventHandler(this.NextButton_Click);
-            // 
+            //
             // PlayButton
-            // 
+            //
             this.PlayButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.PlayButton.Location = new System.Drawing.Point(174, 391);
             this.PlayButton.Name = "PlayButton";
@@ -182,11 +182,11 @@
             this.PlayButton.Text = "▶";
             this.PlayButton.UseVisualStyleBackColor = true;
             this.PlayButton.Click += new System.EventHandler(this.PlayButton_Click);
-            // 
+            //
             // PlayListView
-            // 
-            this.PlayListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.PlayListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.PlayListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.PlaylistNameHeader,
@@ -205,45 +205,45 @@
             this.PlayListView.View = System.Windows.Forms.View.Details;
             this.PlayListView.SelectedIndexChanged += new System.EventHandler(this.PlayListView_SelectedIndexChanged);
             this.PlayListView.DoubleClick += new System.EventHandler(this.PlayListView_DoubleClick);
-            // 
+            //
             // PlaylistNameHeader
-            // 
+            //
             this.PlaylistNameHeader.Text = "Name";
             this.PlaylistNameHeader.Width = 337;
-            // 
+            //
             // PlaylistTypeHeader
-            // 
+            //
             this.PlaylistTypeHeader.Text = "Type";
             this.PlaylistTypeHeader.Width = 110;
-            // 
+            //
             // PlaylistLengthHeader
-            // 
+            //
             this.PlaylistLengthHeader.Text = "Length";
             this.PlaylistLengthHeader.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.PlaylistLengthHeader.Width = 80;
-            // 
+            //
             // PlaylistSizeHeader
-            // 
+            //
             this.PlaylistSizeHeader.Text = "Size";
             this.PlaylistSizeHeader.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.PlaylistSizeHeader.Width = 80;
-            // 
+            //
             // contextMenuStrip
-            // 
+            //
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ExportAsWav});
             this.contextMenuStrip.Name = "contextMenuStrip1";
             this.contextMenuStrip.Size = new System.Drawing.Size(150, 26);
-            // 
+            //
             // ExportAsWav
-            // 
+            //
             this.ExportAsWav.Name = "ExportAsWav";
             this.ExportAsWav.Size = new System.Drawing.Size(149, 22);
             this.ExportAsWav.Text = "Export as .wav";
             this.ExportAsWav.Click += new System.EventHandler(this.ExportAsWav_Click);
-            // 
+            //
             // VolumeTrackBar
-            // 
+            //
             this.VolumeTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.VolumeTrackBar.AutoSize = false;
             this.VolumeTrackBar.BackColor = System.Drawing.SystemColors.ControlLightLight;
@@ -256,10 +256,10 @@
             this.VolumeTrackBar.TickStyle = System.Windows.Forms.TickStyle.None;
             this.VolumeTrackBar.Value = 50;
             this.VolumeTrackBar.Scroll += new System.EventHandler(this.VolumeTrackBar_Scroll);
-            // 
+            //
             // PositionTrackBar
-            // 
-            this.PositionTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.PositionTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.PositionTrackBar.AutoSize = false;
             this.PositionTrackBar.BackColor = System.Drawing.SystemColors.ControlLightLight;
@@ -272,9 +272,9 @@
             this.PositionTrackBar.TickStyle = System.Windows.Forms.TickStyle.None;
             this.PositionTrackBar.Scroll += new System.EventHandler(this.PositionTrackBar_Scroll);
             this.PositionTrackBar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PositionTrackBar_MouseUp);
-            // 
+            //
             // DetailsTabPage
-            // 
+            //
             this.DetailsTabPage.Controls.Add(this.DetailsPropertyGrid);
             this.DetailsTabPage.Location = new System.Drawing.Point(4, 22);
             this.DetailsTabPage.Name = "DetailsTabPage";
@@ -283,18 +283,18 @@
             this.DetailsTabPage.TabIndex = 1;
             this.DetailsTabPage.Text = "Details";
             this.DetailsTabPage.UseVisualStyleBackColor = true;
-            // 
+            //
             // DetailsPropertyGrid
-            // 
+            //
             this.DetailsPropertyGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DetailsPropertyGrid.HelpVisible = false;
             this.DetailsPropertyGrid.Location = new System.Drawing.Point(3, 3);
             this.DetailsPropertyGrid.Name = "DetailsPropertyGrid";
             this.DetailsPropertyGrid.Size = new System.Drawing.Size(695, 416);
             this.DetailsPropertyGrid.TabIndex = 0;
-            // 
+            //
             // XmlTabPage
-            // 
+            //
             this.XmlTabPage.Controls.Add(this.XmlTextBox);
             this.XmlTabPage.Location = new System.Drawing.Point(4, 22);
             this.XmlTabPage.Name = "XmlTabPage";
@@ -302,9 +302,9 @@
             this.XmlTabPage.TabIndex = 2;
             this.XmlTabPage.Text = "XML";
             this.XmlTabPage.UseVisualStyleBackColor = true;
-            // 
+            //
             // XmlTextBox
-            // 
+            //
             this.XmlTextBox.AutoCompleteBracketsList = new char[] {
         '(',
         ')',
@@ -344,20 +344,20 @@
             this.XmlTextBox.Zoom = 100;
             this.XmlTextBox.TextChanged += new System.EventHandler<FastColoredTextBoxNS.TextChangedEventArgs>(this.XmlTextBox_TextChanged);
             this.XmlTextBox.VisibleRangeChangedDelayed += new System.EventHandler(this.XmlTextBox_VisibleRangeChangedDelayed);
-            // 
+            //
             // Timer
-            // 
+            //
             this.Timer.Enabled = true;
             this.Timer.Interval = 25;
             this.Timer.Tick += new System.EventHandler(this.Timer_Tick);
-            // 
+            //
             // saveFileDialog
-            // 
+            //
             this.saveFileDialog.DefaultExt = "wav";
             this.saveFileDialog.Filter = "Wave files (*.wav)|*.wav";
-            // 
+            //
             // AwcForm
-            // 
+            //
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(709, 448);
@@ -365,7 +365,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(592, 300);
             this.Name = "AwcForm";
-            this.Text = "AWC Player - CodeWalker by dexyfex";
+            this.Text = "AWC Player - BadWalker by dexyfex";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AwcForm_FormClosing);
             this.MainTabControl.ResumeLayout(false);
             this.PlayerTabPage.ResumeLayout(false);

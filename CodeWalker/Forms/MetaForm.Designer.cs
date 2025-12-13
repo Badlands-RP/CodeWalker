@@ -63,9 +63,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.XmlTextBox)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.SuspendLayout();
-            // 
+            //
             // MainToolbar
-            // 
+            //
             this.MainToolbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.NewButton,
             this.OpenButton,
@@ -75,9 +75,9 @@
             this.MainToolbar.Size = new System.Drawing.Size(839, 25);
             this.MainToolbar.TabIndex = 6;
             this.MainToolbar.Text = "Main Toolbar";
-            // 
+            //
             // NewButton
-            // 
+            //
             this.NewButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.NewButton.Image = ((System.Drawing.Image)(resources.GetObject("NewButton.Image")));
             this.NewButton.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -85,9 +85,9 @@
             this.NewButton.Size = new System.Drawing.Size(32, 22);
             this.NewButton.Text = "New...";
             this.NewButton.ButtonClick += new System.EventHandler(this.NewButton_ButtonClick);
-            // 
+            //
             // OpenButton
-            // 
+            //
             this.OpenButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.OpenButton.Image = ((System.Drawing.Image)(resources.GetObject("OpenButton.Image")));
             this.OpenButton.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -95,9 +95,9 @@
             this.OpenButton.Size = new System.Drawing.Size(32, 22);
             this.OpenButton.Text = "Open...";
             this.OpenButton.ButtonClick += new System.EventHandler(this.OpenButton_ButtonClick);
-            // 
+            //
             // SaveButton
-            // 
+            //
             this.SaveButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.SaveButton.Image = ((System.Drawing.Image)(resources.GetObject("SaveButton.Image")));
             this.SaveButton.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -105,9 +105,9 @@
             this.SaveButton.Size = new System.Drawing.Size(32, 22);
             this.SaveButton.Text = "Save";
             this.SaveButton.ButtonClick += new System.EventHandler(this.SaveButton_ButtonClick);
-            // 
+            //
             // MainStatusStrip
-            // 
+            //
             this.MainStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.StatusLabel});
             this.MainStatusStrip.Location = new System.Drawing.Point(0, 535);
@@ -115,16 +115,16 @@
             this.MainStatusStrip.Size = new System.Drawing.Size(839, 22);
             this.MainStatusStrip.TabIndex = 4;
             this.MainStatusStrip.Text = "Main Status Strip";
-            // 
+            //
             // StatusLabel
-            // 
+            //
             this.StatusLabel.Name = "StatusLabel";
             this.StatusLabel.Size = new System.Drawing.Size(824, 17);
             this.StatusLabel.Spring = true;
             this.StatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
+            //
             // MainMenu
-            // 
+            //
             this.MainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.FileMenu,
             this.EditMenu,
@@ -134,9 +134,9 @@
             this.MainMenu.Size = new System.Drawing.Size(839, 24);
             this.MainMenu.TabIndex = 5;
             this.MainMenu.Text = "Main Menu";
-            // 
+            //
             // FileMenu
-            // 
+            //
             this.FileMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.FileNewMenu,
             this.FileOpenMenu,
@@ -147,80 +147,80 @@
             this.FileMenu.Name = "FileMenu";
             this.FileMenu.Size = new System.Drawing.Size(37, 20);
             this.FileMenu.Text = "File";
-            // 
+            //
             // FileNewMenu
-            // 
+            //
             this.FileNewMenu.Name = "FileNewMenu";
             this.FileNewMenu.Size = new System.Drawing.Size(145, 22);
             this.FileNewMenu.Text = "New";
             this.FileNewMenu.Click += new System.EventHandler(this.FileNewMenu_Click);
-            // 
+            //
             // FileOpenMenu
-            // 
+            //
             this.FileOpenMenu.Name = "FileOpenMenu";
             this.FileOpenMenu.Size = new System.Drawing.Size(145, 22);
             this.FileOpenMenu.Text = "Open...";
             this.FileOpenMenu.Click += new System.EventHandler(this.FileOpenMenu_Click);
-            // 
+            //
             // FileSaveMenu
-            // 
+            //
             this.FileSaveMenu.Name = "FileSaveMenu";
             this.FileSaveMenu.Size = new System.Drawing.Size(145, 22);
             this.FileSaveMenu.Text = "Save";
             this.FileSaveMenu.Click += new System.EventHandler(this.FileSaveMenu_Click);
-            // 
+            //
             // FileSaveAsMenu
-            // 
+            //
             this.FileSaveAsMenu.Name = "FileSaveAsMenu";
             this.FileSaveAsMenu.Size = new System.Drawing.Size(145, 22);
             this.FileSaveAsMenu.Text = "Save As...";
             this.FileSaveAsMenu.Click += new System.EventHandler(this.FileSaveAsMenu_Click);
-            // 
+            //
             // toolStripSeparator1
-            // 
+            //
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(142, 6);
-            // 
+            //
             // FileCloseMenu
-            // 
+            //
             this.FileCloseMenu.Name = "FileCloseMenu";
             this.FileCloseMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
             this.FileCloseMenu.Size = new System.Drawing.Size(145, 22);
             this.FileCloseMenu.Text = "Close";
             this.FileCloseMenu.Click += new System.EventHandler(this.FileCloseMenu_Click);
-            // 
+            //
             // EditMenu
-            // 
+            //
             this.EditMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.wIPToolStripMenuItem});
             this.EditMenu.Enabled = false;
             this.EditMenu.Name = "EditMenu";
             this.EditMenu.Size = new System.Drawing.Size(39, 20);
             this.EditMenu.Text = "Edit";
-            // 
+            //
             // wIPToolStripMenuItem
-            // 
+            //
             this.wIPToolStripMenuItem.Name = "wIPToolStripMenuItem";
             this.wIPToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
             this.wIPToolStripMenuItem.Text = "[WIP!]";
-            // 
+            //
             // ViewMenu
-            // 
+            //
             this.ViewMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.wIPToolStripMenuItem1});
             this.ViewMenu.Enabled = false;
             this.ViewMenu.Name = "ViewMenu";
             this.ViewMenu.Size = new System.Drawing.Size(44, 20);
             this.ViewMenu.Text = "View";
-            // 
+            //
             // wIPToolStripMenuItem1
-            // 
+            //
             this.wIPToolStripMenuItem1.Name = "wIPToolStripMenuItem1";
             this.wIPToolStripMenuItem1.Size = new System.Drawing.Size(106, 22);
             this.wIPToolStripMenuItem1.Text = "[WIP!]";
-            // 
+            //
             // tabControl1
-            // 
+            //
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -229,9 +229,9 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(839, 486);
             this.tabControl1.TabIndex = 7;
-            // 
+            //
             // tabPage1
-            // 
+            //
             this.tabPage1.Controls.Add(this.XmlTextBox);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
@@ -240,9 +240,9 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "XML";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
+            //
             // XmlTextBox
-            // 
+            //
             this.XmlTextBox.AutoCompleteBracketsList = new char[] {
         '(',
         ')',
@@ -283,9 +283,9 @@
             this.XmlTextBox.Zoom = 100;
             this.XmlTextBox.TextChanged += new System.EventHandler<FastColoredTextBoxNS.TextChangedEventArgs>(this.XmlTextBox_TextChanged);
             this.XmlTextBox.VisibleRangeChangedDelayed += new System.EventHandler(this.XmlTextBox_VisibleRangeChangedDelayed);
-            // 
+            //
             // tabPage2
-            // 
+            //
             this.tabPage2.Controls.Add(this.RawPropertyGrid);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
@@ -294,26 +294,26 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Raw Data";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
+            //
             // RawPropertyGrid
-            // 
+            //
             this.RawPropertyGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.RawPropertyGrid.HelpVisible = false;
             this.RawPropertyGrid.Location = new System.Drawing.Point(3, 3);
             this.RawPropertyGrid.Name = "RawPropertyGrid";
             this.RawPropertyGrid.Size = new System.Drawing.Size(825, 454);
             this.RawPropertyGrid.TabIndex = 0;
-            // 
+            //
             // OpenFileDialog
-            // 
+            //
             this.OpenFileDialog.Filter = "XML files|*.xml|All files|*.*";
-            // 
+            //
             // SaveFileDialog
-            // 
+            //
             this.SaveFileDialog.Filter = "XML files|*.xml|All files|*.*";
-            // 
+            //
             // MetaForm
-            // 
+            //
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(839, 557);
@@ -323,7 +323,7 @@
             this.Controls.Add(this.MainMenu);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MetaForm";
-            this.Text = "Meta Editor - CodeWalker by dexyfex";
+            this.Text = "Meta Editor - BadWalker by dexyfex";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MetaForm_FormClosing);
             this.MainToolbar.ResumeLayout(false);
             this.MainToolbar.PerformLayout();

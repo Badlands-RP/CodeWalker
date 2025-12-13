@@ -42,9 +42,9 @@
             this.Unk3Column = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.SuspendLayout();
-            // 
+            //
             // CloseButton
-            // 
+            //
             this.CloseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.CloseButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.CloseButton.Location = new System.Drawing.Point(417, 389);
@@ -54,11 +54,11 @@
             this.CloseButton.Text = "Close";
             this.CloseButton.UseVisualStyleBackColor = true;
             this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
-            // 
+            //
             // MainListView
-            // 
-            this.MainListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.MainListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.MainListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.XPosColumn,
@@ -75,9 +75,9 @@
             this.MainListView.TabIndex = 4;
             this.MainListView.UseCompatibleStateImageBehavior = false;
             this.MainListView.View = System.Windows.Forms.View.Details;
-            // 
+            //
             // ExportButton
-            // 
+            //
             this.ExportButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ExportButton.Enabled = false;
             this.ExportButton.Location = new System.Drawing.Point(336, 389);
@@ -87,9 +87,9 @@
             this.ExportButton.Text = "Export";
             this.ExportButton.UseVisualStyleBackColor = true;
             this.ExportButton.Click += new System.EventHandler(this.ExportButton_Click);
-            // 
+            //
             // CopyClipboardButton
-            // 
+            //
             this.CopyClipboardButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.CopyClipboardButton.Enabled = false;
             this.CopyClipboardButton.Location = new System.Drawing.Point(227, 389);
@@ -99,40 +99,40 @@
             this.CopyClipboardButton.Text = "Copy to clipboard";
             this.CopyClipboardButton.UseVisualStyleBackColor = true;
             this.CopyClipboardButton.Click += new System.EventHandler(this.CopyClipboardButton_Click);
-            // 
+            //
             // XPosColumn
-            // 
+            //
             this.XPosColumn.Text = "Position X";
             this.XPosColumn.Width = 75;
-            // 
+            //
             // YPosColumn
-            // 
+            //
             this.YPosColumn.Text = "Position Y";
             this.YPosColumn.Width = 75;
-            // 
+            //
             // ZPosColumn
-            // 
+            //
             this.ZPosColumn.Text = "Position Z";
             this.ZPosColumn.Width = 75;
-            // 
+            //
             // Unk0Column
-            // 
+            //
             this.Unk0Column.Text = "Unk0";
-            // 
+            //
             // Unk1Column
-            // 
+            //
             this.Unk1Column.Text = "Unk1";
-            // 
+            //
             // Unk2Column
-            // 
+            //
             this.Unk2Column.Text = "Unk2";
-            // 
+            //
             // Unk3Column
-            // 
+            //
             this.Unk3Column.Text = "Unk3";
-            // 
+            //
             // YwrForm
-            // 
+            //
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.CloseButton;
@@ -143,7 +143,7 @@
             this.Controls.Add(this.CloseButton);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "YwrForm";
-            this.Text = "Waypoint Records Viewer - CodeWalker by dexyfex";
+            this.Text = "Waypoint Records Viewer - BadWalker by dexyfex";
             this.ResumeLayout(false);
 
         }

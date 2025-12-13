@@ -36,9 +36,9 @@
             this.HexTextBox = new CodeWalker.WinForms.TextBoxFix();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
+            //
             // LineSizeDropDown
-            // 
+            //
             this.LineSizeDropDown.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.LineSizeDropDown.FormattingEnabled = true;
             this.LineSizeDropDown.Items.AddRange(new object[] {
@@ -51,18 +51,18 @@
             this.LineSizeDropDown.Size = new System.Drawing.Size(49, 21);
             this.LineSizeDropDown.TabIndex = 102;
             this.LineSizeDropDown.SelectedIndexChanged += new System.EventHandler(this.LineSizeDropDown_SelectedIndexChanged);
-            // 
+            //
             // label1
-            // 
+            //
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(22, 10);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(51, 13);
             this.label1.TabIndex = 103;
             this.label1.Text = "Line size:";
-            // 
+            //
             // statusStrip1
-            // 
+            //
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.StatusLabel});
             this.statusStrip1.Location = new System.Drawing.Point(0, 488);
@@ -70,18 +70,18 @@
             this.statusStrip1.Size = new System.Drawing.Size(748, 22);
             this.statusStrip1.TabIndex = 104;
             this.statusStrip1.Text = "statusStrip1";
-            // 
+            //
             // StatusLabel
-            // 
+            //
             this.StatusLabel.Name = "StatusLabel";
             this.StatusLabel.Size = new System.Drawing.Size(733, 17);
             this.StatusLabel.Spring = true;
             this.StatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
+            //
             // HexTextBox
-            // 
-            this.HexTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.HexTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.HexTextBox.Font = new System.Drawing.Font("Courier New", 8.25F);
             this.HexTextBox.HideSelection = false;
@@ -92,9 +92,9 @@
             this.HexTextBox.Size = new System.Drawing.Size(748, 451);
             this.HexTextBox.TabIndex = 105;
             this.HexTextBox.WordWrap = false;
-            // 
+            //
             // HexForm
-            // 
+            //
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(748, 510);
@@ -105,7 +105,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "HexForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Hex Viewer - CodeWalker by dexyfex";
+            this.Text = "Hex Viewer - BadWalker by dexyfex";
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);

@@ -62,7 +62,7 @@ namespace CodeWalker.Forms
         private void UpdateFormTitle()
         {
             string ro = "";// " [Read-Only]";
-            Text = fileName + " - Meta Editor" + ro + " - CodeWalker by dexyfex";
+            Text = fileName + " - Meta Editor" + ro + " - BadWalker by dexyfex";
         }
 
         private void UpdateTextBoxFromData()
@@ -83,7 +83,7 @@ namespace CodeWalker.Forms
             //    XmlTextBox.Text = "[XML size > 10MB - Not shown due to performance limitations - Please use an external viewer for this file.]";
             //    return;
             //}
-            //else 
+            //else
             if (xml.Length > (1024 * 512))
             {
                 XmlTextBox.Language = Language.Custom;
@@ -421,9 +421,9 @@ namespace CodeWalker.Forms
 
         public bool SaveMeta(XmlDocument doc)
         {
-            //if explorer is in edit mode, and the current RpfFileEntry is valid, convert XML to the 
+            //if explorer is in edit mode, and the current RpfFileEntry is valid, convert XML to the
             //current meta format and then save the file into the RPF.
-            //otherwise, save the generated file to disk? 
+            //otherwise, save the generated file to disk?
             //(currently just return false and revert to XML file save)
 
             if (!(exploreForm?.EditMode ?? false)) return false;

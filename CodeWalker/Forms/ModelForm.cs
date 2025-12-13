@@ -400,7 +400,7 @@ namespace CodeWalker.Forms
 
                 bool rcItemsPending = Renderer.ContentThreadProc();
 
-                if (!(rcItemsPending)) //gameFileCache.ItemsStillPending || 
+                if (!(rcItemsPending)) //gameFileCache.ItemsStillPending ||
                 {
                     Thread.Sleep(1); //sleep if there's nothing to do
                 }
@@ -940,7 +940,7 @@ namespace CodeWalker.Forms
 
         private void UpdateFormTitle()
         {
-            Text = fileName + (modelModified ? "*" : "") + " - CodeWalker by dexyfex";
+            Text = fileName + (modelModified ? "*" : "") + " - BadWalker by dexyfex";
             GTAFolder.UpdateEnhancedFormTitle(this);
         }
 
@@ -1274,7 +1274,7 @@ namespace CodeWalker.Forms
         private void AddDrawableTreeNode(DrawableBase drawable, uint hash, bool check)
         {
             MetaHash mhash = new MetaHash(hash);
-            
+
             var dnode = ModelsTreeView.Nodes.Add(mhash.ToString());
             dnode.Tag = drawable;
             dnode.Checked = check;
@@ -1844,7 +1844,7 @@ namespace CodeWalker.Forms
             if (!folderpath.EndsWith("\\")) folderpath += "\\";
 
 
-            var tryGetTextureFromYtd = new Func<uint, YtdFile, Texture>((texHash, ytd) => 
+            var tryGetTextureFromYtd = new Func<uint, YtdFile, Texture>((texHash, ytd) =>
             {
                 if (ytd == null) return null;
                 int tries = 0;
@@ -1872,7 +1872,7 @@ namespace CodeWalker.Forms
 
             var textures = new HashSet<Texture>();
             var texturesMissing = new HashSet<string>();
-            var collectTextures = new Action<DrawableBase>((d) => 
+            var collectTextures = new Action<DrawableBase>((d) =>
             {
                 if (includeEmbedded)
                 {
