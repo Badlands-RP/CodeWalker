@@ -22,6 +22,7 @@ namespace CodeWalker
 {
     public partial class ExploreForm : Form
     {
+        private volatile bool formopen = false;
         private volatile bool Ready = false;
 
         private Dictionary<string, FileTypeInfo> FileTypes;
@@ -187,6 +188,8 @@ namespace CodeWalker
             }
 
 
+            formopen = true;
+
             Task.Run(() =>
             {
                 try
@@ -205,7 +208,7 @@ namespace CodeWalker
 
                 InitFileCache();
 
-                while (!IsDisposed) //run the file cache content thread until the form exits.
+                while (formopen && !IsDisposed) //run the file cache content thread until the form exits.
                 {
                     if (FileCache.IsInited)
                     {
@@ -3722,6 +3725,8 @@ namespace CodeWalker
 
         private void ExploreForm_FormClosed(object sender, FormClosedEventArgs e)
         {
+            formopen = false; //signal background thread to exit
+
             CleanupDropFolder();
             SaveSettings();
         }
