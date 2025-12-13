@@ -1041,7 +1041,7 @@ namespace CodeWalker.Rendering
     }
 
 
-    public struct ShaderKey
+    public struct ShaderKey : IEquatable<ShaderKey>
     {
         public MetaHash ShaderName;
         public MetaHash ShaderFile;
@@ -1049,6 +1049,24 @@ namespace CodeWalker.Rendering
         public override string ToString()
         {
             return ShaderFile.ToString() + ": " + ShaderName.ToString();
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is ShaderKey other && Equals(other);
+        }
+
+        public bool Equals(ShaderKey other)
+        {
+            return ShaderName.Hash == other.ShaderName.Hash && ShaderFile.Hash == other.ShaderFile.Hash;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return (int)(ShaderName.Hash * 397) ^ (int)ShaderFile.Hash;
+            }
         }
     }
     public class ShaderRenderBucket

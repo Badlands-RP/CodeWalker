@@ -12,10 +12,6 @@
     <AssemblyName>CodeWalker Mod Manager</AssemblyName>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <PlatformTarget>x64</PlatformTarget>
-  </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\CodeWalker.Core\CodeWalker.Core.csproj" />
     <ProjectReference Include="..\CodeWalker.WinForms\CodeWalker.WinForms.csproj" />
