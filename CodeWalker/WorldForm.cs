@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,6 +17,7 @@ using CodeWalker.Rendering;
 using CodeWalker.GameFiles;
 using CodeWalker.Properties;
 using CodeWalker.Tools;
+using CodeWalker.Utils;
 
 namespace CodeWalker
 {
@@ -2723,7 +2725,6 @@ namespace CodeWalker
             {
                 //geometry bounding boxes version with optional triangle intersection
                 float ghitdist = float.MaxValue;
-                const float bboxExpansionFactor = 1.2f; // Expand bounding boxes by 20%
 
                 for (int i = 0; i < dmodels.Length; i++)
                 {
@@ -2735,14 +2736,9 @@ namespace CodeWalker
                         gbbox.Minimum = gbox.Min.XYZ();
                         gbbox.Maximum = gbox.Max.XYZ();
 
-                        // Expand bounding box for initial test
-                        var center = (gbbox.Minimum + gbbox.Maximum) * 0.5f;
-                        var size = (gbbox.Maximum - gbbox.Minimum) * bboxExpansionFactor;
-                        var expandedMin = center - size * 0.5f;
-                        var expandedMax = center + size * 0.5f;
-
-                        bbox.Minimum = expandedMin * scale;
-                        bbox.Maximum = expandedMax * scale;
+                        // Apply scale to bounding box (no expansion needed for triangle intersection)
+                        bbox.Minimum = gbbox.Minimum * scale;
+                        bbox.Maximum = gbbox.Maximum * scale;
                         bool usehit = false;
                         float triHitDist = float.MaxValue;
                         bool triangleHit = false;
@@ -7180,6 +7176,112 @@ namespace CodeWalker
         private void SelectByGeometryCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             SelectByGeometry = SelectByGeometryCheckBox.Checked;
+        }
+
+        private void ExportEntityXmlButton_Click(object sender, EventArgs e)
+        {
+            if (!SelectedItem.HasValue) return;
+
+            var drawable = SelectedItem.Drawable;
+            if (drawable == null)
+            {
+                MessageBox.Show("No drawable found for the selected entity.", "Export Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Determine the file type based on the drawable's owner
+            string fileExt = ".xml";
+            string fileName = "drawable";
+            string baseFileName = "drawable";
+
+            if (drawable.Owner is YdrFile ydr)
+            {
+                fileName = ydr.Name ?? "drawable.ydr";
+                // Remove extension if present to get base name
+                baseFileName = Path.GetFileNameWithoutExtension(fileName);
+            }
+            else if (drawable.Owner is YddFile ydd)
+            {
+                fileName = ydd.Name ?? "drawable_dict.ydd";
+                baseFileName = Path.GetFileNameWithoutExtension(fileName);
+            }
+            else if (drawable.Owner is YftFile yft)
+            {
+                fileName = yft.Name ?? "fragment.yft";
+                baseFileName = Path.GetFileNameWithoutExtension(fileName);
+            }
+
+            // Ask user to select output folder
+            FolderBrowserDialog.Description = "Select folder to export entity XML and textures";
+            if (FolderBrowserDialog.ShowDialog(this) != DialogResult.OK) return;
+
+            string outputFolder = FolderBrowserDialog.SelectedPath;
+            string xmlFileName = fileName + fileExt;
+            string xmlFilePath = Path.Combine(outputFolder, xmlFileName);
+
+            try
+            {
+                // Create textures subfolder (use base name without extension)
+                string texturesFolder = Path.Combine(outputFolder, baseFileName);
+                if (!Directory.Exists(texturesFolder))
+                {
+                    Directory.CreateDirectory(texturesFolder);
+                }
+
+                // Export XML
+                string xml = null;
+                if (drawable.Owner is YdrFile ydrFile)
+                {
+                    xml = YdrXml.GetXml(ydrFile, texturesFolder);
+                }
+                else if (drawable.Owner is YddFile yddFile)
+                {
+                    xml = YddXml.GetXml(yddFile, texturesFolder);
+                }
+                else if (drawable.Owner is YftFile yftFile)
+                {
+                    xml = YftXml.GetXml(yftFile, texturesFolder);
+                }
+
+                if (string.IsNullOrEmpty(xml))
+                {
+                    MessageBox.Show("Failed to generate XML for the drawable.", "Export Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                File.WriteAllText(xmlFilePath, xml);
+
+                // Export textures
+                var textures = new List<Texture>();
+                if (drawable.ShaderGroup?.TextureDictionary?.Textures?.data_items != null)
+                {
+                    textures.AddRange(drawable.ShaderGroup.TextureDictionary.Textures.data_items);
+                }
+
+                int textureCount = 0;
+                foreach (var tex in textures)
+                {
+                    try
+                    {
+                        string texPath = Path.Combine(texturesFolder, tex.Name + ".dds");
+                        byte[] dds = DDSIO.GetDDSFile(tex);
+                        File.WriteAllBytes(texPath, dds);
+                        textureCount++;
+                    }
+                    catch (Exception ex)
+                    {
+                        // Continue with other textures if one fails
+                        System.Diagnostics.Debug.WriteLine($"Failed to export texture {tex.Name}: {ex.Message}");
+                    }
+                }
+
+                MessageBox.Show($"Export successful!\n\nXML: {xmlFileName}\nTextures: {textureCount} exported to '{baseFileName}' folder",
+                    "Export Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error exporting entity:\n{ex.Message}", "Export Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void PopZonesCheckBox_CheckedChanged(object sender, EventArgs e)

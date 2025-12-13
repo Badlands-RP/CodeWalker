@@ -94,9 +94,11 @@ namespace CodeWalker
             this.SelectionNameTextBox = new System.Windows.Forms.TextBox();
             this.SelectionTabControl = new System.Windows.Forms.TabControl();
             this.SelectionEntityTabPage = new System.Windows.Forms.TabPage();
+            this.ExportEntityXmlButton = new System.Windows.Forms.Button();
             this.SelEntityPropertyGrid = new CodeWalker.WinForms.ReadOnlyPropertyGrid();
             this.SelectionArchetypeTabPage = new System.Windows.Forms.TabPage();
             this.SelArchetypePropertyGrid = new CodeWalker.WinForms.ReadOnlyPropertyGrid();
+            this.FolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.SelectionDrawableTabPage = new System.Windows.Forms.TabPage();
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage11 = new System.Windows.Forms.TabPage();
@@ -1161,6 +1163,7 @@ namespace CodeWalker
             //
             // SelectionEntityTabPage
             //
+            this.SelectionEntityTabPage.Controls.Add(this.ExportEntityXmlButton);
             this.SelectionEntityTabPage.Controls.Add(this.SelEntityPropertyGrid);
             this.SelectionEntityTabPage.Location = new System.Drawing.Point(4, 22);
             this.SelectionEntityTabPage.Name = "SelectionEntityTabPage";
@@ -1169,6 +1172,18 @@ namespace CodeWalker
             this.SelectionEntityTabPage.TabIndex = 0;
             this.SelectionEntityTabPage.Text = "Entity";
             this.SelectionEntityTabPage.UseVisualStyleBackColor = true;
+            //
+            // ExportEntityXmlButton
+            //
+            this.ExportEntityXmlButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ExportEntityXmlButton.Location = new System.Drawing.Point(3, 459);
+            this.ExportEntityXmlButton.Name = "ExportEntityXmlButton";
+            this.ExportEntityXmlButton.Size = new System.Drawing.Size(191, 23);
+            this.ExportEntityXmlButton.TabIndex = 36;
+            this.ExportEntityXmlButton.Text = "Export Entity .xml";
+            this.ExportEntityXmlButton.UseVisualStyleBackColor = true;
+            this.ExportEntityXmlButton.Click += new System.EventHandler(this.ExportEntityXmlButton_Click);
             //
             // SelEntityPropertyGrid
             //
@@ -1180,7 +1195,7 @@ namespace CodeWalker
             this.SelEntityPropertyGrid.Name = "SelEntityPropertyGrid";
             this.SelEntityPropertyGrid.PropertySort = System.Windows.Forms.PropertySort.NoSort;
             this.SelEntityPropertyGrid.ReadOnly = true;
-            this.SelEntityPropertyGrid.Size = new System.Drawing.Size(197, 476);
+            this.SelEntityPropertyGrid.Size = new System.Drawing.Size(197, 450);
             this.SelEntityPropertyGrid.TabIndex = 35;
             this.SelEntityPropertyGrid.ToolbarVisible = false;
             //
@@ -3763,6 +3778,8 @@ namespace CodeWalker
         private System.Windows.Forms.Button AddCurrentPositonMarkerButton;
         private System.Windows.Forms.CheckBox SelectionBoundsCheckBox;
         private System.Windows.Forms.CheckBox SelectByGeometryCheckBox;
+        private System.Windows.Forms.Button ExportEntityXmlButton;
+        private System.Windows.Forms.FolderBrowserDialog FolderBrowserDialog;
         private ReadOnlyPropertyGrid SelEntityPropertyGrid;
         private ReadOnlyPropertyGrid SelArchetypePropertyGrid;
         private System.Windows.Forms.TabControl SelectionTabControl;
