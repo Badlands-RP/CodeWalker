@@ -91,6 +91,7 @@
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
             this.YtypNewArchetypeMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.YtypNewArchetypeFromYdrMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.YtypNewArchetypeFromYftMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.YtypMloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.YtypMloNewEntityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.YtypMloNewRoomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -689,6 +690,7 @@
             this.toolStripSeparator13,
             this.YtypNewArchetypeMenu,
             this.YtypNewArchetypeFromYdrMenu,
+            this.YtypNewArchetypeFromYftMenu,
             this.YtypMloToolStripMenuItem,
             this.toolStripSeparator15,
             this.YtypAddToProjectMenu,
@@ -725,6 +727,14 @@
             this.YtypNewArchetypeFromYdrMenu.Size = new System.Drawing.Size(218, 22);
             this.YtypNewArchetypeFromYdrMenu.Text = "New Archetype from YDR...";
             this.YtypNewArchetypeFromYdrMenu.Click += new System.EventHandler(this.YtypNewArchetypeFromYdrMenu_Click);
+            //
+            // YtypNewArchetypeFromYftMenu
+            //
+            this.YtypNewArchetypeFromYftMenu.Enabled = false;
+            this.YtypNewArchetypeFromYftMenu.Name = "YtypNewArchetypeFromYftMenu";
+            this.YtypNewArchetypeFromYftMenu.Size = new System.Drawing.Size(218, 22);
+            this.YtypNewArchetypeFromYftMenu.Text = "New Archetype from YFT...";
+            this.YtypNewArchetypeFromYftMenu.Click += new System.EventHandler(this.YtypNewArchetypeFromYftMenu_Click);
             //
             // YtypMloToolStripMenuItem
             //
@@ -1894,6 +1904,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator28;
         private System.Windows.Forms.ToolStripMenuItem OptionsDisplayEntityIndexesMenu;
         private System.Windows.Forms.ToolStripMenuItem YtypNewArchetypeFromYdrMenu;
+        private System.Windows.Forms.ToolStripMenuItem YtypNewArchetypeFromYftMenu;
         private System.Windows.Forms.ToolStripMenuItem FileOpenFilesMenu;
         private System.Windows.Forms.ToolStripMenuItem FileOpenFolderMenu;
         private System.Windows.Forms.FolderBrowserDialog FolderBrowserDialog;
