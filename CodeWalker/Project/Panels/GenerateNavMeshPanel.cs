@@ -28,6 +28,9 @@ namespace CodeWalker.Project.Panels
             InitializeComponent();
             Tag = "GenerateNavMeshPanel";
 
+            // Set default quality to Medium
+            DensityComboBox.SelectedIndex = 2;
+
             if (ProjectForm?.WorldForm == null)
             {
                 //could happen in some other startup mode - world form is required for this..
@@ -76,17 +79,21 @@ namespace CodeWalker.Project.Panels
 
 
             GenerateButton.Enabled = false;
+            ProgressBar.Value = 0;
 
+            // Get density from combo box selection
+            float density = 0.5f; //distance between vertices for the initial grid (default: Medium)
+            switch (DensityComboBox.SelectedIndex)
+            {
+                case 0: density = 2.0f; break;   // Very Low - Fastest
+                case 1: density = 1.0f; break;   // Low - Fast
+                case 2: density = 0.5f; break;   // Medium - Default
+                case 3: density = 0.25f; break;  // High - Slow
+                case 4: density = 0.125f; break; // Very High - Very Slow
+            }
 
-
-            float density = 0.5f; //distance between vertices for the initial grid
-            //float clipdz = 0.5f; //any polygons with greater steepness should be removed
-
-
-            //Vector2 vertexCounts = (max - min) / density;
-            //int vertexCountX = (int)vertexCounts.X;
-            //int vertexCountY = (int)vertexCounts.Y;
-            //int vertexCountTot = vertexCountX * vertexCountY;
+            // Use most available cores but leave some headroom - use 75% of logical processors, minimum 2
+            int maxParallelism = Math.Max(2, (int)(Environment.ProcessorCount * 0.75));
 
             var layers = new[] { true, false, false }; //collision layers to use
 
@@ -96,9 +103,9 @@ namespace CodeWalker.Project.Panels
 
             Task.Run(() =>
             {
+                var sw = System.Diagnostics.Stopwatch.StartNew();
 
-
-                //find vertices in one world cell at a time, by raycasting in a grid pattern. 
+                //find vertices in one world cell at a time, by raycasting in a grid pattern.
                 //then filter those based on polygon slope deltas (and materials) to reduce the detail.
                 //then add the generated verts for the cell into a master quadtree/bvh/grid
                 //after all verts are generated, do voronoi tessellation with those to generate the nav polys.
@@ -106,7 +113,6 @@ namespace CodeWalker.Project.Panels
 
 
                 var vgrid = new VertexGrid();
-                var vert = new GenVertex();
                 var builder = new YnvBuilder();
 
                 var polys = new List<GenPoly>();
@@ -114,40 +120,93 @@ namespace CodeWalker.Project.Panels
                 var vertexCountXY = (max - min) / density;
                 int vertexCountX = (int)vertexCountXY.X+1;
                 int vertexCountY = (int)vertexCountXY.Y+1;
-                //int vertexCountTot = vertexCountX * vertexCountY;
-                vgrid.BeginGrid(vertexCountX, vertexCountY);
+                int estimatedVertices = vertexCountX * vertexCountY * 2; // Pre-allocate with estimate
+                vgrid.BeginGrid(vertexCountX, vertexCountY, estimatedVertices);
 
-                Ray ray = new Ray(Vector3.Zero, new Vector3(0, 0, -1));//for casting with
-
-                UpdateStatus("Loading YBNs...");
+                UpdateStatus("Finding collision bounds...");
 
                 var bmin = new Vector3(min, 0);
                 var bmax = new Vector3(max, 0);
-                var boundslist = space.BoundsStore.GetItems(ref bmin, ref bmax);
+                var boundslist = space.BoundsStore.GetItems(ref bmin, ref bmax).ToArray();
 
-                //pre-warm the bounds cache for this area, and find the min/max Z
+                UpdateStatus($"Queuing {boundslist.Length} YBNs for loading...");
+
+                // Batch load all YBNs - queue them all first, then wait
+                // Store the hash (uint) for re-queuing, and the name string for display
+                var ybnList = new List<(YbnFile ybn, uint hash, string name)>();
                 foreach (var boundsitem in boundslist)
                 {
                     YbnFile ybn = gameFileCache.GetYbn(boundsitem.Name);
-                    if (ybn == null)
-                    { continue; } //ybn not found?
-                    if (!ybn.Loaded) //ybn not loaded yet...
+                    if (ybn != null) ybnList.Add((ybn, boundsitem.Name, boundsitem.Name.ToString()));
+                }
+
+                // Wait for all YBNs to load with detailed progress
+                int loadedCount = 0;
+                int totalYbns = ybnList.Count;
+                const int timeoutMs = 10000; // 10 seconds timeout per YBN
+                var skippedYbns = new HashSet<string>();
+                var ybnWaitTimes = new Dictionary<string, int>(); // Track wait time per YBN
+
+                while (loadedCount + skippedYbns.Count < totalYbns)
+                {
+                    loadedCount = 0;
+                    string pendingYbn = null;
+                    foreach (var (ybn, hash, name) in ybnList)
                     {
-                        UpdateStatus("Loading ybn: " + boundsitem.Name.ToString() + " ...");
-                        int waitCount = 0;
-                        while (!ybn.Loaded)
+                        if (ybn.Loaded)
                         {
-                            waitCount++;
-                            if (waitCount > 10000)
-                            {
-                                UpdateStatus("Timeout waiting for ybn " + boundsitem.Name.ToString() + " to load!");
-                                Thread.Sleep(1000); //just to let the message display for a second...
-                                break;
-                            }
-                            Thread.Sleep(20);//~50fps should be fine
-                            ybn = gameFileCache.GetYbn(boundsitem.Name); //try queue it again..
+                            loadedCount++;
+                        }
+                        else if (skippedYbns.Contains(name))
+                        {
+                            // Already skipped
+                        }
+                        else if (pendingYbn == null)
+                        {
+                            pendingYbn = name; // Track first pending YBN
                         }
                     }
+
+                    if (loadedCount + skippedYbns.Count < totalYbns && pendingYbn != null)
+                    {
+                        // Track wait time for this specific YBN
+                        if (!ybnWaitTimes.ContainsKey(pendingYbn))
+                        {
+                            ybnWaitTimes[pendingYbn] = 0;
+                        }
+                        ybnWaitTimes[pendingYbn] += 20;
+
+                        if (ybnWaitTimes[pendingYbn] >= timeoutMs)
+                        {
+                            // Skip this YBN - it's not loading after 10 seconds
+                            skippedYbns.Add(pendingYbn);
+                            UpdateStatus($"Skipping YBN (timeout): {pendingYbn}");
+                            Thread.Sleep(50);
+                            continue;
+                        }
+
+                        float waitSecs = ybnWaitTimes[pendingYbn] / 1000f;
+                        UpdateStatus($"Loading YBNs... ({loadedCount}/{totalYbns}) - Waiting for: {pendingYbn} ({waitSecs:F1}s)");
+                        Thread.Sleep(20);
+                    }
+                    else
+                    {
+                        Thread.Sleep(20);
+                    }
+                }
+
+                if (skippedYbns.Count > 0)
+                {
+                    UpdateStatus($"Loaded {loadedCount}/{totalYbns} YBNs ({skippedYbns.Count} skipped). Calculating bounds...");
+                }
+                else
+                {
+                    UpdateStatus($"All {totalYbns} YBNs loaded. Calculating bounds...");
+                }
+
+                // Find min/max Z from loaded YBNs
+                foreach (var (ybn, hash, name) in ybnList)
+                {
                     if (ybn.Loaded && (ybn.Bounds != null))
                     {
                         bmin.Z = Math.Min(bmin.Z, ybn.Bounds.BoxMin.Z);
@@ -155,52 +214,89 @@ namespace CodeWalker.Project.Panels
                     }
                 }
 
-
-
                 //ray-cast each XY vertex position, and find the height and surface from ybn's
                 //continue casting down to find more surfaces...
 
-                UpdateStatus("Processing...");
+                UpdateStatus($"Processing with {maxParallelism} threads...");
+                UpdateProgress(0, vertexCountX);
 
-                for (int vx = 0; vx < vertexCountX; vx++)
+                // Use thread-local storage for ray casting results to avoid contention
+                var allResults = new System.Collections.Concurrent.ConcurrentBag<(int vx, int vy, List<GenVertex> verts)>();
+                int processedRows = 0;
+
+                // Parallel ray casting with limited parallelism
+                var parallelOptions = new ParallelOptions { MaxDegreeOfParallelism = maxParallelism };
+                Parallel.For(0, vertexCountX, parallelOptions, vx =>
                 {
+                    // Thread-local ray and vertex list
+                    Ray ray = new Ray(Vector3.Zero, new Vector3(0, 0, -1));
+
                     for (int vy = 0; vy < vertexCountY; vy++)
                     {
-                        vgrid.BeginCell(vx, vy);
+                        var cellVerts = new List<GenVertex>();
                         var vcoffset = new Vector3(vx, vy, 0) * density;
                         ray.Position = bmin + vcoffset;
-                        ray.Position.Z = bmax.Z + 1.0f;//start the ray at the top of the cell
+                        ray.Position.Z = bmax.Z + 1.0f;
+
                         var intres = space.RayIntersect(ray, float.MaxValue, layers);
-                        hitTestCount++;
-                        while (intres.Hit)// && (intres.HitDist > 0))
+                        Interlocked.Increment(ref hitTestCount);
+
+                        while (intres.Hit)
                         {
                             if (intres.HitDist > 0)
                             {
-                                hitCount++;
-                                vert.Position = intres.Position;
-                                vert.Normal = intres.Normal;
-                                vert.Material = intres.Material.Type;
-                                vert.PolyFlags = (ushort)intres.Material.Flags;
-                                vert.PrevIDX = -1;
-                                vert.PrevIDY = -1;
-                                vert.NextIDX = -1;
-                                vert.NextIDY = -1;
-                                vert.CompPrevX = false;
-                                vert.CompPrevY = false;
-                                vert.CompNextX = false;
-                                vert.CompNextY = false;
-                                vert.PolyID = -1;
-                                vgrid.AddVertex(ref vert);
+                                Interlocked.Increment(ref hitCount);
+                                var vert = new GenVertex
+                                {
+                                    Position = intres.Position,
+                                    Normal = intres.Normal,
+                                    Material = intres.Material.Type,
+                                    PolyFlags = (ushort)intres.Material.Flags,
+                                    PrevIDX = -1,
+                                    PrevIDY = -1,
+                                    NextIDX = -1,
+                                    NextIDY = -1,
+                                    CompPrevX = false,
+                                    CompPrevY = false,
+                                    CompNextX = false,
+                                    CompNextY = false,
+                                    PolyID = -1
+                                };
+                                cellVerts.Add(vert);
 
-                                if (vgrid.CurVertexCount > 15) //too many hits?
-                                { break; }
+                                if (cellVerts.Count > 15) break;
                             }
-                            //continue down until no more hits..... step by 3m
                             ray.Position.Z = intres.Position.Z - 3.0f;
                             intres = space.RayIntersect(ray, float.MaxValue, layers);
                         }
-                        vgrid.EndCell(vx, vy);
+
+                        if (cellVerts.Count > 0)
+                        {
+                            allResults.Add((vx, vy, cellVerts));
+                        }
                     }
+
+                    // Update progress (thread-safe)
+                    int currentRow = Interlocked.Increment(ref processedRows);
+                    if (currentRow % 10 == 0) // Update every 10 rows to reduce UI overhead
+                    {
+                        UpdateProgress(currentRow, vertexCountX);
+                    }
+                });
+
+                UpdateProgress(vertexCountX, vertexCountX);
+                UpdateStatus("Collecting results...");
+
+                // Collect results into the grid (single-threaded to maintain order)
+                foreach (var result in allResults.OrderBy(r => r.vx).ThenBy(r => r.vy))
+                {
+                    vgrid.BeginCell(result.vx, result.vy);
+                    foreach (var vert in result.verts)
+                    {
+                        var v = vert;
+                        vgrid.AddVertex(ref v);
+                    }
+                    vgrid.EndCell(result.vx, result.vy);
                 }
 
                 vgrid.EndGrid(); //build vertex array
@@ -814,8 +910,10 @@ namespace CodeWalker.Project.Panels
 
 
 
-                var statf = "{0} hit tests, {1} hits, {2} new polys";
-                var stats = string.Format(statf, hitTestCount, hitCount, newCount);
+                sw.Stop();
+                var elapsed = sw.Elapsed;
+                var statf = "{0} hit tests, {1} hits, {2} new polys, {3:F1}s elapsed";
+                var stats = string.Format(statf, hitTestCount, hitCount, newCount, elapsed.TotalSeconds);
                 UpdateStatus("Process complete. " + stats);
                 GenerateComplete();
             });
@@ -843,32 +941,53 @@ namespace CodeWalker.Project.Panels
 
         }
 
-        private struct GenEdgeKey
+        private struct GenEdgeKey : IEquatable<GenEdgeKey>
         {
-            public Vector3 V1;
-            public Vector3 V2;
+            // Use quantized integers for faster hashing and comparison (avoids floating point issues)
+            public int V1X;
+            public int V1Y;
+            public int V1Z;
+            public int V2X;
+            public int V2Y;
+            public int V2Z;
+
             public GenEdgeKey(Vector3 v1, Vector3 v2)
             {
-                V1 = v1;
-                V2 = v2;
+                // Quantize to centimeter precision (multiply by 100)
+                V1X = (int)(v1.X * 100);
+                V1Y = (int)(v1.Y * 100);
+                V1Z = (int)(v1.Z * 100);
+                V2X = (int)(v2.X * 100);
+                V2Y = (int)(v2.Y * 100);
+                V2Z = (int)(v2.Z * 100);
             }
 
-            //public int V1X;
-            //public int V1Y;
-            //public int V1Z;
-            //public int V2X;
-            //public int V2Y;
-            //public int V2Z;
-            //public GenEdgeKey(Vector3 v1, Vector3 v2)
-            //{
-            //    V1X = (int)(v1.X * 100);
-            //    V1Y = (int)(v1.Y * 100);
-            //    V1Z = (int)(v1.Z * 100);
-            //    V2X = (int)(v2.X * 100);
-            //    V2Y = (int)(v2.Y * 100);
-            //    V2Z = (int)(v2.Z * 100);
-            //}
+            public override int GetHashCode()
+            {
+                // Fast hash combining all 6 integers
+                unchecked
+                {
+                    int hash = 17;
+                    hash = hash * 31 + V1X;
+                    hash = hash * 31 + V1Y;
+                    hash = hash * 31 + V1Z;
+                    hash = hash * 31 + V2X;
+                    hash = hash * 31 + V2Y;
+                    hash = hash * 31 + V2Z;
+                    return hash;
+                }
+            }
 
+            public override bool Equals(object obj)
+            {
+                return obj is GenEdgeKey key && Equals(key);
+            }
+
+            public bool Equals(GenEdgeKey other)
+            {
+                return V1X == other.V1X && V1Y == other.V1Y && V1Z == other.V1Z &&
+                       V2X == other.V2X && V2Y == other.V2Y && V2Z == other.V2Z;
+            }
         }
 
         private class GenEdge
@@ -988,9 +1107,16 @@ namespace CodeWalker.Project.Panels
             private List<Vector3> VerticesB = new List<Vector3>();
             private List<Vector3> VerticesT = new List<Vector3>();
 
-            public void BeginGrid(int vertexCountX, int vertexCountY)
+            public void BeginGrid(int vertexCountX, int vertexCountY, int estimatedCapacity = 0)
             {
-                VertexList.Clear();
+                if (estimatedCapacity > 0)
+                {
+                    VertexList = new List<GenVertex>(estimatedCapacity);
+                }
+                else
+                {
+                    VertexList.Clear();
+                }
                 Vertices = null;
                 VertexOffsets = new int[vertexCountX, vertexCountY];
                 VertexCounts = new int[vertexCountX, vertexCountY];
@@ -2121,6 +2247,7 @@ namespace CodeWalker.Project.Panels
                 else
                 {
                     GenerateButton.Enabled = true;
+                    ProgressBar.Value = ProgressBar.Maximum;
                 }
             }
             catch { }
@@ -2141,6 +2268,101 @@ namespace CodeWalker.Project.Panels
                 }
             }
             catch { }
+        }
+
+        private void UpdateProgress(int current, int total)
+        {
+            try
+            {
+                if (InvokeRequired)
+                {
+                    BeginInvoke(new Action(() => { UpdateProgress(current, total); }));
+                }
+                else
+                {
+                    if (ProgressBar.Maximum != total)
+                    {
+                        ProgressBar.Maximum = total;
+                    }
+                    ProgressBar.Value = Math.Min(current, total);
+                }
+            }
+            catch { }
+        }
+
+        private void GetFromSelectionButton_Click(object sender, EventArgs e)
+        {
+            var worldForm = ProjectForm?.WorldForm;
+            if (worldForm == null)
+            {
+                MessageBox.Show("World View is not available.");
+                return;
+            }
+
+            // Try to get the selected navmesh polygon or navmesh file
+            var selectedItem = worldForm.CurrentMapSelection;
+            if (selectedItem.NavPoly != null)
+            {
+                // Get the parent YNV file from the selected polygon
+                var ynv = selectedItem.NavPoly.Ynv;
+                if (ynv != null)
+                {
+                    SetCoordsFromYnv(ynv);
+                    return;
+                }
+            }
+
+            // Check if there's a selected YNV file directly
+            if (selectedItem.Archetype == null && selectedItem.EntityDef == null &&
+                selectedItem.CarGenerator == null && selectedItem.PathNode == null &&
+                selectedItem.NavPoly == null && selectedItem.NavPoint == null &&
+                selectedItem.NavPortal == null && selectedItem.TrainTrackNode == null &&
+                selectedItem.ScenarioNode == null && selectedItem.Audio == null)
+            {
+                MessageBox.Show("No navmesh selected.\n\nSelect a navmesh polygon in the World View first, then click this button to populate the coordinates.");
+                return;
+            }
+
+            // Try NavPoint or NavPortal which also have parent YNV
+            if (selectedItem.NavPoint != null)
+            {
+                var ynv = selectedItem.NavPoint.Ynv;
+                if (ynv != null)
+                {
+                    SetCoordsFromYnv(ynv);
+                    return;
+                }
+            }
+
+            if (selectedItem.NavPortal != null)
+            {
+                var ynv = selectedItem.NavPortal.Ynv;
+                if (ynv != null)
+                {
+                    SetCoordsFromYnv(ynv);
+                    return;
+                }
+            }
+
+            MessageBox.Show("No navmesh selected.\n\nSelect a navmesh polygon in the World View first, then click this button to populate the coordinates.");
+        }
+
+        private void SetCoordsFromYnv(YnvFile ynv)
+        {
+            if (ynv?.Nav == null)
+            {
+                MessageBox.Show("Selected navmesh has no navigation data.");
+                return;
+            }
+
+            // Get the AABB from the navmesh
+            var aabbMin = ynv.Nav.AABBMin;
+            var aabbMax = ynv.Nav.AABBMax;
+
+            MinTextBox.Text = FloatUtil.GetVector2String(new SharpDX.Vector2(aabbMin.X, aabbMin.Y));
+            MaxTextBox.Text = FloatUtil.GetVector2String(new SharpDX.Vector2(aabbMax.X, aabbMax.Y));
+
+            UpdateStatus($"Loaded coordinates from navmesh: {ynv.Name}");
         }
 
 

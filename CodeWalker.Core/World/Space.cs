@@ -1148,8 +1148,10 @@ namespace CodeWalker.World
             if (MapDataStore == null) return;
             CurrentHour = hour;
             CurrentWeather = weather;
-            var items = MapDataStore.GetItems(ref cam.Position);
-            for (int i = 0; i < items.Count; i++)
+            // Create a copy of the list to avoid "Collection was modified" exceptions
+            // when other threads modify the shared VisibleItems list
+            var items = MapDataStore.GetItems(ref cam.Position).ToArray();
+            for (int i = 0; i < items.Length; i++)
             {
                 var item = items[i];
                 if (item == null)
@@ -1183,7 +1185,9 @@ namespace CodeWalker.World
             var pos = cam.Position;
             var min = pos - dist;
             var max = pos + dist;
-            var items = BoundsStore.GetItems(ref min, ref max, layers);
+            // Create a copy to avoid "Collection was modified" exceptions
+            // when other threads modify the shared VisibleItems list
+            var items = BoundsStore.GetItems(ref min, ref max, layers).ToArray();
             boundslist.AddRange(items);
         }
 
@@ -1249,10 +1253,12 @@ namespace CodeWalker.World
 
             if ((BoundsStore == null) || (MapDataStore == null)) return res;
 
-            var boundslist = BoundsStore.GetItems(ref ray, layers);
-            var mapdatalist = MapDataStore.GetItems(ref ray);
+            // Create copies of the lists to avoid "Collection was modified" exceptions
+            // when other threads (e.g., rendering) modify the shared VisibleItems lists
+            var boundslist = BoundsStore.GetItems(ref ray, layers).ToArray();
+            var mapdatalist = MapDataStore.GetItems(ref ray).ToArray();
 
-            for (int i = 0; i < boundslist.Count; i++)
+            for (int i = 0; i < boundslist.Length; i++)
             {
                 var bound = boundslist[i];
                 box.Minimum = bound.Min;
@@ -1281,7 +1287,7 @@ namespace CodeWalker.World
                 }
             }
 
-            for (int i = 0; i < mapdatalist.Count; i++)
+            for (int i = 0; i < mapdatalist.Length; i++)
             {
                 var mapdata = mapdatalist[i];
                 if (mapdata == null)
@@ -1509,10 +1515,12 @@ namespace CodeWalker.World
 
             if ((BoundsStore == null) || (MapDataStore == null)) return res;
 
-            var boundslist = BoundsStore.GetItems(ref sphmin, ref sphmax, layers);
-            var mapdatalist = MapDataStore.GetItems(ref sphmin, ref sphmax);
+            // Create copies of the lists to avoid "Collection was modified" exceptions
+            // when other threads modify the shared VisibleItems lists
+            var boundslist = BoundsStore.GetItems(ref sphmin, ref sphmax, layers).ToArray();
+            var mapdatalist = MapDataStore.GetItems(ref sphmin, ref sphmax).ToArray();
 
-            for (int i = 0; i < boundslist.Count; i++)
+            for (int i = 0; i < boundslist.Length; i++)
             {
                 var bound = boundslist[i];
                 box.Minimum = bound.Min;
@@ -1534,7 +1542,7 @@ namespace CodeWalker.World
                 }
             }
 
-            for (int i = 0; i < mapdatalist.Count; i++)
+            for (int i = 0; i < mapdatalist.Length; i++)
             {
                 var mapdata = mapdatalist[i];
                 if ((mapdata.ContentFlags & 1) == 0)
