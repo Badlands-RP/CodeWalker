@@ -394,6 +394,21 @@ namespace CodeWalker.GameFiles
             }
             return false;
         }
+
+        public void ReorderArchetype(Archetype archetype, int newIndex)
+        {
+            if (AllArchetypes == null || archetype == null) return;
+            
+            List<Archetype> archetypes = AllArchetypes.ToList();
+            int oldIndex = archetypes.IndexOf(archetype);
+            
+            if (oldIndex == -1 || oldIndex == newIndex) return;
+            
+            archetypes.RemoveAt(oldIndex);
+            archetypes.Insert(newIndex, archetype);
+            
+            AllArchetypes = archetypes.ToArray();
+        }
     }
 
 

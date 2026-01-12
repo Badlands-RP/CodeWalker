@@ -51,7 +51,9 @@
             this.ProjectTreeView.DragDrop += new System.Windows.Forms.DragEventHandler(this.ProjectTreeView_DragDrop);
             this.ProjectTreeView.DragEnter += new System.Windows.Forms.DragEventHandler(this.ProjectTreeView_DragEnter);
             this.ProjectTreeView.DoubleClick += new System.EventHandler(this.ProjectTreeView_DoubleClick);
+            this.ProjectTreeView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ProjectTreeView_MouseClick);
             this.ProjectTreeView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ProjectTreeView_MouseDown);
+            this.ProjectTreeView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.ProjectTreeView_ItemDrag);
             // 
             // ProjectExplorerPanel
             // 

@@ -2823,17 +2823,165 @@ namespace CodeWalker.Project.Panels
             inDoubleClick = (e.Clicks > 1); //disabling doubleclick expand/collapse
         }
 
+        private void ProjectTreeView_ItemDrag(object sender, ItemDragEventArgs e)
+        {
+            // Only allow dragging archetype nodes
+            TreeNode node = e.Item as TreeNode;
+            if (IsArchetypeNode(node))
+            {
+                DoDragDrop(e.Item, DragDropEffects.Move);
+            }
+        }
+
         private void ProjectTreeView_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetData(DataFormats.FileDrop) != null) //disabling drag and drop text
                 e.Effect = DragDropEffects.All;
+            else if (e.Data.GetDataPresent(typeof(TreeNode)))
+            {
+                e.Effect = DragDropEffects.Move;
+            }
         }
 
         private void ProjectTreeView_DragDrop(object sender, DragEventArgs e)
         {
             string[] files = (string[]) e.Data.GetData(DataFormats.FileDrop);
-            ProjectForm.OpenFiles(files);
+            if (files != null)
+            {
+                ProjectForm.OpenFiles(files);
+                return;
+            }
+            
+            // Handle archetype reordering via drag and drop
+            if (e.Data.GetDataPresent(typeof(TreeNode)))
+            {
+                TreeNode draggedNode = (TreeNode)e.Data.GetData(typeof(TreeNode));
+                TreeNode targetNode = ProjectTreeView.GetNodeAt(ProjectTreeView.PointToClient(new Point(e.X, e.Y)));
+                
+                if (IsArchetypeNode(draggedNode) && IsArchetypeNode(targetNode) && draggedNode != targetNode)
+                {
+                    ReorderArchetypes(draggedNode, targetNode);
+                }
+            }
+        }
 
+        private void ProjectTreeView_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right && ProjectTreeView.SelectedNode != null)
+            {
+                TreeNode selectedNode = ProjectTreeView.SelectedNode;
+                if (IsArchetypeNode(selectedNode))
+                {
+                    // Show context menu for archetype reordering
+                    ContextMenuStrip contextMenu = new ContextMenuStrip();
+                    ToolStripMenuItem moveUpItem = new ToolStripMenuItem("Move Up");
+                    ToolStripMenuItem moveDownItem = new ToolStripMenuItem("Move Down");
+                    
+                    moveUpItem.Click += (s, args) => MoveArchetypeUp(selectedNode);
+                    moveDownItem.Click += (s, args) => MoveArchetypeDown(selectedNode);
+                    
+                    contextMenu.Items.Add(moveUpItem);
+                    contextMenu.Items.Add(moveDownItem);
+                    
+                    contextMenu.Show(ProjectTreeView, e.Location);
+                }
+            }
+        }
+
+        private void MoveArchetypeUp(TreeNode node)
+        {
+            if (!IsArchetypeNode(node)) return;
+            
+            Archetype archetype = (Archetype)node.Tag;
+            YtypFile ytyp = (YtypFile)node.Parent.Tag;
+            
+            if (ytyp == null || archetype == null) return;
+            
+            // Find the index of the archetype
+            int index = Array.IndexOf(ytyp.AllArchetypes, archetype);
+            
+            if (index <= 0) return; // Already at the top
+            
+            // Use the new ReorderArchetype method
+            ytyp.ReorderArchetype(archetype, index - 1);
+            ProjectForm.SetYtypHasChanged(true);
+            
+            // Refresh the tree view to reflect the new order
+            LoadYtypTreeNodes(ytyp, node.Parent.Parent);
+            
+            // Select the moved node
+            TreeNode newNode = FindArchetypeTreeNode(archetype);
+            if (newNode != null)
+            {
+                ProjectTreeView.SelectedNode = newNode;
+                newNode.EnsureVisible();
+            }
+        }
+
+        private void MoveArchetypeDown(TreeNode node)
+        {
+            if (!IsArchetypeNode(node)) return;
+            
+            Archetype archetype = (Archetype)node.Tag;
+            YtypFile ytyp = (YtypFile)node.Parent.Tag;
+            
+            if (ytyp == null || archetype == null) return;
+            
+            // Find the index of the archetype
+            int index = Array.IndexOf(ytyp.AllArchetypes, archetype);
+            
+            if (index >= ytyp.AllArchetypes.Length - 1) return; // Already at the bottom
+            
+            // Use the new ReorderArchetype method
+            ytyp.ReorderArchetype(archetype, index + 1);
+            ProjectForm.SetYtypHasChanged(true);
+            
+            // Refresh the tree view to reflect the new order
+            LoadYtypTreeNodes(ytyp, node.Parent.Parent);
+            
+            // Select the moved node
+            TreeNode newNode = FindArchetypeTreeNode(archetype);
+            if (newNode != null)
+            {
+                ProjectTreeView.SelectedNode = newNode;
+                newNode.EnsureVisible();
+            }
+        }
+
+        private bool IsArchetypeNode(TreeNode node)
+        {
+            if (node == null || node.Parent == null) return false;
+            return node.Parent.Name == "Archetypes" && node.Tag is Archetype;
+        }
+
+        private void ReorderArchetypes(TreeNode draggedNode, TreeNode targetNode)
+        {
+            Archetype draggedArchetype = (Archetype)draggedNode.Tag;
+            Archetype targetArchetype = (Archetype)targetNode.Tag;
+            YtypFile ytyp = (YtypFile)draggedNode.Parent.Tag;
+            
+            if (ytyp == null || draggedArchetype == null || targetArchetype == null) return;
+            
+            // Find the indices of the dragged and target archetypes
+            int draggedIndex = Array.IndexOf(ytyp.AllArchetypes, draggedArchetype);
+            int targetIndex = Array.IndexOf(ytyp.AllArchetypes, targetArchetype);
+            
+            if (draggedIndex == -1 || targetIndex == -1) return;
+            
+            // Use the new ReorderArchetype method
+            ytyp.ReorderArchetype(draggedArchetype, targetIndex);
+            ProjectForm.SetYtypHasChanged(true);
+            
+            // Refresh the tree view to reflect the new order
+            LoadYtypTreeNodes(ytyp, draggedNode.Parent.Parent);
+            
+            // Select the moved node
+            TreeNode newNode = FindArchetypeTreeNode(draggedArchetype);
+            if (newNode != null)
+            {
+                ProjectTreeView.SelectedNode = newNode;
+                newNode.EnsureVisible();
+            }
         }
 
     }
