@@ -1,0 +1,86 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Release tag/name, for example v1.0.0"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  build-release:
+    name: Build and publish release
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Build Release
+        shell: pwsh
+        run: |
+          Remove-Item -LiteralPath "bin\Release" -Recurse -Force -ErrorAction SilentlyContinue
+          msbuild CodeWalker.sln /restore /m /p:Configuration=Release /p:Platform="Any CPU" /v:minimal /nologo
+
+      - name: Package Release
+        shell: pwsh
+        run: |
+          if ("${{ github.event_name }}" -eq "workflow_dispatch") {
+            $version = "${{ inputs.version }}"
+          } else {
+            $version = "${{ github.ref_name }}"
+          }
+
+          $safeVersion = $version -replace '[^A-Za-z0-9._-]', '-'
+          $packageName = "CodeWalker-$safeVersion-win-x64"
+          $staging = Join-Path $env:RUNNER_TEMP $packageName
+          $zipPath = "$packageName.zip"
+
+          New-Item -ItemType Directory -Path $staging | Out-Null
+          Copy-Item -Path "bin\Release\*" -Destination $staging -Recurse
+
+          Get-ChildItem -Path $staging -Recurse -Include *.pdb,*.xml,*.vshost.* |
+            Remove-Item -Force -ErrorAction SilentlyContinue
+
+          Compress-Archive -Path "$staging\*" -DestinationPath $zipPath -Force
+
+          "RELEASE_VERSION=$version" >> $env:GITHUB_ENV
+          "RELEASE_ZIP=$zipPath" >> $env:GITHUB_ENV
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.RELEASE_ZIP }}
+          path: ${{ env.RELEASE_ZIP }}
+          if-no-files-found: error
+
+      - name: Create or Update GitHub Release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $releaseExists = $false
+          gh release view "$env:RELEASE_VERSION" --repo "$env:GITHUB_REPOSITORY" *> $null
+          if ($LASTEXITCODE -eq 0) {
+            $releaseExists = $true
+          }
+
+          if ($releaseExists) {
+            gh release upload "$env:RELEASE_VERSION" "$env:RELEASE_ZIP" --repo "$env:GITHUB_REPOSITORY" --clobber
+          } else {
+            gh release create "$env:RELEASE_VERSION" "$env:RELEASE_ZIP" `
+              --repo "$env:GITHUB_REPOSITORY" `
+              --target "$env:GITHUB_SHA" `
+              --title "CodeWalker $env:RELEASE_VERSION" `
+              --notes "Automated Release build from commit $env:GITHUB_SHA."
+          }
