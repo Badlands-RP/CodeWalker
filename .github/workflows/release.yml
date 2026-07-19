@@ -77,11 +77,9 @@ jobs:
           if ("${{ github.event_name }}" -eq "push" -and "${{ github.ref_type }}" -eq "branch") {
             $releaseTitle = "CodeWalker master $env:RELEASE_VERSION"
             $releaseNotes = "Automated Release build from master commit $env:GITHUB_SHA."
-            $releaseFlags = @("--prerelease")
           } else {
             $releaseTitle = "CodeWalker $env:RELEASE_VERSION"
             $releaseNotes = "Automated Release build from commit $env:GITHUB_SHA."
-            $releaseFlags = @()
           }
 
           $releaseExists = $false
@@ -97,6 +95,5 @@ jobs:
               --repo "$env:GITHUB_REPOSITORY" `
               --target "$env:GITHUB_SHA" `
               --title "$releaseTitle" `
-              --notes "$releaseNotes" `
-              @releaseFlags
+              --notes "$releaseNotes"
           }
