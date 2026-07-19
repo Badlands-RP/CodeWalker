@@ -34,6 +34,9 @@
             this.ProjectManifestTextBox = new FastColoredTextBoxNS.FastColoredTextBox();
             this.SaveManifestButton = new System.Windows.Forms.Button();
             this.SaveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.LoadManifestButton = new System.Windows.Forms.Button();
+            this.UpdateManifestButton = new System.Windows.Forms.Button();
+            this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.ProjectManifestTextBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -102,11 +105,38 @@
             this.SaveFileDialog.FileName = "_manifest.ymf";
             this.SaveFileDialog.Filter = "Manifest files|*.ymf";
             // 
+            // LoadManifestButton
+            // 
+            this.LoadManifestButton.Location = new System.Drawing.Point(213, 2);
+            this.LoadManifestButton.Name = "LoadManifestButton";
+            this.LoadManifestButton.Size = new System.Drawing.Size(113, 23);
+            this.LoadManifestButton.TabIndex = 7;
+            this.LoadManifestButton.Text = "Load _manifest.ymf";
+            this.LoadManifestButton.UseVisualStyleBackColor = true;
+            this.LoadManifestButton.Click += new System.EventHandler(this.LoadManifestButton_Click);
+            // 
+            // UpdateManifestButton
+            // 
+            this.UpdateManifestButton.Location = new System.Drawing.Point(332, 2);
+            this.UpdateManifestButton.Name = "UpdateManifestButton";
+            this.UpdateManifestButton.Size = new System.Drawing.Size(117, 23);
+            this.UpdateManifestButton.TabIndex = 8;
+            this.UpdateManifestButton.Text = "Update from Project";
+            this.UpdateManifestButton.UseVisualStyleBackColor = true;
+            this.UpdateManifestButton.Click += new System.EventHandler(this.UpdateManifestButton_Click);
+            // 
+            // OpenFileDialog
+            // 
+            this.OpenFileDialog.FileName = "_manifest.ymf";
+            this.OpenFileDialog.Filter = "Manifest files|*.ymf;*.xml|All files|*.*";
+            // 
             // EditProjectManifestPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(605, 451);
+            this.Controls.Add(this.UpdateManifestButton);
+            this.Controls.Add(this.LoadManifestButton);
             this.Controls.Add(this.SaveManifestButton);
             this.Controls.Add(this.ProjectManifestGenerateButton);
             this.Controls.Add(this.ProjectManifestTextBox);
@@ -123,5 +153,8 @@
         private FastColoredTextBoxNS.FastColoredTextBox ProjectManifestTextBox;
         private System.Windows.Forms.Button SaveManifestButton;
         private System.Windows.Forms.SaveFileDialog SaveFileDialog;
+        private System.Windows.Forms.Button LoadManifestButton;
+        private System.Windows.Forms.Button UpdateManifestButton;
+        private System.Windows.Forms.OpenFileDialog OpenFileDialog;
     }
 }
