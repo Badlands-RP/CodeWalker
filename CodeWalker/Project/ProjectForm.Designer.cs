@@ -92,6 +92,7 @@
             this.YtypNewArchetypeMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.YtypNewArchetypeFromYdrMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.YtypNewArchetypeFromYftMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.YtypCopyArchetypeDetailsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.YtypMloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.YtypMloNewEntityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.YtypMloNewRoomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -691,6 +692,7 @@
             this.YtypNewArchetypeMenu,
             this.YtypNewArchetypeFromYdrMenu,
             this.YtypNewArchetypeFromYftMenu,
+            this.YtypCopyArchetypeDetailsMenu,
             this.YtypMloToolStripMenuItem,
             this.toolStripSeparator15,
             this.YtypAddToProjectMenu,
@@ -735,6 +737,14 @@
             this.YtypNewArchetypeFromYftMenu.Size = new System.Drawing.Size(218, 22);
             this.YtypNewArchetypeFromYftMenu.Text = "New Archetype from YFT...";
             this.YtypNewArchetypeFromYftMenu.Click += new System.EventHandler(this.YtypNewArchetypeFromYftMenu_Click);
+            //
+            // YtypCopyArchetypeDetailsMenu
+            //
+            this.YtypCopyArchetypeDetailsMenu.Enabled = false;
+            this.YtypCopyArchetypeDetailsMenu.Name = "YtypCopyArchetypeDetailsMenu";
+            this.YtypCopyArchetypeDetailsMenu.Size = new System.Drawing.Size(258, 22);
+            this.YtypCopyArchetypeDetailsMenu.Text = "Copy/Import Archetypes From YTYP...";
+            this.YtypCopyArchetypeDetailsMenu.Click += new System.EventHandler(this.YtypCopyArchetypeDetailsMenu_Click);
             //
             // YtypMloToolStripMenuItem
             //
@@ -1821,6 +1831,7 @@
         private System.Windows.Forms.ToolStripMenuItem YtypNameMenu;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
         private System.Windows.Forms.ToolStripMenuItem YtypNewArchetypeMenu;
+        private System.Windows.Forms.ToolStripMenuItem YtypCopyArchetypeDetailsMenu;
         private System.Windows.Forms.ToolStripMenuItem YndNameMenu;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;

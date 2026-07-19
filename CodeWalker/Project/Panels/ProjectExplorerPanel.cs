@@ -2208,6 +2208,20 @@ namespace CodeWalker.Project.Panels
                 tn.Text = ytyp.RpfFileEntry?.Name ?? ytyp.Name;
             }
         }
+        public void RefreshYtypTreeNode(YtypFile ytyp)
+        {
+            var tn = FindYtypTreeNode(ytyp);
+            if (tn != null)
+            {
+                tn.Text = (ytyp.HasChanged ? "*" : "") + (ytyp.RpfFileEntry?.Name ?? ytyp.Name);
+                var wasExpanded = tn.IsExpanded;
+                LoadYtypTreeNodes(ytyp, tn);
+                if (wasExpanded)
+                {
+                    tn.Expand();
+                }
+            }
+        }
         public void UpdateYbnTreeNode(YbnFile ybn)
         {
             var tn = FindYbnTreeNode(ybn);

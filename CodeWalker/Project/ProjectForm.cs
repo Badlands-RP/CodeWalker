@@ -3566,6 +3566,186 @@ namespace CodeWalker.Project
             CurrentArchetype = archetype;
 
         }
+        public void CopyArchetypeDetailsFromYtyp()
+        {
+            if (CurrentYtypFile == null) return;
+            if (!YtypExistsInProject(CurrentYtypFile)) return;
+
+            YtypArchetypeImportForm picker = new YtypArchetypeImportForm(CurrentYtypFile, CurrentProjectFile?.YtypFiles);
+            if (picker.ShowDialog(this) != DialogResult.OK) return;
+
+            var sourceArchetypes = picker.SourceYtyp?.AllArchetypes ?? new Archetype[0];
+            var selectedItems = picker.SelectedItems;
+            var targetArchetypes = CurrentYtypFile.AllArchetypes ?? new Archetype[0];
+            var targetByAssetName = BuildArchetypeLookup(targetArchetypes, true);
+            var targetByName = BuildArchetypeLookup(targetArchetypes, false);
+            var matchedTargets = new HashSet<Archetype>();
+            Archetype lastChangedArchetype = null;
+            int copiedCount = 0;
+            int importedCount = 0;
+
+            RemoveProjectArchetypes(CurrentYtypFile);
+            lock (ProjectSyncRoot)
+            {
+                foreach (var selectedItem in selectedItems)
+                {
+                    var sourceArchetype = selectedItem.SourceArchetype;
+                    var targetArchetype = FindMatchingArchetype(sourceArchetype, targetByAssetName, targetByName);
+                    if (targetArchetype != null)
+                    {
+                        CopyArchetypeDetails(sourceArchetype, targetArchetype);
+                        matchedTargets.Add(targetArchetype);
+                        lastChangedArchetype = targetArchetype;
+                        copiedCount++;
+                    }
+                    else
+                    {
+                        var importedArchetype = CloneArchetypeForYtyp(sourceArchetype, CurrentYtypFile);
+                        CurrentYtypFile.AddArchetype(importedArchetype);
+                        AddArchetypeToLookup(importedArchetype, targetByAssetName, true);
+                        AddArchetypeToLookup(importedArchetype, targetByName, false);
+                        lastChangedArchetype = importedArchetype;
+                        importedCount++;
+                    }
+                }
+            }
+            AddProjectArchetypes(CurrentYtypFile);
+
+            var targetOnlyCount = targetArchetypes.Length - matchedTargets.Count;
+            var uncheckedCount = sourceArchetypes.Length - selectedItems.Count;
+
+            if ((copiedCount > 0) || (importedCount > 0))
+            {
+                SetYtypHasChanged(true);
+                ProjectExplorer?.RefreshYtypTreeNode(CurrentYtypFile);
+                if (lastChangedArchetype != null)
+                {
+                    CurrentArchetype = lastChangedArchetype;
+                    ProjectExplorer?.TrySelectArchetypeTreeNode(CurrentArchetype);
+                    ShowEditArchetypePanel(true);
+                }
+            }
+
+            MessageBox.Show(
+                "Copy/import archetypes complete.\n" +
+                "Copied into existing: " + copiedCount.ToString() + "\n" +
+                "Imported as new: " + importedCount.ToString() + "\n" +
+                "Unchecked source: " + uncheckedCount.ToString() + "\n" +
+                "Target-only: " + targetOnlyCount.ToString());
+        }
+        private void AddArchetypeToLookup(Archetype archetype, Dictionary<MetaHash, Archetype> lookup, bool useAssetName)
+        {
+            if (archetype == null) return;
+
+            var key = useAssetName ? archetype._BaseArchetypeDef.assetName : archetype._BaseArchetypeDef.name;
+            if (key == 0) return;
+            if (!lookup.ContainsKey(key))
+            {
+                lookup.Add(key, archetype);
+            }
+        }
+        private Dictionary<MetaHash, Archetype> BuildArchetypeLookup(Archetype[] archetypes, bool useAssetName)
+        {
+            var lookup = new Dictionary<MetaHash, Archetype>();
+            if (archetypes == null) return lookup;
+
+            foreach (var archetype in archetypes)
+            {
+                if (archetype == null) continue;
+
+                var key = useAssetName ? archetype._BaseArchetypeDef.assetName : archetype._BaseArchetypeDef.name;
+                if (key == 0) continue;
+                if (!lookup.ContainsKey(key))
+                {
+                    lookup.Add(key, archetype);
+                }
+            }
+
+            return lookup;
+        }
+        private Archetype FindMatchingArchetype(Archetype sourceArchetype, Dictionary<MetaHash, Archetype> targetByAssetName, Dictionary<MetaHash, Archetype> targetByName)
+        {
+            if (sourceArchetype == null) return null;
+
+            Archetype targetArchetype;
+            var assetName = sourceArchetype._BaseArchetypeDef.assetName;
+            if ((assetName != 0) && targetByAssetName.TryGetValue(assetName, out targetArchetype))
+            {
+                return targetArchetype;
+            }
+
+            var name = sourceArchetype._BaseArchetypeDef.name;
+            if ((name != 0) && targetByName.TryGetValue(name, out targetArchetype))
+            {
+                return targetArchetype;
+            }
+
+            return null;
+        }
+        private void CopyArchetypeDetails(Archetype sourceArchetype, Archetype targetArchetype)
+        {
+            targetArchetype._BaseArchetypeDef = sourceArchetype._BaseArchetypeDef;
+            targetArchetype.Extensions = sourceArchetype.Extensions;
+
+            if (targetArchetype is TimeArchetype targetTimeArchetype)
+            {
+                targetTimeArchetype._TimeArchetypeDef._BaseArchetypeDef = targetArchetype._BaseArchetypeDef;
+            }
+            else if (targetArchetype is MloArchetype targetMloArchetype)
+            {
+                targetMloArchetype._MloArchetypeDef._BaseArchetypeDef = targetArchetype._BaseArchetypeDef;
+            }
+
+            RefreshArchetypeConvenienceFields(targetArchetype);
+        }
+        private Archetype CloneArchetypeForYtyp(Archetype sourceArchetype, YtypFile targetYtyp)
+        {
+            if (sourceArchetype is TimeArchetype sourceTimeArchetype)
+            {
+                var data = sourceTimeArchetype._TimeArchetypeDef;
+                var clone = new TimeArchetype();
+                clone.Init(targetYtyp, ref data);
+                clone.Extensions = sourceTimeArchetype.Extensions;
+                return clone;
+            }
+
+            if (sourceArchetype is MloArchetype sourceMloArchetype)
+            {
+                var data = sourceMloArchetype._MloArchetypeDef;
+                var clone = new MloArchetype();
+                clone.Init(targetYtyp, ref data);
+                clone.Extensions = sourceMloArchetype.Extensions;
+                clone.entities = sourceMloArchetype.entities;
+                clone.rooms = sourceMloArchetype.rooms;
+                clone.portals = sourceMloArchetype.portals;
+                clone.entitySets = sourceMloArchetype.entitySets;
+                clone.timeCycleModifiers = sourceMloArchetype.timeCycleModifiers;
+                return clone;
+            }
+
+            var baseData = sourceArchetype._BaseArchetypeDef;
+            var baseClone = new Archetype();
+            baseClone.Init(targetYtyp, ref baseData);
+            baseClone.Extensions = sourceArchetype.Extensions;
+            return baseClone;
+        }
+        private void RefreshArchetypeConvenienceFields(Archetype archetype)
+        {
+            archetype.Hash = archetype._BaseArchetypeDef.assetName;
+            if (archetype.Hash.Hash == 0)
+            {
+                archetype.Hash = archetype._BaseArchetypeDef.name;
+            }
+
+            archetype.DrawableDict = archetype._BaseArchetypeDef.drawableDictionary;
+            archetype.TextureDict = archetype._BaseArchetypeDef.textureDictionary;
+            archetype.ClipDict = archetype._BaseArchetypeDef.clipDictionary;
+            archetype.BBMin = archetype._BaseArchetypeDef.bbMin;
+            archetype.BBMax = archetype._BaseArchetypeDef.bbMax;
+            archetype.BSCenter = archetype._BaseArchetypeDef.bsCentre;
+            archetype.BSRadius = archetype._BaseArchetypeDef.bsRadius;
+            archetype.LodDist = archetype._BaseArchetypeDef.lodDist;
+        }
         public YmapEntityDef NewMloEntity(YmapEntityDef copy = null, bool copyTransform = false, bool selectNew = true)
         {
             if ((CurrentArchetype == null) || !(CurrentArchetype is MloArchetype mloArch))
@@ -9112,6 +9292,7 @@ namespace CodeWalker.Project
             YtypNewArchetypeMenu.Enabled = enable && inproj;
             YtypNewArchetypeFromYdrMenu.Enabled = enable && inproj;
             YtypNewArchetypeFromYftMenu.Enabled = enable && inproj;
+            YtypCopyArchetypeDetailsMenu.Enabled = enable && inproj;
             YtypMloToolStripMenuItem.Enabled = enable && inproj && ismlo;
             YtypMloNewEntityToolStripMenuItem.Enabled = YtypMloToolStripMenuItem.Enabled;
 
@@ -9667,6 +9848,10 @@ namespace CodeWalker.Project
         private void YtypNewArchetypeFromYftMenu_Click(object sender, EventArgs e)
         {
             NewArchetypesFromYfts();
+        }
+        private void YtypCopyArchetypeDetailsMenu_Click(object sender, EventArgs e)
+        {
+            CopyArchetypeDetailsFromYtyp();
         }
         private void YtypMloNewEntityToolStripMenuItem_Click(object sender, EventArgs e)
         {

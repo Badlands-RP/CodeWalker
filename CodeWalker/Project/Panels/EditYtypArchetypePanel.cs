@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Globalization;
+using System.Reflection;
+using System.Text;
 using System.Windows.Forms;
 using CodeWalker.GameFiles;
 using SharpDX;
@@ -11,10 +13,14 @@ namespace CodeWalker.Project.Panels
         public ProjectForm ProjectForm;
 
         private bool populatingui;
+        private TabPage ExtensionsTabPage;
+        private ListBox ExtensionsListBox;
+        private TextBox ExtensionDetailsTextBox;
 
         public EditYtypArchetypePanel(ProjectForm owner)
         {
             InitializeComponent();
+            InitializeExtensionsTab();
 
             ProjectForm = owner;
         }
@@ -86,6 +92,176 @@ namespace CodeWalker.Project.Panels
                 }
                 else TabControl.TabPages.Remove(TimeArchetypeTabPage);
 
+            }
+
+            UpdateExtensionsTab();
+        }
+
+        private void InitializeExtensionsTab()
+        {
+            ExtensionsTabPage = new TabPage();
+            ExtensionsListBox = new ListBox();
+            ExtensionDetailsTextBox = new TextBox();
+
+            ExtensionsTabPage.Text = "Extensions";
+            ExtensionsTabPage.UseVisualStyleBackColor = true;
+
+            ExtensionsListBox.Dock = DockStyle.Left;
+            ExtensionsListBox.Width = 260;
+            ExtensionsListBox.DisplayMember = "DisplayText";
+            ExtensionsListBox.SelectedIndexChanged += ExtensionsListBox_SelectedIndexChanged;
+
+            ExtensionDetailsTextBox.Dock = DockStyle.Fill;
+            ExtensionDetailsTextBox.Multiline = true;
+            ExtensionDetailsTextBox.ReadOnly = true;
+            ExtensionDetailsTextBox.ScrollBars = ScrollBars.Both;
+            ExtensionDetailsTextBox.WordWrap = false;
+            ExtensionDetailsTextBox.Font = new System.Drawing.Font("Courier New", 9.0F);
+
+            ExtensionsTabPage.Controls.Add(ExtensionDetailsTextBox);
+            ExtensionsTabPage.Controls.Add(ExtensionsListBox);
+            TabControl.TabPages.Add(ExtensionsTabPage);
+        }
+
+        private void UpdateExtensionsTab()
+        {
+            ExtensionsListBox.Items.Clear();
+            ExtensionDetailsTextBox.Clear();
+
+            var extensions = CurrentArchetype?.Extensions;
+            if ((extensions == null) || (extensions.Length == 0))
+            {
+                ExtensionDetailsTextBox.Text = "No extensions.";
+                return;
+            }
+
+            for (int i = 0; i < extensions.Length; i++)
+            {
+                ExtensionsListBox.Items.Add(new ExtensionListItem(i, extensions[i]));
+            }
+
+            if (ExtensionsListBox.Items.Count > 0)
+            {
+                ExtensionsListBox.SelectedIndex = 0;
+            }
+        }
+
+        private void ExtensionsListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var item = ExtensionsListBox.SelectedItem as ExtensionListItem;
+            ExtensionDetailsTextBox.Text = GetExtensionDetails(item?.Extension);
+        }
+
+        private string GetExtensionDetails(MetaWrapper extension)
+        {
+            if (extension == null) return string.Empty;
+
+            var sb = new StringBuilder();
+            AppendLine(sb, "Type", extension.GetType().Name);
+            AppendLine(sb, "Name", extension.Name);
+            sb.AppendLine();
+
+            if (extension is MCExtensionDefParticleEffect particle)
+            {
+                AppendLine(sb, "Data.name", particle.Data.name.ToCleanString());
+                AppendLine(sb, "fxName", particle.fxName);
+                AppendLine(sb, "Data.offsetPosition", FormatVector3(particle.Data.offsetPosition));
+                AppendLine(sb, "Data.offsetRotation", FormatVector4(particle.Data.offsetRotation));
+                AppendLine(sb, "Data.fxType", particle.Data.fxType.ToString());
+                AppendLine(sb, "Data.boneTag", particle.Data.boneTag.ToString());
+                AppendLine(sb, "Data.scale", FloatUtil.ToString(particle.Data.scale));
+                AppendLine(sb, "Data.probability", particle.Data.probability.ToString());
+                AppendLine(sb, "Data.flags", particle.Data.flags.ToString());
+                AppendLine(sb, "Data.color", "0x" + particle.Data.color.ToString("X8"));
+            }
+            else if (extension is MCExtensionDefLightEffect light)
+            {
+                AppendLine(sb, "Data.name", light.Data.name.ToCleanString());
+                AppendLine(sb, "Data.offsetPosition", FormatVector3(light.Data.offsetPosition));
+                AppendLine(sb, "Light instances", (light.instances?.Length ?? 0).ToString());
+            }
+            else
+            {
+                AppendGenericObjectDump(sb, extension);
+            }
+
+            return sb.ToString();
+        }
+
+        private static void AppendGenericObjectDump(StringBuilder sb, object value)
+        {
+            if (value == null) return;
+
+            var type = value.GetType();
+            foreach (var prop in type.GetProperties(BindingFlags.Instance | BindingFlags.Public))
+            {
+                if (prop.GetIndexParameters().Length > 0) continue;
+
+                object propValue;
+                try
+                {
+                    propValue = prop.GetValue(value, null);
+                }
+                catch
+                {
+                    propValue = "(unavailable)";
+                }
+
+                AppendLine(sb, prop.Name, FormatValue(propValue));
+            }
+
+            foreach (var field in type.GetFields(BindingFlags.Instance | BindingFlags.Public))
+            {
+                object fieldValue;
+                try
+                {
+                    fieldValue = field.GetValue(value);
+                }
+                catch
+                {
+                    fieldValue = "(unavailable)";
+                }
+
+                AppendLine(sb, field.Name, FormatValue(fieldValue));
+            }
+        }
+
+        private static string FormatValue(object value)
+        {
+            if (value == null) return string.Empty;
+            if (value is Vector3 v3) return FormatVector3(v3);
+            if (value is Vector4 v4) return FormatVector4(v4);
+            if (value is MetaHash hash) return hash.ToCleanString();
+            if (value is Array arr) return value.GetType().GetElementType()?.Name + "[" + arr.Length.ToString() + "]";
+            return value.ToString();
+        }
+
+        private static string FormatVector3(Vector3 v)
+        {
+            return FloatUtil.GetVector3String(v);
+        }
+
+        private static string FormatVector4(Vector4 v)
+        {
+            return FloatUtil.GetVector4String(v);
+        }
+
+        private static void AppendLine(StringBuilder sb, string name, string value)
+        {
+            sb.Append(name.PadRight(24));
+            sb.Append(": ");
+            sb.AppendLine(value ?? string.Empty);
+        }
+
+        private class ExtensionListItem
+        {
+            public MetaWrapper Extension { get; }
+            public string DisplayText { get; }
+
+            public ExtensionListItem(int index, MetaWrapper extension)
+            {
+                Extension = extension;
+                DisplayText = (index + 1).ToString() + ". " + extension.GetType().Name + " - " + extension.Name;
             }
         }
 

@@ -68,10 +68,15 @@ namespace CodeWalker.GameFiles
                 for (int i = 0; i < AllArchetypes.Length; i++)
                 {
                     var arch = AllArchetypes[i]; //save the extensions first..
-                    if (arch._BaseArchetypeDef.extensions.Count1 > 0)
+                    if ((arch.Extensions != null) && (arch.Extensions.Length > 0))
                     {
                         arch._BaseArchetypeDef.extensions = mb.AddWrapperArrayPtr(arch.Extensions);
                     }
+                    else
+                    {
+                        arch._BaseArchetypeDef.extensions = new Array_StructurePointer();
+                    }
+                    SyncSpecializedBaseArchetypeDef(arch);
                 }
 
                 MetaPOINTER[] ptrs = new MetaPOINTER[AllArchetypes.Length];
@@ -168,6 +173,17 @@ namespace CodeWalker.GameFiles
             HasChanged = false;
 
             return data;
+        }
+        private static void SyncSpecializedBaseArchetypeDef(Archetype arch)
+        {
+            if (arch is TimeArchetype t)
+            {
+                t._TimeArchetypeDef._BaseArchetypeDef = arch._BaseArchetypeDef;
+            }
+            else if (arch is MloArchetype m)
+            {
+                m._MloArchetypeDef._BaseArchetypeDef = arch._BaseArchetypeDef;
+            }
         }
 
         public void Load(byte[] data)
