@@ -3461,23 +3461,17 @@ namespace CodeWalker.Project
             foreach (var file in files)
             {
                 archetype = CurrentYtypFile.AddArchetype();
-                YdrFile ydr = new YdrFile();
-                RpfFile.LoadResourceFile(ydr, File.ReadAllBytes(file), 165);
                 var name = Path.GetFileNameWithoutExtension(file);
                 var hash = JenkHash.GenHash(name);
-                archetype._BaseArchetypeDef.name = hash;
-                archetype._BaseArchetypeDef.assetName = hash;
-                archetype._BaseArchetypeDef.assetType = rage__fwArchetypeDef__eAssetType.ASSET_TYPE_DRAWABLE;
-                archetype._BaseArchetypeDef.specialAttribute = 0;
-                archetype._BaseArchetypeDef.flags = 32;
-                archetype._BaseArchetypeDef.bbMin = ydr.Drawable.BoundingBoxMin;
-                archetype._BaseArchetypeDef.bbMax = ydr.Drawable.BoundingBoxMax;
-                archetype._BaseArchetypeDef.bsCentre = ydr.Drawable.BoundingCenter;
-                archetype._BaseArchetypeDef.bsRadius = ydr.Drawable.BoundingSphereRadius;
-                archetype._BaseArchetypeDef.hdTextureDist = 60.0f;
-                archetype._BaseArchetypeDef.lodDist = 60.0f;
-                if (ydr.Drawable.ShaderGroup.TextureDictionary != null) archetype._BaseArchetypeDef.textureDictionary = hash;
-                if (ydr.Drawable.Bound != null) archetype._BaseArchetypeDef.physicsDictionary = hash;
+
+                JenkIndex.Ensure(name);
+                SetupArchetypeFromYdrName(archetype, hash);
+
+                var ydr = TryLoadYdrForArchetype(file);
+                if (ydr?.Drawable != null)
+                {
+                    ApplyDrawableDetailsToArchetype(archetype, ydr.Drawable, hash);
+                }
 
                 AddProjectArchetype(archetype);
             }
@@ -3486,6 +3480,51 @@ namespace CodeWalker.Project
             ProjectExplorer?.TrySelectArchetypeTreeNode(archetype);
             CurrentArchetype = archetype;
 
+        }
+        private YdrFile TryLoadYdrForArchetype(string filename)
+        {
+            try
+            {
+                YdrFile ydr = new YdrFile();
+                RpfFile.LoadResourceFile(ydr, File.ReadAllBytes(filename), 165);
+                return ydr;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        private void SetupArchetypeFromYdrName(Archetype archetype, MetaHash hash)
+        {
+            archetype._BaseArchetypeDef.name = hash;
+            archetype._BaseArchetypeDef.assetName = hash;
+            archetype._BaseArchetypeDef.assetType = rage__fwArchetypeDef__eAssetType.ASSET_TYPE_DRAWABLE;
+            archetype._BaseArchetypeDef.specialAttribute = 0;
+            archetype._BaseArchetypeDef.flags = 32;
+            archetype._BaseArchetypeDef.bbMin = new Vector3(-1.0f, -1.0f, -1.0f);
+            archetype._BaseArchetypeDef.bbMax = new Vector3(1.0f, 1.0f, 1.0f);
+            archetype._BaseArchetypeDef.bsCentre = Vector3.Zero;
+            archetype._BaseArchetypeDef.bsRadius = 1.0f;
+            archetype._BaseArchetypeDef.hdTextureDist = 60.0f;
+            archetype._BaseArchetypeDef.lodDist = 60.0f;
+            archetype._BaseArchetypeDef.textureDictionary = hash;
+        }
+        private void ApplyDrawableDetailsToArchetype(Archetype archetype, Drawable drawable, MetaHash hash)
+        {
+            archetype._BaseArchetypeDef.bbMin = drawable.BoundingBoxMin;
+            archetype._BaseArchetypeDef.bbMax = drawable.BoundingBoxMax;
+            archetype._BaseArchetypeDef.bsCentre = drawable.BoundingCenter;
+            archetype._BaseArchetypeDef.bsRadius = drawable.BoundingSphereRadius;
+
+            if (drawable.ShaderGroup?.TextureDictionary != null)
+            {
+                archetype._BaseArchetypeDef.textureDictionary = hash;
+            }
+
+            if (drawable.Bound != null)
+            {
+                archetype._BaseArchetypeDef.physicsDictionary = hash;
+            }
         }
         public void NewArchetypesFromYfts()
         {
