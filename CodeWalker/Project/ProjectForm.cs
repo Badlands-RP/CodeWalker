@@ -1,6 +1,7 @@
 ﻿using CodeWalker.GameFiles;
 using CodeWalker.Project.Panels;
 using CodeWalker.Properties;
+using CodeWalker.Updates;
 using CodeWalker.Utils;
 using CodeWalker.World;
 using SharpDX;
@@ -115,6 +116,8 @@ namespace CodeWalker.Project
 
         private bool ShowProjectItemInProcess = false;
         private bool WorldSelectionChangeInProcess = false;
+        private bool updateRestartPending = false;
+        private ToolStripMenuItem ToolsCheckForUpdatesMenu;
 
 
         public ProjectForm(WorldForm worldForm = null)
@@ -122,6 +125,7 @@ namespace CodeWalker.Project
             WorldForm = worldForm;
 
             InitializeComponent();
+            InitializeUpdaterMenu();
 
             SetTheme(Settings.Default.ProjectWindowTheme, false);
             ShowDefaultPanels();
@@ -3480,6 +3484,14 @@ namespace CodeWalker.Project
             ProjectExplorer?.TrySelectArchetypeTreeNode(archetype);
             CurrentArchetype = archetype;
 
+        }
+
+        private void InitializeUpdaterMenu()
+        {
+            ToolsCheckForUpdatesMenu = new ToolStripMenuItem("Check for Updates...");
+            ToolsCheckForUpdatesMenu.Click += ToolsCheckForUpdatesMenu_Click;
+            ToolsMenu.DropDownItems.Add(new ToolStripSeparator());
+            ToolsMenu.DropDownItems.Add(ToolsCheckForUpdatesMenu);
         }
         private YdrFile TryLoadYdrForArchetype(string filename)
         {
@@ -9662,11 +9674,81 @@ namespace CodeWalker.Project
 
 
 
+        private async Task CheckForUpdatesAsync()
+        {
+            if (ToolsCheckForUpdatesMenu != null)
+            {
+                ToolsCheckForUpdatesMenu.Enabled = false;
+            }
+
+            var oldCursor = Cursor;
+            Cursor = Cursors.WaitCursor;
+
+            try
+            {
+                var updater = new GitHubUpdateService();
+                var update = await updater.CheckForUpdatesAsync();
+
+                if (!string.IsNullOrEmpty(update.ErrorMessage))
+                {
+                    MessageBox.Show(this, update.ErrorMessage, "Update Check Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (!update.IsUpdateAvailable)
+                {
+                    MessageBox.Show(this, GitHubUpdateService.BuildDetailsText(update), "BadWalker Is Up To Date", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                Cursor = oldCursor;
+                using (var dialog = new UpdateAvailableForm(update))
+                {
+                    if (dialog.ShowDialog(this) != DialogResult.OK)
+                    {
+                        return;
+                    }
+                }
+
+                if (CurrentProjectFile?.HasChanged ?? false)
+                {
+                    var closeResult = MessageBox.Show(
+                        this,
+                        "BadWalker needs to close and restart to install the update. Any changed project files will be offered for saving during close.\n\nContinue with the update?",
+                        "Install Update",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question);
+                    if (closeResult != DialogResult.Yes)
+                    {
+                        return;
+                    }
+                }
+
+                Cursor = Cursors.WaitCursor;
+                var zipPath = await updater.DownloadReleaseZipAsync(update);
+                updater.StartUpdaterAndRestart(zipPath);
+                updateRestartPending = true;
+                Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, "Unable to check for or install updates:\n" + ex.Message, "Update Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Cursor = oldCursor;
+                if (ToolsCheckForUpdatesMenu != null)
+                {
+                    ToolsCheckForUpdatesMenu.Enabled = true;
+                }
+            }
+        }
+
         //######## events
 
         private void ProjectForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (CurrentProjectFile?.HasChanged ?? false)
+            if (!updateRestartPending && (CurrentProjectFile?.HasChanged ?? false))
             {
                 var msg = "Are you sure you want to close the project window?";
                 var tit = "Confirm close";
@@ -10077,6 +10159,10 @@ namespace CodeWalker.Project
         private void ToolsImportMenyooXmlMenu_Click(object sender, EventArgs e)
         {
             ImportMenyooXml();
+        }
+        private async void ToolsCheckForUpdatesMenu_Click(object sender, EventArgs e)
+        {
+            await CheckForUpdatesAsync();
         }
         private void ToolsDeleteGrassMenu_Click(object sender, EventArgs e)
         {
