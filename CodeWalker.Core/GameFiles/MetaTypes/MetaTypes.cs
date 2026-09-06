@@ -1564,22 +1564,20 @@ namespace CodeWalker.GameFiles
             { return null; } //no block or wrong block? shouldn't happen!
 
             int byteoffset = (int)ptroffset;// (ptroffset * 16 + ptrunkval);
-            int itemoffset = byteoffset / itemsize;
 
             int curi = 0;
             while (itemsleft > 0)
             {
-                int blockcount = ptrblock.DataLength / itemsize;
-                int itemcount = blockcount - itemoffset;
+                int itemcount = (ptrblock.DataLength - byteoffset) / itemsize;
                 if (itemcount > itemsleft)
                 { itemcount = itemsleft; } //don't try to read too many items..
                 for (int i = 0; i < itemcount; i++)
                 {
-                    int offset = (itemoffset + i) * itemsize;
+                    int offset = byteoffset + i * itemsize;
                     int index = curi + i;
                     items[index] = ConvertData<T>(ptrblock.Data, offset);
                 }
-                itemoffset = 0; //start at beginning of next block..
+                byteoffset = 0; //start at beginning of next block..
                 curi += itemcount;
                 itemsleft -= itemcount;
                 if (itemsleft <= 0)
